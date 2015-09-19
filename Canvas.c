@@ -6,7 +6,7 @@
 // Eg. u'r "Cash-in-Hand?", "live?", "or still friends of Dr. Nelson Mandal";
 //
 // Citizen-Ken: 
-                Well we're going on a guilt trip too israil. & Do you need IT/Marketing in Three? 
+                Well we're going on a guilt trip too israil. & Do you need IT/Marketing in 3-D? 
 // A-Thesis-on: 
                 it's comprized of FreePascal can't U c/c++ U'r time is drawing niegh 
                  to obtain your companies, very, very own corprate, dirigible listings? 
