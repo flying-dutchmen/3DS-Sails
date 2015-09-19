@@ -1,14 +1,16 @@
 #include "Canvas.h"
 //Revamped from the sources of (Shiny Quagsire & AlbertoSONIC & xerpi & steveice10 & Lua-Player-Plus)
 //
-// [act 1, scene 1]: the Pro-liter-riot's, Sklaven
+// the Pro-liter-riot's, Sklaven
+// [act 1, scene 1] 
+//(Open-Soure-live from israil &or in Three-D) Citizen Ken, do you have? bunker with barometric... mars trial?
 //
-// Thesis: You'r time is drawing niegh to obtain your companies very, very own corprate Drighbal listings
+// A Thesis on: You'r time is drawing niegh to obtain your companies very, very own corprate Drighbal listings
 //
 //
 //& some portions oblivious too &also untested 
 //keep in mind!!!! wii who 1/2 gui studies & work on computer-science thesis's: wii need more generic
-///wii the Pro-liter-riot can polka! can't jump!? but .. wii can can polka! (Open-Soure live &or in Three-D)
+///wii the Pro-liter-riot can polka! can't jump!? but .. wii can can polka!
 //+estranged with the repeated offending gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL)
 
 void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
