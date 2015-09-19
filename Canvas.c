@@ -3,7 +3,7 @@
 //
 // the Pro-liter-riot's, Sklaven (a turned OUT/Bent FSF/Open-Soure) 
 // [act 1, scene 1] 
-// Eg. u'r "Cash-in-Hand?", "live?": friends of Dr. Nelson Mandal, we're going on a guilt trip too israil. & Do you need IT in Three-D?) 
+// Eg. u'r "Cash-in-Hand?", "live?" or still friends of Dr. Nelson Mandal, we're going on a guilt trip too israil. & Do you need IT in Three-D?) 
 //
 // A Thesis on: You'r time is drawing niegh to obtain your companies very, very own corprate Drighbal listings
 //
