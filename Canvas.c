@@ -8,7 +8,7 @@
 // Citizen-Ken: 
                 Well we're going on a guilt trip too israil. & Do you need IT/Marketing in Three? 
 // A-Thesis-on: 
-                it's compized of FreePascal can't U c/c++ U'r time is drawing niegh 
+                it's comprized of FreePascal can't U c/c++ U'r time is drawing niegh 
                  to obtain your companies, very, very own corprate, dirigible listings? 
 //
 //
