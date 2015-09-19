@@ -49,7 +49,7 @@ void SetRecRe(u8* screen, int Top, int Left, int Height, int Width, u32* Region)
 	int i, j;
 	for(i=1;i<Width;i++)
            for(j=1;j<Height;j++)
-    //linare section of screen gfxbuffer todo... (height-y+x*height)*3 ?
+    //linare section of screen gfxbuffer todo...  (Height-j+i*Height)*3 ?
 		SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
 }
 
@@ -60,7 +60,11 @@ u32* GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 	int i, j;
 	for(i=1;i<Width;i++)
            for(j=1;j<Height;j++)
-    //linare section of screen gfxbuffer todo... (height-y+x*height)*3 ?
-	  Region[i,j] = GetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top);
+    //linare section of screen gfxbuffer todo... (Height-j+i*Height)*3 ?
+	  Region[i,j] = GetCanvasPixel(screen[(j+Top*CanvasWidth+i+Left)*3],i+Left,j+Top);
 	return Region;	
 }
+
+the Pro-liter-riot's Sklaven "kennyd.lee" present's "& long sex-live the Pro-liter-riot, 3 nude lcd's 1/2 of in 3-D"
+
+also (unmolested GPU, openGL &or Nanox)?
