@@ -4,15 +4,15 @@
 // the Pro-liter-riot's, Sklaven (a turned OUT/Bent FSF/Open-Soure) 
 // [act 1, scene 1] 
 // Eg. u'r "Cash-in-Hand?", "live?", "or still friends of Dr. Nelson Mandal";
-//(Citizen-Ken: Well we're going on a guilt trip too israil. & Do you need IT in Three-D?) 
 //
-// A Thesis on: You'r time is drawing niegh to obtain your companies very, very own corprate Drighbal listings
+// Citizen-Ken: Well we're going on a guilt trip too israil. & Do you need IT/Marketing in Three? 
+// a-Thesis-on: You'r time is drawing niegh to obtain your companies very, very own corprate Drighbal listings
 //
 //
-//& some portions oblivious too &also untested 
+//PS: & some portions oblivious too &also untested 
 //keep in mind!!!! wii who 1/2 gui studies & work on computer-science thesis's: wii need more generic
 ///wii the Pro-liter-riot can polka! can't jump!? but .. wii can polka!
-//+estranged with the repeated offending gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL)
+//+estranged with the repeated offending gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL) canvas pixil render
 
 void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 {
