@@ -66,4 +66,4 @@ u32* GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 }
 
 the Pro-liter-riot's Sklaven "kennyd-lee" present's "& long sex-live the Pro-liter-riot, 3 nude lcd's 1/2 of in 3-D"
-also (unmolested GPU, GIMP, openGL &or Nanox or anyall other that got bent Mozilla)?
+also (unmolested GPU, GIMP, openGL &or Nanox or anyall other that "got bent Mozilla" that have endure some form of rape)?
