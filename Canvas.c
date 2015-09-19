@@ -6,7 +6,8 @@
 // Eg. u'r "Cash-in-Hand?", "live?", "or still friends of Dr. Nelson Mandal";
 //
 // Citizen-Ken: Well we're going on a guilt trip too israil. & Do you need IT/Marketing in Three? 
-// a-Thesis-on: You'r time is drawing niegh to obtain your companies very, very own corprate Drighbal listings
+// A-Thesis-on: it's compized of FreePascal can't U c/c++ U'r time is drawing niegh 
+                to obtain your companies very, very own corprate Drighbal listings
 //
 //
 //PS: & some portions oblivious too &also untested 
