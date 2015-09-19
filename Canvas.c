@@ -1,6 +1,11 @@
 #include "Canvas.h"
-//Revamped from the sources of (Shiny Quagsire & AlbertoSONIC & xerpi & Lua-Player-Plus)
-//& portions untested
+//Revamped from the sources of (Shiny Quagsire & AlbertoSONIC & xerpi & steveice10 & Lua-Player-Plus)
+//
+// you'r time is drawing niegh to obtain your companies very, very own corprate Drighbal listings
+//
+//
+//& some portions oblivious to untested &are in generic 
+//+estranged with repeated offending gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL)
 
 void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 {
@@ -66,4 +71,4 @@ u32* GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 }
 
 the Pro-liter-riot's Sklaven "kennyd-lee" present's "& long sex-live the Pro-liter-riot, 3 nude lcd's 1/2 of in 3-D"
-also (unmolested GPU, GIMP, openGL &or Nanox or anyall other that "got bent Mozilla" that have endure some form of rape)?
+also (unmolested citrus, GPU, GIMP, openGL &or Nanox or anyall other that "got bent Mozilla" that have endure some form of rape)?
