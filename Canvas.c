@@ -19,15 +19,20 @@ u32 * GetCanvasPixel(u8* screen, int x, int y)
         return colour;
 }
 
+//todo
+//LED-Memory * flick through FB[1,2,3]  Vram/Cram/FSrom/sdmc buffer transfer speeds > (6 / 1.5) && old128 || new256?
+int MaxWidth(u8* screen)
+{ 
+//top
+   if (screen = (gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL) || gfxGetFramebuffer(GFX_TOP, GFX_RIGHT, NULL, NULL))) return 400;
+//bottom
+   else if (screen = gfxGetFramebuffer(GFX_BOTTOM, GFX_LEFT, NULL, NULL)) return 340;
+}
+
 void ClearCanvas(u8* screen, u32 colour)
 { 
 	int height=240;
-	int width;
-//top
-   if (screen = (gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL) || gfxGetFramebuffer(GFX_TOP, GFX_RIGHT, NULL, NULL))) width = 400;
-
-//bottom
-   else if (screen = gfxGetFramebuffer(GFX_BOTTOM, GFX_LEFT, NULL, NULL)) width = 340;
+	int width = MaxWidth(screen);
 	int i, j;
 	for(i=1;i<width;i++)
            for(j=1;j<height;j++)
@@ -36,14 +41,10 @@ void ClearCanvas(u8* screen, u32 colour)
 
 void SetRecRe(u8* screen, int Top, int Left, int Height, int Width, u32* Region)
 { 
-	int MaxWidth, MaxHeight=240;
-//top
-   if (screen = (gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL) || gfxGetFramebuffer(GFX_TOP, GFX_RIGHT, NULL, NULL))) MaxWidth = 400;
-//bottom
-   else if (screen = gfxGetFramebuffer(GFX_BOTTOM, GFX_LEFT, NULL, NULL)) MaxWidth = 340;
+	int CanvasWidth = MaxWidth(screen);
 	int i, j;
 	for(i=1;i<Width;i++)
            for(j=1;j<Height;j++)
     //linare section of screen gfxbuffer todo...
-		SetCanvasPixel(screen[j+Top*MaxWidth+i+Left],i+Left,j+Top, Region[i,j]);
+		SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
 }
