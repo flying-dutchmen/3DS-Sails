@@ -1,13 +1,15 @@
 #include "Canvas.h"
 //Revamped from the sources of (Shiny Quagsire & AlbertoSONIC & xerpi & steveice10 & Lua-Player-Plus)
 //
-// the Pro-liter-riot's, Sklaven (a turned OUT/Bent FSF/Open-Soure) 
+// the Pro-liter-riot's, Sklaven (a turned-out &or Bent FSF/Open-Soure) 
 // [act 1, scene 1] 
 // Eg. u'r "Cash-in-Hand?", "live?", "or still friends of Dr. Nelson Mandal";
 //
-// Citizen-Ken: Well we're going on a guilt trip too israil. & Do you need IT/Marketing in Three? 
-// A-Thesis-on: it's compized of FreePascal can't U c/c++ U'r time is drawing niegh 
-                to obtain your companies very, very own corprate Drighbal listings
+// Citizen-Ken: 
+                Well we're going on a guilt trip too israil. & Do you need IT/Marketing in Three? 
+// A-Thesis-on: 
+                it's compized of FreePascal can't U c/c++ U'r time is drawing niegh 
+                 to obtain your companies, very, very own corprate, dirigible listings? 
 //
 //
 //PS: & some portions oblivious too &also untested 
