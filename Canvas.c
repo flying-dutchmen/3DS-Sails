@@ -6,10 +6,10 @@
 // Eg. u'r "Cash-in-Hand?", "live?", "or still friends of Dr. Nelson Mandal";
 //
 // Citizen-Ken: 
-                Well we're going on a guilt trip too israil. & Do you need IT/Marketing in 3-D? 
+//                Well we're going on a guilt trip too israil. & Do you need IT/Marketing in 3-D? 
 // A-Thesis-on: 
-                it's comprized of FreePascal can't U c/c++ U'r time is drawing niegh 
-                 to obtain your companies, very, very own corprate, dirigible listings? 
+//                it's comprized of FreePascal can't U c/c++ U'r time is drawing niegh 
+//                 to obtain your companies, very, very own corprate, dirigible listings? 
 //
 //
 //PS: & some portions oblivious too &also untested 
@@ -17,13 +17,23 @@
 ///wii the Pro-liter-riot can polka! can't jump!? but .. wii can polka!
 //+estranged with the repeated offending gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL) canvas pixil render
 
+//was found //gs.h --> crtulib nintendo 3ds
+//#define RGBA8(r,g,b,a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
+
+//this catering more 32 strict
+#define  RGBA8asBit32 (v); \
+  ((((&v[0])&0xFF)<<24) | (((&v[1])&0xFF)<<16) | (((&v[2])&0xFF)<<8) | (((&v[3])&0xFF)<<0))
+
+
 void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 {
 	int height=240;
 	u32 v=(height-y+x*height)*3;
-	screen[v]=colour & 0xFF;
-	screen[v+1]=(colour>>8) & 0xFF;
-	screen[v+2]=(colour>>16) & 0xFF;
+        screen[v]= RGBA8asBit32(colour);
+
+//	screen[v]=colour & 0xFF;
+//	screen[v+1]=(colour>>8) & 0xFF;
+//	screen[v+2]=(colour>>16) & 0xFF;
 }
 
 u32 * GetCanvasPixel(u8* screen, int x, int y)
@@ -48,14 +58,23 @@ int MaxWidth(u8* screen)
    else if (screen = gfxGetFramebuffer(GFX_BOTTOM, GFX_LEFT, NULL, NULL)) return 340;
 }
 
+//into replace function pointer
+#define Dual_for(j,i,top, Width, Height, into) \
+//	do { \
+           for(i=top;i<Width;i++)for(j=top;j<Height;j++)(into); 
+//	} while (0);
+
 void ClearCanvas(u8* screen, u32 colour)
 { 
 	int height=240;
 	int width = MaxWidth(screen);
 	int i, j;
-	for(i=1;i<width;i++)
-           for(j=1;j<height;j++)
-		SetCanvasPixel(screen,i,j,colour);
+
+//	for(i=1;i<width;i++)
+//           for(j=1;j<height;j++)
+//		SetCanvasPixel(screen,i,j,colour);
+
+        Dual_for(j,i,1,width,height,SetCanvasPixel(screen,i,j,colour));
 }
 
 void SetRecRe(u8* screen, int Top, int Left, int Height, int Width, u32* Region)
@@ -80,5 +99,5 @@ u32* GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 	return Region;	
 }
 
-the Pro-liter-riot's Sklaven "kennyd-lee" present's "& long sex-live the Pro-liter-riot, 3 nude lcd's 1/2 of in 3-D"
-also (unmolested citrus, GPU, GIMP, openGL &or Nanox or anyall other that "got bent Mozilla" that have endure some form of rape)?
+//the Pro-liter-riot's Sklaven "kennyd-lee" present's "& long sex-live the Pro-liter-riot, 3 nude lcd's 1/2 of in 3-D"
+//also (unmolested citrus, GPU, GIMP, openGL &or Nanox or any & all other that "got bent Mozilla" that have endure some form of rape)?
