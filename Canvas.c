@@ -1,7 +1,7 @@
 #include "Canvas.h"
 //Revamped from the sources of (Shiny Quagsire & AlbertoSONIC & xerpi & steveice10 & Lua-Player-Plus)
 //
-// the Pro-liter-riot's, Sklaven (a turned-out &or bent FSF/Open-Soure) 
+// the Pro-liter-riot's, Sklaven (a turned-out &or bent FSF/Open-Source) 
 // [act 1, scene 1] 
 // Eg. u'r "Cash-in-Hand?", "live?", "or still friends with Dr. Nelson Mandal";
 //
@@ -93,5 +93,6 @@ u32* GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 	return Region;	
 }
 
-//the Pro-liter-riot's Sklaven "kennyd-lee" present's "& long sex-live the Pro-liter-riot, 3 nude lcd's 1/2 of in 3-D"
+//the Pro-liter-riot's Sklaven "kennyd-lee" 
+//present's "long sex-live the Pro-liter-riot, &  3 nude lcd's 1/2 of in 3-D"
 //also (unmolested Citrus, GPU, GIMP, openGL &or Nanox or any & all other that "got bent Mozilla" that have endure some form of rape)?
