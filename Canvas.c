@@ -23,17 +23,18 @@ void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 	screen[v+2]=(colour>>16) & 0xFF;
 }
 
+//found @ https://github.com/Lectem/3Damnesic 
+#define ABGR8(r, g, b, a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
+
 u32 GetCanvasPixel(u8* screen, int x, int y)
 {
-	int colour, height=240;
+        int height=240;
 	u32 v=(height-1-y+x*height)*3;
+
 	//GetPixel  Lua-Player-Plus
-	//colour = (screen[v] & 0x00FFFFFF) | (0xFFFFFFFF & 0xFF000000);
-	colour = (screen[v]) & 0xFF;
-	colour =+ (screen[v+1]>>8) & 0xFF;
-	colour =+ (screen[v+2]>>16) & 0xFF;
-	colour =+ (0xFF >> 24);
-        return colour;
+//	u32 colour = (screen[idx] & 0x00FFFFFF) | (0xFFFFFFFF & 0xFF000000);
+
+        return ABGR8(screen[v],screen[v+1],screen[v+2],0xFF);
 }
 
 //todo
@@ -46,36 +47,25 @@ int MaxWidth(u8* screen)
    else if (screen = gfxGetFramebuffer(GFX_BOTTOM, GFX_LEFT, NULL, NULL)) return 340;
 }
 
-//
-#define Dual_for(j,i, Width, Height, into) \
-//	do { \
-           for(i=1;i<Width;i++)for(j=1;j<Height;j++)(into); 
-//	} while (0);
-
 void ClearCanvas(u8* screen, u32 colour)
 { 
 	int height=240;
 	int width = MaxWidth(screen);
 	int i, j;
 
-//	for(i=1;i<width;i++)
-//           for(j=1;j<height;j++)
-//		SetCanvasPixel(screen,i,j,colour);
-
-        Dual_for(j,i,width,height,SetCanvasPixel(screen,i,j,colour));
+	for(i=0;i<width;i++)
+           for(j=0;j<height;j++)
+		SetCanvasPixel(screen,i,j,colour);
 }
 
 void SetRecRe(u8* screen, int Top, int Left, int Height, int Width, u32* Region)
 { 
 	int CanvasWidth = MaxWidth(screen);
 	int i, j;
-	for(i=1;i<Width;i++)
-           for(j=1;j<Height;j++)
+	for(i=0;i<Width;i++)
+           for(j=0;j<Height;j++)
 		SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
 
-//        Dual_for(j,i,width,height, \
-//        SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]));
-	
 }
 
 u32* GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
@@ -83,14 +73,11 @@ u32* GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 	u32* Region;
 	int CanvasWidth = MaxWidth(screen);
 	int i, j;
-	for(i=1;i<Width;i++)
-           for(j=1;j<Height;j++)
+	for(i=0;i<Width;i++)
+           for(j=0;j<Height;j++)
     //inverted linare section of screen with out repeated gfxbuffer todo... (Height-1-j+i*Height)*3 ?
-	  Region[i,j] = GetCanvasPixel(screen[(j+Top*CanvasWidth+i+Left)*3],i+Left,j+Top);
-	  
-//        Dual_for(j,i,width,height, \
-//        (Region[i,j] = GetCanvasPixel(screen[(j+Top*CanvasWidth+i+Left)*3],i+Left,j+Top))));
-	return Region;	
+	  Region[i,j] = GetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top);
+       return Region;	
 }
 
 //the Pro-liter-riot's Sklaven "kennyd-lee" 
