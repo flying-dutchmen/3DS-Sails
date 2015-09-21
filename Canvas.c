@@ -34,7 +34,7 @@ u32 GetCanvasPixel(u8* screen, int x, int y)
 	//GetPixel  Lua-Player-Plus
 //	u32 colour = (screen[idx] & 0x00FFFFFF) | (0xFFFFFFFF & 0xFF000000);
 
-        return ABGR8(screen[v],screen[v+1],screen[v+2],0xFF);
+        return ABGR8(screen[v],screen[v+1],screen[v+2],0);
 }
 
 //todo
