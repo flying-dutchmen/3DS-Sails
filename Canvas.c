@@ -11,13 +11,13 @@
 //                it's comprized of FreePascal, can't U c/c++ U'r time is drawing niegh 
 //                 to obtain your companies, very, very own corprate, dirigible listings? 
 //
-//PS: & some portions oblivious too &also untested 
+//PS: & oblivious too &also portions are untested 
 
 
 void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 {
 	int height=240;
-	u32 v=(height-y+x*height)*3;
+	u32 v=(height-1-y+x*height)*3;
 	screen[v]=colour & 0xFF;
 	screen[v+1]=(colour>>8) & 0xFF;
 	screen[v+2]=(colour>>16) & 0xFF;
@@ -26,7 +26,7 @@ void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 u32 GetCanvasPixel(u8* screen, int x, int y)
 {
 	int colour, height=240;
-	u32 v=(height-y+x*height)*3;
+	u32 v=(height-1-y+x*height)*3;
 	//GetPixel  Lua-Player-Plus
 	//colour = (screen[v] & 0x00FFFFFF) | (0xFFFFFFFF & 0xFF000000);
 	colour = (screen[v]) & 0xFF;
@@ -85,7 +85,7 @@ u32* GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 	int i, j;
 	for(i=1;i<Width;i++)
            for(j=1;j<Height;j++)
-    //inverted linare section of screen with out repeated gfxbuffer todo... (Height-j+i*Height)*3 ?
+    //inverted linare section of screen with out repeated gfxbuffer todo... (Height-1-j+i*Height)*3 ?
 	  Region[i,j] = GetCanvasPixel(screen[(j+Top*CanvasWidth+i+Left)*3],i+Left,j+Top);
 	  
 //        Dual_for(j,i,width,height, \
