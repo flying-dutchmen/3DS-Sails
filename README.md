@@ -1,5 +1,5 @@
 # 3D-Sails  
-Nintendo 3ds Canvas (Get &amp; Set, RecRegions indivial Pixil) 
+Nintendo 3ds Canvas (Get &amp; Set, RecRegions individual Pixil) 
 
 Pass the bar 
 
@@ -8,7 +8,7 @@ Pass the bar
 
 //test pattern 1st pass  
 for (i = 0; i < 79; ++i)  
-for (j = 0; j < 200; ++j)  
+ for (j = 0; j < 200; ++j)  
 	{  
         SetCanvasPixel(screenTopLeft,i,j,RED);  
                                 SetCanvasPixel(screenTopRight,i,j,RED);  
@@ -22,9 +22,9 @@ for (j = 0; j < 200; ++j)
                                 SetCanvasPixel(screenTopRight,i+320,j,BLUE);  
 				};  
 //test pattern 2nd pass   
-				for (i = 0; i < 99; ++i)  
-				  for (j = 201; j < 239; ++j)  
-				{  
+for (i = 0; i < 99; ++i)  
+ for (j = 201; j < 239; ++j)  
+	{  
                                 SetCanvasPixel(screenTopLeft,i,j,PINK);  
                                 SetCanvasPixel(screenTopRight,i,j,PINK);  
                                 SetCanvasPixel(screenTopLeft,i+100,j,LIGHT_GREEN);  
