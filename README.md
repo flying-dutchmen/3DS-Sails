@@ -1,5 +1,5 @@
 # 3D-Sails  
-Nintendo 3ds Canvas (Get &amp; Set, RecRegions individual Pixil) 
+Nintendo 3ds Canvas (Get &amp; Set, rectangular regions & individual Pixil) 
 
 Pass the bar 
 
