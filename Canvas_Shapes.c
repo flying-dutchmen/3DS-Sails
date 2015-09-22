@@ -97,3 +97,58 @@ void Circum(u8* screen, int cx, int cy, int x, int y, u32 colour)
 		SetCanvasPixel(screen, cx - y, cy - x, colour);
 	}
 }
+
+
+//Revised from -->http://www.programming-techniques.com/2012/01/drawing-ellipse-with-mid-point-ellipse.html
+#define ROUND(a) ((int) (a + 0.5))
+
+void ellipsePlotPoints(u8* screen, int xCenter, int yCenter, int x, int y, u32 colour){
+    SetCanvasPixel(screen, xCenter + x, yCenter + y, colour);
+    SetCanvasPixel(screen, xCenter - x, yCenter + y, colour);
+    SetCanvasPixel(screen, xCenter + x, yCenter - y, colour);
+    SetCanvasPixel(screen, xCenter - x, yCenter - y, colour);
+}
+void Ellipse(u8* screen, int xCenter, int yCenter, int Rx, int Ry, u32 colour){
+    int Rx2 = Rx*Rx;
+    int Ry2 = Ry*Ry;
+    int twoRx2 = 2 * Rx2;
+    int twoRy2 = 2 * Ry2;
+    int p;
+    int x = 0;
+    int y = Ry;
+    int px = 0;
+    int py = twoRx2 * y;
+
+    ellipsePlotPoints(screen, xCenter, yCenter, x, y, colour);
+
+    /* For Region 1 */
+    p = ROUND(Ry2 - (Rx2*Ry) + (0.25) * Rx2);
+    while(px < py){
+        x++;
+        px += twoRy2;
+        if(p < 0){
+            p += Ry2 + px;
+        }else{
+            y--;
+            py -= twoRx2;
+            p += Ry2 + px - py;
+        }
+        ellipsePlotPoints(screen, xCenter, yCenter, x, y, colour);
+    }
+
+    /* For Region 2*/
+    p = ROUND(Ry2 * (x + 0.5)*(x + 0.5) + Rx2 * (y - 1)*(y - 1) - Rx2 * Ry2);
+    while(y > 0){
+        y--;
+        py -= twoRx2;
+        if(p > 0){
+            p += Rx2 - py;
+        }else{
+            x++;
+            px += twoRy2;
+            p += Rx2 - py + px;
+        }
+        ellipsePlotPoints(screen, xCenter, yCenter, x, y, colour);
+    }
+
+}
