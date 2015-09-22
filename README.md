@@ -1,5 +1,5 @@
 # 3D-Sails  
-Nintendo 3ds Canvas (Get &amp; Set, rectangular regions & individual Pixil) 
+Nintendo 3ds Canvas usage/demo
 
 	screenTopLeft = gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL); 
 	screenTopRight = gfxGetFramebuffer(GFX_TOP, GFX_RIGHT, NULL, NULL); 
