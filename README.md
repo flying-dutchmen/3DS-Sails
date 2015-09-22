@@ -41,14 +41,14 @@ for (i = 0; i < 99; ++i)
 --> https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636255289976613/?type=1&theater
 
 
-//Primitive's usage/demo
-//Cracker; and the world is full of them; want polygon?
+//Primitive's usage/demo  
+//Cracker; and the world is full of them; want polygon?  
 
-  				line(screenTopLeft, 0, 239, 399, 0, PINK);
-			  	line(screenTopRight, 0, 0, 399, 239, PINK);
-				Circle(screenTopLeft, 50, 50, 10, BLUE);
-				Circle(screenTopRight, 349, 50, 10, BLUE);
-				Ellipse(screenTopLeft, 50, 150, 20, 10, GREEN);
-				Ellipse(screenTopRight, 349, 150, 20, 10, GREEN);
+  				line(screenTopLeft, 0, 239, 399, 0, PINK);  
+			  	line(screenTopRight, 0, 0, 399, 239, PINK);  
+				Circle(screenTopLeft, 50, 50, 10, BLUE);  
+				Circle(screenTopRight, 349, 50, 10, BLUE);  
+				Ellipse(screenTopLeft, 50, 150, 20, 10, GREEN);  
+				Ellipse(screenTopRight, 349, 150, 20, 10, GREEN);  
 
-				gfxFlushBuffers();
+				gfxFlushBuffers();  
