@@ -42,7 +42,7 @@ for (i = 0; i < 99; ++i)
 
 
 //Primitive's usage/demo  
-//Cracker; and the world is full of them; want polygon?  
+//Cracker; and the world is full of them; want a polygon?  
 
   				line(screenTopLeft, 0, 239, 399, 0, PINK);  
 			  	line(screenTopRight, 0, 0, 399, 239, PINK);  
