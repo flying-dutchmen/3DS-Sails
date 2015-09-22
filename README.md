@@ -1,5 +1,5 @@
-# 3D-Sails  
-Nintendo 3ds Canvas 
+# 3DS-Sails  
+Canvas & ... for Nintendo 3ds platform  
 
 Pixil usage/demo
 
