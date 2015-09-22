@@ -6,16 +6,19 @@
 
 #include "Canvas.h"
 
-void line(u8* screen, int x, int y, int x2, int y2, u32 colour) {
-	y++;
-	char *coord = (char*) (720 * x + 720 - (3 * y + 3) + *screen);
-	int i;
-//	for (i = 0; i < length; i++) {
-
-
-	}
-
-	//write_color(coord + screen, r, g, b);
+//Revised from --> http://rosettacode.org/wiki/Bitmap/Bresenham%27s_line_algorithm#C
+void line(u8* screen, int x0, int y0, int x1, int y1, u32 colour) {
+  int dx = abs(x1-x0), sx = x0<x1 ? 1 : -1;
+  int dy = abs(y1-y0), sy = y0<y1 ? 1 : -1; 
+  int err = (dx>dy ? dx : -dy)/2, e2;
+ 
+  for(;;){
+    SetCanvasPixel(x0,y0,colour);
+    if (x0==x1 && y0==y1) break;
+    e2 = err;
+    if (e2 >-dx) { err -= dy; x0 += sx; }
+    if (e2 < dy) { err += dx; y0 += sy; }
+  }
 }
 
 void LineHV(u8* screen, int x1, int y1, int x2, int y2, u32 colour)
