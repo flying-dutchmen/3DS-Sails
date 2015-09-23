@@ -95,7 +95,7 @@ void SetRecRe(u8* screen, int Top, int Left, int Height, int Width, u8* Region)
 //	     MemFree(Region);    // freeze
 //	     vramFree(Region);   // freeze
 //	     VRAM_Free(Region);   // freeze
-	     linearFree(Region); // colour is off & !freeze
+ /* if (bool) */ linearFree(Region); // 
 
 //		SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
 }
