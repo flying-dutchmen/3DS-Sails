@@ -59,7 +59,7 @@ Pixil usage/demo II
 		break;  
   }  
   
-//Primitive's usage/demo  
+Primitive's usage/demo  
 //Cracker; and the world is full of them; want a polygon?  
 
   				line(screenTopLeft, 0, 239, 399, 0, PINK);  
@@ -73,13 +73,13 @@ Pixil usage/demo II
 
 -->https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636836319918510/?type=1&theater
 
-//Rectangular-Region usage/demo
+Rectangular-Region usage/demo
 
-//u8* Recbufl = (u8*)linearMemAlign(bitmapsize, 0x8);
-//Recbufl= (u8*)GetRecRe(screenTopLeft,10,10,80,80);
+//u8* Recbufl = (u8*)linearMemAlign(bitmapsize, 0x8);  
+//Recbufl= (u8*)GetRecRe(screenTopLeft,10,10,80,80); // patterns & tiles
 //SetRecRe(screenBottom,10,10,80,80,Recbufl);
 //linearFree(Recbufr);
 
-//Proform Mem clean-up @ SetRecRe?? all cases? 
+//Proforms Mem clean-up in SetRecRe?? all cases? or if wii need repeated ...
 SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));
 
