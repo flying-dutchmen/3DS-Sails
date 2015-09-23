@@ -40,7 +40,25 @@ for (i = 0; i < 99; ++i)
 
 --> https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636255289976613/?type=1&theater
 
-
+Pixil usage/demo II  
+   switch(GetCanvasPixel(screenTopLeft,x,y))  
+  {   
+ 	case RED: text_print(screenBottom, "Sampled a RED",100,120); break;  
+	case GREEN: text_print(screenBottom, "Sampled a GREEN",100,120); break;  
+ 	case BLUE: text_print(screenBottom, "Sampled a BLUE",100,120); break;  
+ 	case CYAN: text_print(screenBottom, "Sampled a CYAN",100,120); break;  
+ 	case PINK: text_print(screenBottom, "Sampled a PINK",100,120); break;  
+ 	case YELLOW: text_print(screenBottom, "Sampled a YELLOW",100,120); break;  
+ 	case BLACK: text_print(screenBottom, "Sampled a BLACK",100,120); break;  
+ 	case WHITE: text_print(screenBottom, "Sampled a WHITE",100,120); break;   
+ 	case ORANGE: text_print(screenBottom, "Sampled a ORANGE",100,120); break;  
+ 	case LIGHT_GREEN: text_print(screenBottom, "Sampled a LIGHT GREEN",100,120); break;   
+ 	case PURPLE: text_print(screenBottom, "Sampled a PURPLE",100,120); break;  
+	default:   
+                ClearCanvas(screenBottom, BLACK);  
+		break;  
+  }  
+  
 //Primitive's usage/demo  
 //Cracker; and the world is full of them; want a polygon?  
 
