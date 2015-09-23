@@ -1,7 +1,7 @@
 #include "Canvas.h"
 // the Pro-liter-riot's, Sklaven (a turned-out &or bent FSF/Open-Source) 
 // [act 1, scene 1] 
-// Eg. u'r "Cash-in-Hand?", "live?", "or still friends with Dr. Nelson Mandal";
+// Eg. "Cash-in-Hand?", " U'r live?", "or still friends with Dr. Nelson Mandal";
 //
 // Citizen-Ken: 
 //                Well we're going on a guilt trip too israil. & Do you need IT/Marketing in 3-D? 
@@ -19,13 +19,14 @@
 //& smealum --> https://github.com/smealum/ctrulib
 
 
+
 void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 {
 	int height=240;
 	u32 v=(height-1-y+x*height)*3;
-	screen[v]=colour & 0xFF;
-	screen[v+1]=(colour>>8) & 0xFF;
-	screen[v+2]=(colour>>16) & 0xFF;
+	screen[v]=colour & 0xFF;         //blue
+	screen[v+1]=(colour>>8) & 0xFF;  //green
+	screen[v+2]=(colour>>16) & 0xFF; //red
 }
 
 //found @ https://github.com/Lectem/3Damnesic 
@@ -37,11 +38,11 @@ u32 GetCanvasPixel(u8* screen, int x, int y)
 {
         int height=240;
 	u32 v=(height-1-y+x*height)*3;
-
-//GetPixel  Lua-Player-Plus
-//	u32 colour = (screen[idx] & 0x00FFFFFF) | (0xFFFFFFFF & 0xFF000000);
-
-        return ABGR8(screen[v],screen[v+1],screen[v+2],0xFF);
+	u32 colour =screen[v];
+	colour += (screen[v+1] << 8);
+	colour += (screen[v+2] << 16);
+        return colour;
+//        return ABGR8(screen[v],screen[v+2],screen[v+1], 0xFF);
 }
 
 //todo
@@ -78,8 +79,8 @@ void SetRecRe(u8* screen, int Top, int Left, int Height, int Width, u8* Region)
 	for(i=Left;i<Width;i++)
            for(j=Top;j<Height;j++)
  {
-	    int si = (240-1-j+i*240) * 3;
-	    int di = (Height-1-(Left-j)+((Top-i)*Height)) * 3;
+	    int si = (240-1-j+i*240) * 3;  
+	    int di = (Height-1-(Top-j)+((Left-i)*Height)) * 3;
 
              screen[si++] = Region[di++];
              screen[si++] = Region[di++];
@@ -88,7 +89,7 @@ void SetRecRe(u8* screen, int Top, int Left, int Height, int Width, u8* Region)
 //		SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
 }
 
-//Re-tooled --> StapleButter :: blargSnes :: main.c :: "bool TakeScreenshot(char* path)"
+//re-tooled --> StapleButter :: blargSnes :: main.c :: "bool TakeScreenshot(char* path)"
 u8 * GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 {  
 //	u32* Region;
@@ -102,13 +103,13 @@ u8 * GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
            for(j=Top;j<Height;j++)
 {
 			int si = (240-1-j+i*240) * 3;
-			int di = (Height-1-(Left-j)+((Top-i)*Height)) * 3;
+			int di = (Height-1-(Top-j)+((Left-i)*Height)) * 3;
 			
 			Region[di++] = screen[si++];
 			Region[di++] = screen[si++];
 			Region[di++] = screen[si++];
 
-// inverted linare section of screen with out repeated gfxbuffer todo... (Height-1-j+i*Height)*3 ?
+// section screen with out repeated gfxbuffer todo... (Height-1-j+i*Height)*3 ?
 //	  Region[i,j] = GetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top);
 
 }
@@ -117,4 +118,4 @@ u8 * GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 
 //the Pro-liter-riot's Sklaven "kennyd-lee" 
 //present's "long sex-live the Pro-liter-riot, &  3 nude lcd's 1/2 of in 3-D"
-//also (unmolested Citrus, GPU, GIMP, openGL &or Nanox or any & all other that "got bent Mozilla" that have endure some form of rape)?
+//also (unmolested Citrus, GPU, GIMP, openGL &or Nanox or any & all other that "got bent Mozilla" that have endured some form of rape)?
