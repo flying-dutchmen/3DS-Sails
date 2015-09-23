@@ -72,3 +72,14 @@ Pixil usage/demo II
 				gfxFlushBuffers();  
 
 -->https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636836319918510/?type=1&theater
+
+//Rectangular-Region usage/demo
+
+//u8* Recbufl = (u8*)linearMemAlign(bitmapsize, 0x8);
+//Recbufl= (u8*)GetRecRe(screenTopLeft,10,10,80,80);
+//SetRecRe(screenBottom,10,10,80,80,Recbufl);
+//linearFree(Recbufr);
+
+//Proform Mem clean-up @ SetRecRe?? all cases? 
+SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));
+
