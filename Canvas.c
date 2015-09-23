@@ -31,6 +31,7 @@ void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 
 //found @ https://github.com/Lectem/3Damnesic 
 #define ABGR8(r, g, b, a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
+
 //& found //gs.h --> crtulib nintendo 3ds
 //#define RGBA8(r,g,b,a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
 
@@ -40,7 +41,7 @@ u32 GetCanvasPixel(u8* screen, int x, int y)
 	u32 v=(height-1-y+x*height)*3;
 	u32 colour =screen[v];
 	colour += (screen[v+1] << 8);
-	colour += (screen[v+2] << 16);
+	colour += (screen[v+2]<< 16);
         return colour;
 //        return ABGR8(screen[v],screen[v+2],screen[v+1], 0xFF);
 }
@@ -76,15 +77,17 @@ void SetRecRe(u8* screen, int Top, int Left, int Height, int Width, u8* Region)
 { 
 //	int CanvasWidth = MaxWidth(screen);
 	int i, j;
-	for(i=Left;i<Width;i++)
-           for(j=Top;j<Height;j++)
+	for(i=Left;i<Width+Left;i++)
+           for(j=Top;j<Height+Top;j++)
  {
-	    int si = (240-1-j+i*240) * 3;  
-	    int di = (Height-1-(Top-j)+((Left-i)*Height)) * 3;
 
-             screen[si++] = Region[di++];
-             screen[si++] = Region[di++];
-             screen[si++] = Region[di++];
+//	u32 v=(height-1-y+x*height)*3;
+	    int si = (240-1-j+i*240) * 3;  
+	    int di = Height-1-(j-Top)+(i-Left)*Height * 3;
+
+             screen[si] = Region[di];
+             screen[si+1] = Region[di+1];
+             screen[si+2] = Region[di+2];
  }
 //		SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
 }
@@ -99,15 +102,15 @@ u8 * GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 //	int CanvasWidth = MaxWidth(screen); ???
 
 	int i, j;
-	for(i=Left;i<Width;i++)
-           for(j=Top;j<Height;j++)
+	for(i=Left;i<Width+Left;i++)
+           for(j=Top;j<Height+Top;j++)
 {
 			int si = (240-1-j+i*240) * 3;
-			int di = (Height-1-(Top-j)+((Left-i)*Height)) * 3;
+                        int di = Height-1-(j-Top)+(i-Left)*Height * 3;
 			
-			Region[di++] = screen[si++];
-			Region[di++] = screen[si++];
-			Region[di++] = screen[si++];
+			Region[di] = screen[si];
+			Region[di+1] = screen[si+1];
+			Region[di+2] = screen[si+2];
 
 // section screen with out repeated gfxbuffer todo... (Height-1-j+i*Height)*3 ?
 //	  Region[i,j] = GetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top);
