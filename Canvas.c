@@ -9,7 +9,7 @@
 //                it's comprized of FreePascal, can't U c/c++ U'r time is drawing niegh 
 //                 to obtain your companies, very, very own corprate, dirigible listings? 
 //
-//PS: Oblivious too! Also some portions are un-tested & Revamped from sources listed bellow 
+//PS: code is in bliss, nearing Oblivious too! & Revamped from sources listed bellow 
 //
 // ShinyQuagsire23 --> https://github.com/shinyquagsire23/DCPU-3DS
 //& AlbertoSONIC --> https://github.com/AlbertoSONIC/3DS_Paint
@@ -73,6 +73,7 @@ void ClearCanvas(u8* screen, u32 colour)
 		SetCanvasPixel(screen,i,j,colour);
 }
 
+//zzz... ahh... yah, yup?
 void SetRecRe(u8* screen, int Top, int Left, int Height, int Width, u8* Region)
 { 
 //	int CanvasWidth = MaxWidth(screen);
@@ -81,14 +82,21 @@ void SetRecRe(u8* screen, int Top, int Left, int Height, int Width, u8* Region)
            for(j=Top;j<Height+Top;j++)
  {
 
-//	u32 v=(height-1-y+x*height)*3;
-	    int si = (240-1-j+i*240) * 3;  
-	    int di = Height-1-(j-Top)+(i-Left)*Height * 3;
+//	    int si = (240-1-j+i*240) * 3;  
+//	    int di = Height-1-(j-Top)+(i-Left)*Height * 3;
 
-             screen[si] = Region[di];
-             screen[si+1] = Region[di+1];
-             screen[si+2] = Region[di+2];
+//             screen[si] = Region[di]; //& 0xFF no effect
+//             screen[si+1] = Region[di+1];
+//             screen[si+2] = Region[di+2];
+
+		SetCanvasPixel(screen, i, j, GetCanvasPixel(Region,i-Left,j-Top));
  }
+
+//	     MemFree(Region);    // freeze
+//	     vramFree(Region);   // freeze
+//	     VRAM_Free(Region);   // freeze
+	     linearFree(Region); // colour is off & !freeze
+
 //		SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
 }
 
@@ -97,7 +105,13 @@ u8 * GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 {  
 //	u32* Region;
 	u32 bitmapsize = Width*Height*3;
-	u8* Region = (u8*)MemAlloc(bitmapsize);
+
+//A fun-time to debug
+//	u8* Region = (u8*)MemAlloc(bitmapsize);
+//	u8* Region = (u8*)vramAlloc(bitmapsize);
+//	u8* Region = (u8*)VRAM_Alloc(bitmapsize);
+//	u8* Region = (u8*)linearAlloc(bitmapsize);
+	u8* Region = (u8*)linearMemAlign(bitmapsize, 0x8);
 	memset(Region, 0, bitmapsize);
 //	int CanvasWidth = MaxWidth(screen); ???
 
@@ -105,12 +119,14 @@ u8 * GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
 	for(i=Left;i<Width+Left;i++)
            for(j=Top;j<Height+Top;j++)
 {
-			int si = (240-1-j+i*240) * 3;
-                        int di = Height-1-(j-Top)+(i-Left)*Height * 3;
-			
-			Region[di] = screen[si];
-			Region[di+1] = screen[si+1];
-			Region[di+2] = screen[si+2];
+//   			int si = (240-1-j+i*240) * 3;
+//                      int di = Height-1-(j-Top)+(i-Left)*Height * 3;
+
+			SetCanvasPixel(Region, i-Left, j-Top, GetCanvasPixel(screen,i,j));
+
+//			Region[di] = screen[si];
+//			Region[di+1] = screen[si+1];
+//			Region[di+2] = screen[si+2];
 
 // section screen with out repeated gfxbuffer todo... (Height-1-j+i*Height)*3 ?
 //	  Region[i,j] = GetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top);
