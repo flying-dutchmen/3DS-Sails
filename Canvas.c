@@ -9,7 +9,7 @@
 //                it's comprized of FreePascal, can't U c/c++ U'r time is drawing niegh 
 //                 to obtain your companies, very, very own corprate, dirigible listings? 
 //
-//PS: code is in bliss, nearing Oblivious too! & Revamped from sources listed bellow 
+//PS: code is in bliss, Oblivious too! & Revamped from sources listed bellow 
 //
 // ShinyQuagsire23 --> https://github.com/shinyquagsire23/DCPU-3DS
 //& AlbertoSONIC --> https://github.com/AlbertoSONIC/3DS_Paint
