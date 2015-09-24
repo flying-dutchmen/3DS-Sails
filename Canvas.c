@@ -97,7 +97,7 @@ void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, 
    linearFree(Region); 
 //}
 
-//looked ok didn't work --> SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
+//in the begin there was --> SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
 }
 
 //inspired by --> StapleButter :: blargSnes :: main.c :: "bool TakeScreenshot(char* path)"
