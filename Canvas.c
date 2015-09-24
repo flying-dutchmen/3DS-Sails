@@ -82,8 +82,8 @@ RamType GetRamLocal;
 */
 
 //zzz... ahh... yah, yup? I'm intiled to "going off on a tangent"
-#define SetRecRe(screen, Top, Left, Height, Width, Region)(SetRecEx(screen, Top, Left, Height, Width, Region, 1))
-void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, bool CleanUp)
+#define SetRecRe(screen, Top, Left, Height, Width, Region)(SetRecEx(screen, Top, Left, Height, Width, Region, 1, linear))
+void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, bool CleanUp, RamType RamLocal)
 { 
 //	int CanvasWidth = MaxWidth(screen);
 	int i, j;
