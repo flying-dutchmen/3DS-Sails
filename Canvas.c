@@ -18,8 +18,6 @@
 //& Lua-Player-Plus --> https://github.com/Rinnegatamante
 //& smealum --> https://github.com/smealum/ctrulib
 
-
-
 void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 {
 	int height=240;
@@ -31,7 +29,6 @@ void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 
 //found @ https://github.com/Lectem/3Damnesic 
 #define ABGR8(r, g, b, a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
-
 //& found //gs.h --> crtulib nintendo 3ds
 //#define RGBA8(r,g,b,a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
 
@@ -56,7 +53,6 @@ int MaxWidth(u8* screen)
    else if (screen = gfxGetFramebuffer(GFX_BOTTOM, GFX_LEFT, NULL, NULL)) return 340;
 }
 
-
 #define Dual_for(j,i, Width, Height, into) \
 //	do { \
            for(i=0;i<Width;i++)for(j=0;j<Height;j++){into}; 
@@ -73,68 +69,62 @@ void ClearCanvas(u8* screen, u32 colour)
 		SetCanvasPixel(screen,i,j,colour);
 }
 
-//zzz... ahh... yah, yup?
-void SetRecRe(u8* screen, int Top, int Left, int Height, int Width, u8* Region)
+//mem.h <--
+/*
+typedef enum
+{
+	linear = 0,
+	vram = 1 
+}RamType;
+
+RamType GetRamLocal;
+#define SetRamLocal(Local)(GetRamLocal=Local);
+*/
+
+//zzz... ahh... yah, yup? I'm intiled to "going off on a tangent"
+#define SetRecRe(screen, Top, Left, Height, Width, Region)(SetRecEx(screen, Top, Left, Height, Width, Region, 1))
+void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, bool CleanUp)
 { 
 //	int CanvasWidth = MaxWidth(screen);
 	int i, j;
 	for(i=Left;i<Width+Left;i++)
            for(j=Top;j<Height+Top;j++)
- {
-
-//	    int si = (240-1-j+i*240) * 3;  
-//	    int di = Height-1-(j-Top)+(i-Left)*Height * 3;
-
-//             screen[si] = Region[di]; //& 0xFF no effect
-//             screen[si+1] = Region[di+1];
-//             screen[si+2] = Region[di+2];
-
 		SetCanvasPixel(screen, i, j, GetCanvasPixel(Region,i-Left,j-Top));
- }
 
-//	     MemFree(Region);    // freeze
-//	     vramFree(Region);   // freeze
-//	     VRAM_Free(Region);   // freeze
- /* if (bool) */ linearFree(Region); // 
+  if (CleanUp) //switch(GetRamLocal){
+//case vram: vramFree(Region); break;  
+//default: 
+   linearFree(Region); 
+//}
 
-//		SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
+//looked ok didn't work --> SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
 }
 
-//re-tooled --> StapleButter :: blargSnes :: main.c :: "bool TakeScreenshot(char* path)"
-u8 * GetRecRe(u8* screen, int Top, int Left, int Height, int Width)
+//inspired by --> StapleButter :: blargSnes :: main.c :: "bool TakeScreenshot(char* path)"
+#define GetRecRe(screen, Top, Left, Height, Width)(GetRecEx(screen, Top, Left, Height, Width, linear))
+u8 * GetRecEx(u8* screen, int Top, int Left, int Height, int Width, RamType RamLocal)
 {  
-//	u32* Region;
+//	int CanvasWidth = MaxWidth(screen); ???
 	u32 bitmapsize = Width*Height*3;
 
-//A fun-time to debug
-//	u8* Region = (u8*)MemAlloc(bitmapsize);
-//	u8* Region = (u8*)vramAlloc(bitmapsize);
-//	u8* Region = (u8*)VRAM_Alloc(bitmapsize);
-//	u8* Region = (u8*)linearAlloc(bitmapsize);
+//switch(RamLocal){
+//case vram: u8* Region = (u8*)vramMemAlign(bitmapsize, 0x8); break;
+//default: 
 	u8* Region = (u8*)linearMemAlign(bitmapsize, 0x8);
+//}	
 	memset(Region, 0, bitmapsize);
-//	int CanvasWidth = MaxWidth(screen); ???
 
 	int i, j;
 	for(i=Left;i<Width+Left;i++)
            for(j=Top;j<Height+Top;j++)
-{
-//   			int si = (240-1-j+i*240) * 3;
-//                      int di = Height-1-(j-Top)+(i-Left)*Height * 3;
-
 			SetCanvasPixel(Region, i-Left, j-Top, GetCanvasPixel(screen,i,j));
 
-//			Region[di] = screen[si];
-//			Region[di+1] = screen[si+1];
-//			Region[di+2] = screen[si+2];
-
-// section screen with out repeated gfxbuffer todo... (Height-1-j+i*Height)*3 ?
+// goal reached "section screen with out repeated gfxbuffer"
 //	  Region[i,j] = GetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top);
 
-}
 	return Region;	
 }
 
-//the Pro-liter-riot's Sklaven "kennyd-lee" 
-//present's "long sex-live the Pro-liter-riot, &  3 nude lcd's 1/2 of in 3-D"
+// Sklaven "kennyd-lee"
+//Present's "long sex-live the Pro-liter-riot, &  3 nude lcd's 1/2 of it in 3-D"
 //also (unmolested Citrus, GPU, GIMP, openGL &or Nanox or any & all other that "got bent Mozilla" that have endured some form of rape)?
