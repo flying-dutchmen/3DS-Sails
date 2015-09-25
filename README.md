@@ -75,11 +75,12 @@ Primitive's usage/demo
 
 Rectangular-Region usage/demo
 
-//u8* Recbufl = (u8*)linearMemAlign(bitmapsize, 0x8);  
-//Recbufl= (u8*)GetRecRe(screenTopLeft,10,10,80,80); // patterns & tiles
-//SetRecRe(screenBottom,10,10,80,80,Recbufl);
-//linearFree(Recbufr);
-
 //Proforms Mem clean-up in SetRecRe?? all cases? or if wii need repeated ...
 SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));
 
+Rectangular-Region usage/demo II
+
+//u8* Recbufl = (u8*)linearMemAlign(bitmapsize, 0x8);  
+Recbufl= (u8*)GetRecEx(screenTopLeft,10,10,80,80,linear); // patterns & tiles ?  
+SetRecEx(screenBottom,10,10,80,80, Recbufl, 0, linear); //about args 7th boolean cleanup, 8th RamType (1=vram or 0=linear)  
+linearFree(Recbufr); //manual  
