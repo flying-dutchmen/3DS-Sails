@@ -2,9 +2,10 @@
 ##Canvas for Nintendo 3ds platform   
 All source Code with exception of "Dual_for" presented has undergone debuging & passed test Eg. is functional/usable.  
 The *.c Sources & demos presented how ever broken, assume an intermediate++ knowledge "C" for thire usage!  
-To steno-graph, laymen others a "glips &or appreciation for the work involved in building an implemention" and not scarcely fathom just the *.h header/interface's! & too many other authours && engineers && pro-liter-riot's mentioned here or not through out "A very sincere Thank-You"! 
+To steno-graph, laymen others a "glips &or appreciation for the work involved in building an implemention" and not scarcely fathom just the *.h header/interface's!   
+& too many other authours && engineers && pro-liter-riot's mentioned here or not through out "A very sincere Thank-You"!  
 
-& digress width: Some how ore an other? "Over priced & rusted, badly out-dated tele-com" smell the epson 3rd-dimension salts, woke up & cought the ball. Eg. "inhuman-resource & investmentmnet in personal"! sounds left field? 
+& I digress width: Some how ore an other? "Over priced & rusted, badly out-dated tele-com" smell the epson 3rd-dimension salts, woke up & cought the ball. Eg. "inhuman-resource & investmentment in personal"! sounds left field?   
 
 S.V.P. Any Questions, requests &or proposals can be sent via email!   
 
