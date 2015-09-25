@@ -1,49 +1,46 @@
 #include "Canvas_font.h"
-#include "ascii64.h"
 
-void CanvasChar(u8* screen, char letter,int x,int y, u32 colour)
+//CanvasChar && CanvasString
+//revised --> https://bitbucket.org/xerpi/eleven-arms/src/
+
+extern const u8 msx_font[];
+
+//int font_draw_char(int x, int y, u32 color, char c)
+int CanvasChar(u8* screen,  char c, int x, int y, u32 colour)
 {
-	int i, k;
-	unsigned char mask;
-	unsigned char l;
-
-	for (i = 0; i < 8; i++){
-		mask = 0b10000000;
-		l = asciiData[(int)letter][i];
-		for (k = 0; k < 8; k++){
-			if ((mask >> k) & l){
-//				drawPixel(k+x,i+y,r,g,b,screen);
-				SetCanvasPixel(screen, k+x,i+y,colour);
-			}     
+	u8 *font = (u8*)(msx_font + (c - (u32)' ') * 8);
+	int i, j;
+	for (i = 0; i < 8; ++i) {
+		for (j = 0; j < 8; ++j) {
+//			if ((*font & (128 >> j))) draw_plot(x+j, y+i, color);
+			if ((*font & (128 >> j))) SetCanvasPixel(screen, x+j, y+i, colour);
 		}
+		++font;
 	}
+	return x+8;
 }
 
-void CanvasString(u8* screen, char* word, int x, int y, u32 colour)
+//int font_draw_string(int x, int y, u32 color, const char *string)
+int CanvasString(u8* screen, const char *string, int x, int y, u32 colour)
 {
-	int tmp_x =x;
-	int i;
-	int line = 0;
-	int width = MaxWidth(screen);
-
-//	switch(screenPos){
-//	case GFX_BOTTOM:
-//		=BOTTOM_WIDTH;
-//		break;
-//	default:
-//		width=TOP_WIDTH;
-//		break;
-//	}
-
-	for (i = 0; i < (signed)strlen(word); i++){
-
-		if (tmp_x+8 > width) {
-			line++;
-			tmp_x = x;
+	if (string == NULL) return x;
+	int startx = x;
+	const char *s = string;
+	while (*s) {
+		if (*s == '\n') {
+			x = startx;
+			y+=8;
+		} else if (*s == ' ') {
+			x+=8;
+		} else if(*s == '\t') {
+			x+=8*4;
+		} else {
+//			draw_fillrect(x, y, 8, 8, BLACK);
+//			font_draw_char(x, y, color, *s);
+			CanvasChar(screen, *s, x, y, colour);
+			x+=8;
 		}
-//		drawChar(word[i],tmp_x,y+(line*8),r,g,b, screen);
-		CanvasChar(screen, word[i],tmp_x,y+(line*8),colour);
-
-		tmp_x = tmp_x+8;
+		++s;
 	}
+	return x;
 }
