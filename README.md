@@ -1,7 +1,14 @@
 # 3DS Sails  
-Canvas & ... for Nintendo 3ds platform  
+##Canvas tools for Nintendo 3ds platform   
+All source Code with exception of "dual_for" presented has undergone debuging & passed test Eg. is functional/usable.
+The *.c Sources & demos presented how ever broken assume the intermediate++ knowledge "C" for thire use!
+Any Questions, requests &or proposals can be sent via email! 
 
-Pixil usage/demo
+to: kennyd.lee@outlook.com
+or Bcc undead.kennyd@gmail.com,KennyD@mail.com 
+subject: Nintendo 3DS Sails ...
+
+##Pixil usage/demo
 
 	screenTopLeft = gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL); 
 	screenTopRight = gfxGetFramebuffer(GFX_TOP, GFX_RIGHT, NULL, NULL); 
@@ -40,7 +47,7 @@ for (i = 0; i < 99; ++i)
 
 --> https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636255289976613/?type=1&theater
 
-Pixil usage/demo II  
+##Pixil usage/demo II  
    switch(GetCanvasPixel(screenTopLeft,x,y))  
   {   
  	case RED: text_print(screenBottom, "Sampled a RED",100,120); break;  
@@ -59,7 +66,7 @@ Pixil usage/demo II
 		break;  
   }  
   
-Primitive's usage/demo  
+##Primitive's shapes usage/demo  
 //Cracker; and the world is full of them; want a polygon?  
 
   				line(screenTopLeft, 0, 239, 399, 0, PINK);  
@@ -73,15 +80,15 @@ Primitive's usage/demo
 
 -->https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636836319918510/?type=1&theater
 
-Rectangular-Region usage/demo
+##Rectangular-Region usage/demo
 
 //Proforms memory clean-up all cases. What if wii need repeated usage of ...
 SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));
 
-Rectangular-Region usage/demo II
+##Rectangular-Region extended usage/demo II
 
 //u8* Recbufl = (u8*)linearMemAlign(bitmapsize, 0x8);  
 Recbufl= (u8*)GetRecEx(screenTopLeft,10,10,80,80,linear); // patterns & tiles ?  
-//&about args 7th boolean cleanup, 8th RamType (1=vram or 0=linear)  
-SetRecEx(screenBottom,10,10,80,80, Recbufl, 0, linear); 
+//& about args 7th boolean cleanup, 8th RamType (1=vram or 0=linear)    
+SetRecEx(screenBottom,10,10,80,80, Recbufl, 0, linear);  
 linearFree(Recbufr); //manual garbage collection 
