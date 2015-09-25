@@ -6,7 +6,7 @@ To steno-graph, laymen others a "glips &or appreciation for the work involved in
   
 & too many other authours && engineers && pro-liter-riot's mentioned here or not through out "A very sincere Thank-You"!  
 
-& I digress width: Some how ore an other? "Over priced & rusted, badly out-dated tele-com" smell the epson 3rd-dimension salts, woke up & cought the ball. Eg. "inhuman-resource & investmentment in personal"! Free phone calls +R&D for gestopo, sounds way to left field riech?   
+& I digress width: Some how ore an other? "Over priced & rusted, badly out-dated tele-com" smell the epson 3rd-dimension salts, woke up & cought the ball. Eg. "inhuman-resource & made some investmentments in personal"! Free phone calls +R&D for gestopo, sounds way to left field riech?   
 
 S.V.P. Any Questions, requests &or proposals can be sent via email!   
 
