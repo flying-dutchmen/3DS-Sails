@@ -82,7 +82,7 @@ for (i = 0; i < 99; ++i)
 
 ##Rectangular-Region usage/demo
 
-//Proforms memory clean-up all cases. What if wii need repeated usage of ...
+//Proforms memory clean-up all cases. What if wii need in 1/2 time repeated usage of ...
 SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));
 
 ##Rectangular-Region extended usage/demo II
@@ -90,5 +90,7 @@ SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));
 //u8* Recbufl = (u8*)linearMemAlign(bitmapsize, 0x8);  
 Recbufl= (u8*)GetRecEx(screenTopLeft,10,10,80,80,linear); // patterns & tiles ?  
 //& about args 7th boolean cleanup, 8th RamType (1=vram or 0=linear)    
-SetRecEx(screenBottom,10,10,80,80, Recbufl, 0, linear);  
-linearFree(Recbufr); //manual garbage collection 
+SetRecEx(screenBottom,10,10,80,80, Recbufl, 0, linear);    
+//looks like wii Have to GetRecEx(buff) over & ... anyways?
+//SetRecEx(screenBottom,10,100,80,80, Recbufl, 0, linear); repeated or subsiquent calls have no eval  
+linearFree(Recbufl); //manual CleanUp
