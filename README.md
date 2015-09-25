@@ -93,5 +93,5 @@ Recbufl= (u8*)GetRecEx(screenTopLeft,10,10,80,80,linear); // patterns & tiles ?
 //& about args 7th boolean cleanup, 8th RamType (1=vram or 0=linear)    
 SetRecEx(screenBottom,10,10,80,80, Recbufl, 0, linear);    
 //looks like wii Have to GetRecEx(buff) over & ... anyways? vram !work && freeze 3ds  
-//SetRecEx(screenBottom,10,100,80,80, Recbufl, 0, linear); repeated or subsiquent calls have no eval  
-linearFree(Recbufl); //manual CleanUp, 
+//SetRecEx(screenBottom,10,100,80,80, Recbufl, 0, linear); repeated or subsiquent calls have no-eval  
+linearFree(Recbufl); //manual CleanUp
