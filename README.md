@@ -1,12 +1,12 @@
 # 3DS Sails  
-##Canvas tools for Nintendo 3ds platform   
+##Canvas for Nintendo 3ds platform   
 All source Code with exception of "dual_for" presented has undergone debuging & passed test Eg. is functional/usable.  
 The *.c Sources & demos presented how ever broken assume the intermediate++ knowledge "C" for thire use!   
 Any Questions, requests &or proposals can be sent via email!   
 
 to: kennyd.lee@outlook.com  
 or Bcc undead.kennyd@gmail.com,KennyD@mail.com   
-subject: Nintendo 3DS Sails ...  
+Subject: Nintendo 3DS Sails ...  
 
 ##Pixil usage/demo
 
