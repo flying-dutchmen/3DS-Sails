@@ -69,19 +69,17 @@ void ClearCanvas(u8* screen, u32 colour)
 		SetCanvasPixel(screen,i,j,colour);
 }
 
-//mem.h <--
+//Canvas_Types.h <--
 /*
-typedef enum
-{
+typedef enum{
 	linear = 0,
 	vram = 1 
 }RamType;
-
-RamType GetRamLocal;
-#define SetRamLocal(Local)(GetRamLocal=Local);
 */
 
 //zzz... ahh... yah, yup? I'm intiled to "going off on a tangent"
+//inspired buy --> StapleButter :: blargSnes :: main.c :: "bool TakeScreenshot(char* path)"
+
 #define SetRecRe(screen, Top, Left, Height, Width, Region) (SetRecEx(screen, Top, Left, Height, Width, Region, 1, linear))
 void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, bool CleanUp, RamType RamLocal)
 { 
@@ -91,27 +89,28 @@ void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, 
            for(j=Top;j<Height+Top;j++)
 		SetCanvasPixel(screen, i, j, GetCanvasPixel(Region,i-Left,j-Top));
 
-  if (CleanUp) //switch(GetRamLocal){
-//case vram: vramFree(Region); break;  
-//default: 
+  if (CleanUp) switch(RamLocal){
+case vram: vramFree(Region); break;  
+default: 
    linearFree(Region); 
-//}
+}
 
 //in the begin there was --> SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j]);
 }
 
 //inspired by --> StapleButter :: blargSnes :: main.c :: "bool TakeScreenshot(char* path)"
-#define GetRecRe(screen, Top, Left, Height, Width)(GetRecEx(screen, Top, Left, Height, Width, linear))
+#define GetRecRe(screen, Top, Left, Height, Width) (GetRecEx(screen, Top, Left, Height, Width, linear))
 u8 * GetRecEx(u8* screen, int Top, int Left, int Height, int Width, RamType RamLocal)
 {  
 //	int CanvasWidth = MaxWidth(screen); ???
 	u32 bitmapsize = Width*Height*3;
-
-//switch(RamLocal){
-//case vram: u8* Region = (u8*)vramMemAlign(bitmapsize, 0x8); break;
-//default: 
-	u8* Region = (u8*)linearMemAlign(bitmapsize, 0x8);
-//}	
+        u8* Region;
+        
+switch(RamLocal){
+case vram: Region = (u8*)vramMemAlign(bitmapsize, 0x8); break;
+default: 
+           Region = (u8*)linearMemAlign(bitmapsize, 0x8);
+}		
 	memset(Region, 0, bitmapsize);
 
 	int i, j;
