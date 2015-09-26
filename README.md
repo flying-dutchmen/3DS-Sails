@@ -104,8 +104,8 @@ for (i = 0; i < 99; ++i)
     poly(screenTopLeft, shape, 8, LIGHT_GREEN);  //in debug  
     poly(screenTopRight, shape, 8, LIGHT_GREEN); //in debug  
     
-	box(screenTopLeft, 70, 130, 330, 70, WHITE);  
-	box(screenTopRight, 70, 130, 330, 70, WHITE);  
+   box(screenTopLeft, 70, 90, 260, 40, WHITE);   
+   box(screenTopRight, 70, 90, 260, 40, WHITE);   
 
 ##Rectangular-Region usage/demo
 
