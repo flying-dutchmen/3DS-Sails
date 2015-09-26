@@ -42,7 +42,8 @@ void box(u8* screen, int x1, int y1, int x2, int y2, u32 colour)
 //drafted --> too-be tested &or revised
 void poly(u8* screen, int * argv, int argc, u32 colour)
 //void poly(u8* screen, int x1, int y1, int x2, int y2, int x3, int y3, u32 colour)
-{
+{ 
+    int i;
 //if (argc < 4) return  
 //roll through the array increment 2 positions
     for(i =0;i<argc-2;i+=2)
