@@ -43,9 +43,9 @@ void box(u8* screen, int x1, int y1, int x2, int y2, u32 colour)
 void poly(u8* screen, int * argv, int argc, u32 colour)
 //void poly(u8* screen, int x1, int y1, int x2, int y2, int x3, int y3, u32 colour)
 {
-if argc > 4 // 
-//skip first point & roll through the array increment 2 positions
-    for(i =2;x<argc;x+=2)
+//if (argc < 4) return  
+//roll through the array increment 2 positions
+    for(i =0;x<argc;x+=2)
       	line(screen, argv[i], argv[i+1], argv[i+2], argv[i+3], colour);
 //Close polygon      	
       	line(screen, argv[0], argv[1], argv[argc-1], argv[argc], colour);
