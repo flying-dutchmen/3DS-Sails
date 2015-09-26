@@ -1,6 +1,6 @@
 #include "Canvas_Shapes.h"
 
-//with exception of poly && poly3 && unless stated/commented in the above otherwise source were cited -->
+//with exception of poly && unless stated/commented in the above otherwise source were cited -->
 //https://github.com/shinyquagsire23/DCPU-3DS
 //https://github.com/AlbertoSONIC/3DS_Paint
 
@@ -19,24 +19,43 @@ void line(u8* screen, int x0, int y0, int x1, int y1, u32 colour) {
   }
 }
 
-//-->
-void poly(u8* screen, int x1, int y1, int x2, int y2, u32 colour)
+void HVline(u8* screen, int x1, int y1, int x2, int y2, u32 colour)
 {
-	line(screen, x1, y1, x2, y1, colour);
-	line(screen, x2, y1, x2, y2, colour);
-	line(screen, x1, y2, x2, y2, colour);
-	line(screen, x1, y1, x1, y2, colour);
+	int x, y;
+	if (x1 == x2){
+		if (y1<y2) for (y = y1; y < y2; y++) SetCanvasPixel(screen,x1,y,colour);
+		else for (y = y2; y < y1; y++) SetCanvasPixel(screen,x1,y,colour);
+	} else {
+		if (x1<x2) for (x = x1; x < x2; x++) SetCanvasPixel(screen,x,y1,colour);
+		else for (x = x2; x < x1; x++) SetCanvasPixel(screen,x,y1,colour);
+	}
 }
 
-//-->
-void poly3(u8* screen, int x1, int y1, int x2, int y2, int x3, int y3, u32 colour)
+void box(u8* screen, int x1, int y1, int x2, int y2, u32 colour)
 {
-	line(screen, x1, y1, x2, y2, colour);
-	line(screen, x2, y2, x3, y3, colour);
-	line(screen, x3, y3, x1, y1, colour);
+	HVline(screen, x1, y1, x2, y1, colour);
+	HVline(screen, x2, y1, x2, y2, colour);
+	HVline(screen, x1, y2, x2, y2, colour);
+	HVline(screen, x1, y1, x1, y2, colour);
 }
 
-//altered --> https://bitbucket.org/xerpi/eleven-arms/src/
+//--> too-be revise
+void poly(u8* screen, int * argv, int argc, u32 colour)
+//void poly(u8* screen, int x1, int y1, int x2, int y2, int x3, int y3, u32 colour)
+{
+if argc > 4 // 
+//skip first point & roll through the array increment 2 positions
+    for(i =2;x<argc;x+=2)
+      	line(screen, argv[i], argv[i+1], argv[i+2], argv[i+3], colour);
+//Close polygon      	
+      	line(screen, argv[0], argv[1], argv[argc-1], argv[argc], colour);
+      
+//	line(screen, x1, y1, x2, y2, colour);
+//	line(screen, x2, y2, x3, y3, colour);
+//	line(screen, x3, y3, x1, y1, colour);
+}
+
+//altered --> https://bitbucket.org/xerpi
 void rectfill(u8* screen, int x, int y, int w, int h, u32 colour)
 {
 	int i, j;
