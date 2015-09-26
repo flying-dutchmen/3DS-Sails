@@ -45,7 +45,7 @@ void poly(u8* screen, int * argv, int argc, u32 colour)
 {
 //if (argc < 4) return  
 //roll through the array increment 2 positions
-    for(i =0;x<argc;x+=2)
+    for(i =0;i<argc-2;i+=2)
       	line(screen, argv[i], argv[i+1], argv[i+2], argv[i+3], colour);
 //Close polygon      	
       	line(screen, argv[0], argv[1], argv[argc-1], argv[argc], colour);
@@ -61,7 +61,7 @@ void rectfill(u8* screen, int x, int y, int w, int h, u32 colour)
 	int i, j;
 	for (i = 0; i < w; ++i) {
 		for (j = 0; j < h; ++j) {
-			SetCanvasPixel(screen, x+i, y+j, color);
+			SetCanvasPixel(screen, x+i, y+j, colour);
 		}
 	}
 }
