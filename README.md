@@ -98,10 +98,11 @@ for (i = 0; i < 99; ++i)
     shape[6] = 80;    /* fourth vertex */  
     shape[7] = 80;  
   
-//   shape[8] = shape[0];      /* our poly automatically close */  
- //  shape[9] = shape[1];      /* the polygon, so we don't need to close it */  
-    poly(screenTopLeft, shape, 8, LIGHT_GREEN);  //in debug
-    poly(screenTopRight, shape, 8, LIGHT_GREEN); //in debug
+//   shape[8] = shape[0];      /* our's automatically close */  
+ //  shape[9] = shape[1];      /* the polygon, so we don't need bother*/  
+ 
+    poly(screenTopLeft, shape, 8, LIGHT_GREEN);  //in debug  
+    poly(screenTopRight, shape, 8, LIGHT_GREEN); //in debug  
     
     box(screenTopLeft, 10, 90, 390, 40, WHITE);  
     box(screenTopRight, 10, 90, 390, 40, WHITE);  
