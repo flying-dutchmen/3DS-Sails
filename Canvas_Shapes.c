@@ -39,7 +39,7 @@ void box(u8* screen, int x1, int y1, int x2, int y2, u32 colour)
 	HVline(screen, x1, y1, x1, y2, colour);
 }
 
-//--> too-be revise
+//drafted --> too-be tested &or revised
 void poly(u8* screen, int * argv, int argc, u32 colour)
 //void poly(u8* screen, int x1, int y1, int x2, int y2, int x3, int y3, u32 colour)
 {
