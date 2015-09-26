@@ -19,24 +19,12 @@ void line(u8* screen, int x0, int y0, int x1, int y1, u32 colour) {
   }
 }
 
-void HVline(u8* screen, int x1, int y1, int x2, int y2, u32 colour)
+void box(u8* screen, int x, int y, int w, int h, u32 colour)
 {
-	int x, y;
-	if (x1 == x2){
-		if (y1<y2) for (y = y1; y < y2; y++) SetCanvasPixel(screen,x1,y,colour);
-		else for (y = y2; y < y1; y++) SetCanvasPixel(screen,x1,y,colour);
-	} else {
-		if (x1<x2) for (x = x1; x < x2; x++) SetCanvasPixel(screen,x,y1,colour);
-		else for (x = x2; x < x1; x++) SetCanvasPixel(screen,x,y1,colour);
-	}
-}
-
-void box(u8* screen, int x1, int y1, int x2, int y2, u32 colour)
-{
-	HVline(screen, x1, y1, x2, y1, colour);
-	HVline(screen, x2, y1, x2, y2, colour);
-	HVline(screen, x1, y2, x2, y2, colour);
-	HVline(screen, x1, y1, x1, y2, colour);
+	line(screen, x, y, x+w, y, colour); //top
+	line(screen, x, y, x, y+h, colour); //left
+	line(screen, x, y+h, x+w, y+h, colour); //bottom
+	line(screen, x+w, y, x+w, y+h, colour); //right
 }
 
 //drafted --> too-be tested &or revised
