@@ -72,7 +72,7 @@ for (i = 0; i < 99; ++i)
 		break;  
   }  
   
-##Primitive's shapes usage/demo  
+##Primitive shapes usage/demo  
 //Cracker; and the world is full of them; want a polygon?  
 
   				line(screenTopLeft, 0, 239, 399, 0, PINK);  
@@ -85,6 +85,27 @@ for (i = 0; i < 99; ++i)
 				gfxFlushBuffers();  
 
 -->https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636836319918510/?type=1&theater
+
+##Primitive shapes usage/demo II
+
+   int shape[8];   /* our polygon array */  
+    shape[0] = 20;    /* first vertex */  
+    shape[1] = 20;  
+    shape[2] = 40;    /* second vertex */  
+    shape[3] = 40;  
+    shape[4] = 60;    /* third vertex */  
+    shape[5] = 60;  
+    shape[6] = 80;    /* fourth vertex */  
+    shape[7] = 80;  
+  
+//   shape[8] = shape[0];      /* our poly automatically close */  
+ //  shape[9] = shape[1];      /* the polygon, so we don't need to close it */  
+    poly(screenTopLeft, shape, 8, LIGHT_GREEN);  //in debug
+    poly(screenTopRight, shape, 8, LIGHT_GREEN); //in debug
+    
+    box(screenTopLeft, 10, 90, 390, 40, WHITE);  
+    box(screenTopRight, 10, 90, 390, 40, WHITE);  
+				
 
 ##Rectangular-Region usage/demo
 
