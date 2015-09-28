@@ -167,7 +167,7 @@ void Ellipse(u8* screen, int xCenter, int yCenter, int Rx, int Ry, u32 colour){
 
 }
 
-//QuadRationalBezierSeg &&  plotRotatedEllipseRect &&  RotatedEllipse 
+//QuadRationalBezierSeg &&  plotRotatedEllipseRect &&  RotatedEllipse. Are being debuging for this platform
 //revised --> http://members.chello.at/easyfilter/bresenham.js
 QuadRationalBezierSeg(u8* screen, int x0, int y0, int x1, int y1, int x2, int y2, int w, u32 colour)
 {                   /* plot a limited rational Bezier segment, squared weight */
