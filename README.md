@@ -1,7 +1,7 @@
 # 3DS Sails  
-##24bit "true-colour" Canvas for Nintendo 3ds platform  
-##Features get & set for both pixil or rectangular-regions versatile
-##flexible output left, right, bottom & ... text, Lines, Boxes, Circles, Ellipse's & Polygon's
+###24bit "true-colour" Canvas for Nintendo 3ds platform  
+###Features get & set for both pixil or rectangular-regions versatile
+###flexible output left, right, bottom & ... text, Lines, Boxes, Circles, Ellipse's & Polygon's
 
 All source Code with exception of "Dual_for" presented has undergone debuging & passed Eg. is functional/usable.  
 The *.c Sources & demos presented how ever broken, assume an intermediate++ knowledge "C" for thire usage!  
