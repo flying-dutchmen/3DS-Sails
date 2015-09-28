@@ -1,12 +1,14 @@
 # 3DS Sails  
-##Canvas for Nintendo 3ds platform   
-All source Code with exception of "Dual_for" presented has undergone debuging & passed test Eg. is functional/usable.  
-The *.c Sources & demos presented how ever broken, assume an intermediate++ knowledge "C" for thire usage!  
-To steno-graph, laymen others a "glips &or appreciation for the work involved in building an implemention" and not scarcely fathom just the *.h header/interface's!   
-  
-& too many other authours && engineers && pro-liter-riot's mentioned here or not through out "A very sincere Thank-You"!  
+##24bit "true-colour" Canvas for Nintendo 3ds platform  
+##Features get & set for both pixil or rectangular-regions versatile
+##flexible output left, right, bottom & ... text, Lines, Boxes, Circles, Ellipse's & Polygon's
 
-& I digress width: Some how ore an other? "Over priced & rusted, badly out-dated tele-com" smell the epson 3rd-dimension salts, woke up & cought the ball. Eg. "inhuman-resource & made some investmentments in personal"! Free phone calls +R&D for gestopo, sounds way to left field riech?   
+All source Code with exception of "Dual_for" presented has undergone debuging & passed Eg. is functional/usable.  
+The *.c Sources & demos presented how ever broken, assume an intermediate++ knowledge "C" for thire usage!  
+To steno-graph, laymen others a "glips &or new appreciation for the work involved in building an implemention" and not scarcely fathom just the *.h header/interface's!   
+  
+& too many other authours && engineers && pro-liter-riot's mentioned here or not through out 
+"A very sincere Thank-You"!  
 
 S.V.P. Any Questions, requests &or proposals can be sent via email!   
 
@@ -88,21 +90,20 @@ for (i = 0; i < 99; ++i)
 
 ##Primitive shapes usage/demo II
 
-   int shape[8];   /* our polygon array */  
-    shape[0] = 20;    /* first vertex */  
-    shape[1] = 20;  
-    shape[2] = 40;    /* second vertex */  
-    shape[3] = 40;  
-    shape[4] = 60;    /* third vertex */  
-    shape[5] = 60;  
-    shape[6] = 80;    /* fourth vertex */  
-    shape[7] = 80;  
+   int * shape[6];   /* our polygon array */
+
+    shape[0] = 20;           /* first vertex */
+    shape[1] = 20;
+    shape[2] = 20;    /* second vertex */
+    shape[3] = 60;
+    shape[4] = 140;    /* third vertex */
+    shape[5] = 80;
   
-//   shape[8] = shape[0];      /* our's automatically close */  
- //  shape[9] = shape[1];      /* the polygon, so we don't need bother*/  
+//   shape[4] = shape[0];      /* our's automatically close */  
+ //  shape[5] = shape[1];      /* the polygon, so we don't need bother*/  
  
-    poly(screenTopLeft, shape, 8, LIGHT_GREEN);  //in debug  
-    poly(screenTopRight, shape, 8, LIGHT_GREEN); //in debug  
+    poly(screenTopLeft, shape, 5, LIGHT_GREEN);    
+    poly(screenTopRight, shape, 5, LIGHT_GREEN);  
     
    box(screenTopLeft, 70, 90, 260, 40, WHITE);   
    box(screenTopRight, 70, 90, 260, 40, WHITE);   
