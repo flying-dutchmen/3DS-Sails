@@ -1,11 +1,12 @@
-# 3DS Sails  
-####24bit "true-colour" Canvas for the Nintendo 3ds platform  
-####versatile get & set for both pixil or rectangular-regions
-####flexible output left, right, bottom & ... text, Lines, Boxes, Poly, Circles, Ellipse.
+# 3DS Sails - So tell your %^#@ing Spider-Woman
+  
+####24bit "true-colour" Canvas for the Nintendo 3DS platform  
+####versatile get & set for both pixil or rectangular-regions. Use Text, Lines, Boxes, Poly, Circles & Ellipse.
+####Elegant use of left, right, bottom & ... gfxFramebuffer's as your Canvas.
 
 All source Code with exception of "Dual_for" presented has undergone debuging & passed Eg. is functional/usable.  
-The *.c Sources & demos presented how ever broken, assume an intermediate++ knowledge "C" for thire usage!  
-To steno-graph, laymen others a "glips &or new appreciation for the work involved in building an implemention" and not scarcely fathom just the *.h header/interface's!   
+The *.c Sources & snippets presented how ever broken, assume an intermediate++ knowledge "C" for thire usage!  
+To steno-graph, laymen others a "glips &or new appreciation for the work involved in building an implemention" and not scarcely fathom just the *.h header/interface's! & if you don't like; Well then; it's walk the plank! 
   
 & too many other authours && engineers && pro-liter-riot's mentioned here or not through out 
 "A very sincere Thank-You"!  
@@ -13,8 +14,11 @@ To steno-graph, laymen others a "glips &or new appreciation for the work involve
 S.V.P. Any Questions, requests &or proposals can be sent via email!   
 
 to: kennyd.lee@outlook.com  
-or Bcc undead.kennyd@gmail.com,KennyD@mail.com   
+or Bcc undead.kennyd@gmail.com, KennyD@mail.com   
 Subject: Nintendo 3DS Sails ...  
+
+Etymology--> https://en.wikipedia.org/wiki/Canvas#Etymology
+The word "canvas" is derived from the 13th century Anglo-French canevaz and the Old French canevas. Both may be derivatives of the Vulgar Latin cannapaceus for "made of hemp," originating from the Greek κάνναβις (cannabis)
 
 ##Pixil usage/demo
 
