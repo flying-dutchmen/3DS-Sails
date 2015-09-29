@@ -17,7 +17,7 @@ to: kennyd.lee@outlook.com
 or Bcc undead.kennyd@gmail.com, KennyD@mail.com   
 Subject: Nintendo 3DS Sails ...  
 
-Etymology--> https://en.wikipedia.org/wiki/Canvas#Etymology
+Etymology--> https://en.wikipedia.org/wiki/Canvas#Etymology   
 The word "canvas" is derived from the 13th century Anglo-French canevaz and the Old French canevas. Both may be derivatives of the Vulgar Latin cannapaceus for "made of hemp," originating from the Greek κάνναβις (cannabis)
 
 ##Pixil usage/demo
