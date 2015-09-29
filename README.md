@@ -1,4 +1,4 @@
-# 3DS Sails - So tell your %^#@ing Spider-Woman
+# 3DS Sails 
   
 ####24bit "true-colour" Canvas for the Nintendo 3DS platform  
 ####versatile get & set for both pixil or rectangular-regions. With Text, Lines, Boxes, Poly, Circles & tilted  Ellipse.
@@ -129,3 +129,5 @@ SetRecEx(screenBottom,10,10,80,80, Recbufl, 0, linear);
 //looks like wii Have to GetRecEx(buff) over & ... anyways? vram !work && freeze 3ds  
 //SetRecEx(screenBottom,10,100,80,80, Recbufl, 0, linear); repeated or subsiquent calls have no-eval  
 linearFree(Recbufl); //manual CleanUp
+
+#Ps. Mysterio is my pawn, So tell your %^#@ing Spider-Woman
