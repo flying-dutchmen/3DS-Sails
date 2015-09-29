@@ -167,3 +167,32 @@ void Ellipse(u8* screen, int xCenter, int yCenter, int Rx, int Ry, u32 colour){
     }
 
 }
+
+//too-be debugged &or revised 
+//pillaged --> http://www.uwgb.edu/dutchs/Geometry/HTMLCanvas/ObliqueEllipses5.HTM :: function Ellipse
+Ellipse_Rotated(u8* screen, int majaxis, int minaxis, int xctr, int yctr, int rotnrad, u32 colour){
+	//Draw ellipse of arbitrary orientation
+	float t = 0; //Parametric equation variable
+	int x0 = xctr + majaxis*cos(rotnrad);// initial x-val
+	int y0 = yctr - majaxis*sin(rotnrad);// initial y-val
+	int x1 = x0;// final x-val
+	int y1 = y0;// final y-val
+		
+	for (t=0; t <= 6.3; t = t + 0.1)
+	{
+	x0=x1;
+	y0=y1;
+	x1= xctr + majaxis*cos(t)*Math.cos(rotnrad) - minaxis*sin(t)*sin(rotnrad);
+	y1= yctr - majaxis*cos(t)*Math.sin(rotnrad) - minaxis*sin(t)*cos(rotnrad);
+	line (screen,x0,y0,x1,y1);
+	}//close for loop
+	
+	//Draw Cartesian Axes
+	line(screen,0,yctr,2*xctr,yctr,colour);
+	line(screen,xctr,0,xctr,2*yctr,colour);
+
+	//Draw Major and Minor Axes
+	line(screen,xctr+majaxis*cos(rotnrad),yctr-majaxis*sin(rotnrad),xctr-majaxis*cos(rotnrad),yctr+majaxis*sin(rotnrad),colour);
+	line(screen,xctr+minaxis*sin(rotnrad),yctr+minaxis*cos(rotnrad),xctr-minaxis*sin(rotnrad),yctr-minaxis*cos(rotnrad),colour);
+	}//close Ellipse()
+}
