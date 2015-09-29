@@ -130,4 +130,5 @@ SetRecEx(screenBottom,10,10,80,80, Recbufl, 0, linear);
 //SetRecEx(screenBottom,10,100,80,80, Recbufl, 0, linear); repeated or subsiquent calls have no-eval  
 linearFree(Recbufl); //manual CleanUp
 
-#Ps. Mysterio is my pawn, So tell your %^#@ing Spider-Woman
+#Ps. Mysterio is nothing more than pawn,    
+#So tell your %^#@ing Spider-Woman!!!
