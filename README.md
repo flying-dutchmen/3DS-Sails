@@ -1,8 +1,8 @@
 # 3DS Sails - So tell your %^#@ing Spider-Woman
   
 ####24bit "true-colour" Canvas for the Nintendo 3DS platform  
-####versatile get & set for both pixil or rectangular-regions. Use Text, Lines, Boxes, Poly, Circles & Ellipse.
-####Elegant use of left, right, bottom & ... gfxFramebuffer's as your Canvas.
+####versatile get & set for both pixil or rectangular-regions. With Text, Lines, Boxes, Poly, Circles & tilted  Ellipse.
+####"Elegant" use of left, right, bottom & ... gfxFramebuffer's as your blank canvas.
 
 All source Code with exception of "Dual_for" presented has undergone debuging & passed Eg. is functional/usable.  
 The *.c Sources & snippets presented how ever broken, assume an intermediate++ knowledge "C" for thire usage!  
@@ -57,7 +57,7 @@ for (i = 0; i < 99; ++i)
 				gfxFlushBuffers();
 				//gfxSwapBuffers();
 
---> https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636255289976613/?type=1&theater
+As scene here --> https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636255289976613/?type=1&theater
 
 ##Pixil usage/demo II  
    switch(GetCanvasPixel(screenTopLeft,x,y))  
@@ -83,14 +83,14 @@ for (i = 0; i < 99; ++i)
 
   				line(screenTopLeft, 0, 239, 399, 0, PINK);  
 			  	line(screenTopRight, 0, 0, 399, 239, PINK);  
-				Circle(screenTopLeft, 50, 50, 10, BLUE);  
-				Circle(screenTopRight, 349, 50, 10, BLUE);  
-				Ellipse(screenTopLeft, 50, 150, 20, 10, GREEN);  
-				Ellipse(screenTopRight, 349, 150, 20, 10, GREEN);  
+				Circle(screenTopLeft, 50, 50, 10, BLUE); //needs slight overhall    
+				Circle(screenTopRight, 349, 50, 10, BLUE); //& finalized     
+				Ellipse(screenTopLeft, 50, 150, 20, 10, GREEN); //macro is too-be revised    
+				Ellipse(screenTopRight, 349, 150, 20, 10, GREEN); //& placed back in finaldraft   
 
 				gfxFlushBuffers();  
 
--->https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636836319918510/?type=1&theater
+As scene here -->https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636836319918510/?type=1&theater
 
 ##Primitive shapes usage/demo II
 
@@ -111,6 +111,8 @@ for (i = 0; i < 99; ++i)
     
    box(screenTopLeft, 70, 90, 260, 40, WHITE);   
    box(screenTopRight, 70, 90, 260, 40, WHITE);   
+
+As scene here -->https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1638563179745824/?type=3&theater
 
 ##Rectangular-Region usage/demo
 
