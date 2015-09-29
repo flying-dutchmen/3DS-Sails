@@ -168,7 +168,7 @@ void Ellipse(u8* screen, int xCenter, int yCenter, int Rx, int Ry, u32 colour){
 
 }
 
-//too-be debugged &or revised 
+//too-be tested &or revised 
 //pillaged --> http://www.uwgb.edu/dutchs/Geometry/HTMLCanvas/ObliqueEllipses5.HTM :: function Ellipse
 Ellipse_Rotated(u8* screen, int majaxis, int minaxis, int xctr, int yctr, int rotnrad, u32 colour){
 	//Draw ellipse of arbitrary orientation
