@@ -67,7 +67,7 @@ void CircleFill(u8* screen, int xCen, int yCen, int radius, u32 colour)
 }
 
 //pillaged --> http://www.uwgb.edu/dutchs/Geometry/HTMLCanvas/ObliqueEllipses5.HTM
-Ellipse(u8* screen, int xctr, int yctr, int majaxis, int minaxis, int rotnrad, u32 colour){
+void Ellipse(u8* screen, int xctr, int yctr, int majaxis, int minaxis, int rotnrad, u32 colour){
 	//Draw ellipse of arbitrary orientation
 	float t = 0; //Parametric equation variable
 	int x0 = xctr + majaxis*cos(rotnrad);// initial x-val
