@@ -1,7 +1,7 @@
 # 3DS Sails 
   
-####24bit "true-colour" Canvas for the Nintendo 3DS platform  
-####versatile get & set for both pixil or rectangular-regions. 
+####24bit "true-colour" Canvas built for the Nintendo 3DS platform  
+####versatile get & set for both pixel or rectangular regions. 
 ####Use Text, Lines, Boxes, Polygons, Circles & tilted Ellipse.
 ####"Elegant" use of left, right, bottom & ... gfxFramebuffer's as your blank canvas.
 
@@ -21,7 +21,7 @@ Subject: Nintendo 3DS Sails ...
 Etymology--> https://en.wikipedia.org/wiki/Canvas#Etymology   
 The word "canvas" is derived from the 13th century Anglo-French canevaz and the Old French canevas. Both may be derivatives of the Vulgar Latin cannapaceus for "made of hemp," originating from the Greek κάνναβις (cannabis)
 
-##Pixil usage/demo
+##Pixel usage/demo
 
 	screenTopLeft = gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL); 
 	screenTopRight = gfxGetFramebuffer(GFX_TOP, GFX_RIGHT, NULL, NULL); 
@@ -60,7 +60,7 @@ for (i = 0; i < 99; ++i)
 
 As scene here --> https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636255289976613/?type=1&theater
 
-##Pixil usage/demo II  
+##Pixel usage/demo II  
    switch(GetCanvasPixel(screenTopLeft,x,y))  
   {   
  	case RED: text_print(screenBottom, "Sampled a RED",100,120); break;  
@@ -84,10 +84,10 @@ As scene here --> https://www.facebook.com/1596037147331761/photos/a.16291763673
 
   				line(screenTopLeft, 0, 239, 399, 0, PINK);  
 			  	line(screenTopRight, 0, 0, 399, 239, PINK);  
-				Circle(screenTopLeft, 50, 50, 10, BLUE); //needs slight overhall    
-				Circle(screenTopRight, 349, 50, 10, BLUE); //& finalized     
-				Ellipse(screenTopLeft, 50, 150, 20, 10, GREEN); //macro is too-be revised    
-				Ellipse(screenTopRight, 349, 150, 20, 10, GREEN); //& placed back in finaldraft   
+				Circle(screenTopLeft, 50, 50, 10, BLUE);     
+				Circle(screenTopRight, 349, 50, 10, RED);      
+				Ellipse(screenTopLeft, 50, 150, 20, 10, 45, RED); 
+				Ellipse(screenTopRight, 349, 150, 20, 10, 135, BLUE); 
 
 				gfxFlushBuffers();  
 
@@ -97,18 +97,18 @@ As scene here -->https://www.facebook.com/1596037147331761/photos/a.162917636735
 
    int * shape[6];   /* our polygon array */
 
-    shape[0] = 20;           /* first vertex */
+    shape[0] = 20;    /* first vertex */
     shape[1] = 20;
     shape[2] = 20;    /* second vertex */
     shape[3] = 60;
-    shape[4] = 140;    /* third vertex */
+    shape[4] = 140;   /* third vertex */
     shape[5] = 80;
   
 //   shape[4] = shape[0];      /* our's automatically close */  
- //  shape[5] = shape[1];      /* the polygon, so we don't need bother*/  
+//   shape[5] = shape[1];      /* the polygon, so we don't need bother*/  
  
-    poly(screenTopLeft, shape, 5, LIGHT_GREEN);    
-    poly(screenTopRight, shape, 5, LIGHT_GREEN);  
+   poly(screenTopLeft, shape, 5, LIGHT_GREEN);    
+   poly(screenTopRight, shape, 5, LIGHT_GREEN);  
     
    box(screenTopLeft, 70, 90, 260, 40, WHITE);   
    box(screenTopRight, 70, 90, 260, 40, WHITE);   
