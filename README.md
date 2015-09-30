@@ -1,13 +1,13 @@
 # 3DS Sails 
   
-####24bit "true-colour" Canvas built for the Nintendo 3DS platform  
+####24bit "true-colour" Canvas for the Nintendo 3DS platform.
 ####versatile get & set for both pixel or rectangular regions. 
 ####Use Text, Lines, Boxes, Polygons, Circles & tilted Ellipse.
 ####"Elegant" use of left, right, bottom & ... gfxFramebuffer's as your blank canvas.
 
 All source Code with exception of "Dual_for" presented has undergone debuging & passed Eg. is functional/usable.  
 The *.c Sources & snippets presented how ever broken, assume an intermediate++ knowledge "C" for thire usage!  
-To steno-graph, laymen others a "glips &or new appreciation for the work involved in building an implemention" and not scarcely fathom just the *.h header/interface's! & if you don't like; Well then; it's walk the plank! 
+To steno-graph, laymen others a "glips &or new appreciation for the work involved in building an implemention" and not scarcely fathom just the *.h header/interface's! & if you don't like it; Well then; walk the plank! 
   
 & too many other authours && engineers && pro-liter-riot's mentioned here or not through out 
 "A very sincere Thank-You"!  
