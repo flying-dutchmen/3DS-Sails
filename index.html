@@ -1,0 +1,217 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on https://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" href="stylesheets/github-dark.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>3ds-sails</title>
+  <meta name="description" content="Nintendo 3ds Screen Canvas Get, Set for Pixel, Region">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">3ds-sails</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Nintendo 3ds Screen Canvas Get, Set for Pixel, Region</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/flying-dutchmen/3DS-Sails/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/flying-dutchmen/3DS-Sails/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/flying-dutchmen/3DS-Sails" class="code">View 3ds-sails on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>
+<a id="3ds-sails" class="anchor" href="#3ds-sails" aria-hidden="true"><span class="octicon octicon-link"></span></a>3DS Sails</h1>
+
+<h4>
+<a id="24bit-true-colour-canvas-for-the-nintendo-3ds-platform" class="anchor" href="#24bit-true-colour-canvas-for-the-nintendo-3ds-platform" aria-hidden="true"><span class="octicon octicon-link"></span></a>24bit "true-colour" Canvas for the Nintendo 3DS platform.</h4>
+
+<h4>
+<a id="versatile-get--set-for-both-pixel-or-rectangular-regions" class="anchor" href="#versatile-get--set-for-both-pixel-or-rectangular-regions" aria-hidden="true"><span class="octicon octicon-link"></span></a>versatile get &amp; set for both pixel or rectangular regions.</h4>
+
+<h4>
+<a id="use-text-lines-boxes-polygons-circles--tilted-ellipse" class="anchor" href="#use-text-lines-boxes-polygons-circles--tilted-ellipse" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use Text, Lines, Boxes, Polygons, Circles &amp; tilted Ellipse.</h4>
+
+<h4>
+<a id="elegant-use-of-left-right-bottom---gfxframebuffers-as-your-blank-canvas" class="anchor" href="#elegant-use-of-left-right-bottom---gfxframebuffers-as-your-blank-canvas" aria-hidden="true"><span class="octicon octicon-link"></span></a>"Elegant" use of left, right, bottom &amp; ... gfxFramebuffer's as your blank canvas.</h4>
+
+<p>All source Code with exception of "Dual_for" presented has undergone debuging &amp; passed Eg. is functional/usable.<br>
+The *.c Sources &amp; snippets presented how ever broken, assume an intermediate++ knowledge "C" for thire usage!<br>
+To steno-graph, laymen others a "glips &amp;or new appreciation for the work involved in building an implemention" and not scarcely fathom just the *.h header/interface's! &amp; if you don't like it; Well then; walk the plank! </p>
+
+<p>&amp; too many other authours &amp;&amp; engineers &amp;&amp; pro-liter-riot's mentioned here or not through out 
+"A very sincere Thank-You"!  </p>
+
+<p>S.V.P. Any Questions, requests &amp;or proposals can be sent via email!   </p>
+
+<p>to: <a href="mailto:kennyd.lee@outlook.com">kennyd.lee@outlook.com</a><br>
+or Bcc <a href="mailto:undead.kennyd@gmail.com">undead.kennyd@gmail.com</a>, <a href="mailto:KennyD@mail.com">KennyD@mail.com</a><br>
+Subject: Nintendo 3DS Sails ...  </p>
+
+<p><a href="https://en.wikipedia.org/wiki/Canvas#Etymology">Etymology--&gt;</a><br>
+The word "canvas" is derived from the 13th century Anglo-French canevaz and the Old French canevas. Both may be derivatives of the Vulgar Latin cannapaceus for "made of hemp," originating from the Greek κάνναβις (cannabis)</p>
+
+<h2>
+<a id="pixel-usagedemo" class="anchor" href="#pixel-usagedemo" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636255289976613/?type=1&amp;theater">Pixel usage/demo</a>
+</h2>
+
+<pre><code>screenTopLeft = gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL); 
+screenTopRight = gfxGetFramebuffer(GFX_TOP, GFX_RIGHT, NULL, NULL); 
+</code></pre>
+
+<p>//test pattern 1st pass<br>
+for (i = 0; i &lt; 79; ++i)<br>
+ for (j = 0; j &lt; 200; ++j)<br>
+    {<br>
+        SetCanvasPixel(screenTopLeft,i,j,RED);<br>
+                                SetCanvasPixel(screenTopRight,i,j,RED);<br>
+                                SetCanvasPixel(screenTopLeft,i+80,j,CYAN);<br>
+                                SetCanvasPixel(screenTopRight,i+80,j,CYAN);<br>
+                                SetCanvasPixel(screenTopLeft,i+160,j,YELLOW);<br>
+                                SetCanvasPixel(screenTopRight,i+160,j,YELLOW);<br>
+                                SetCanvasPixel(screenTopLeft,i+240,j,BLACK);<br>
+                                SetCanvasPixel(screenTopRight,i+240,j,BLACK);<br>
+                                SetCanvasPixel(screenTopLeft,i+320,j,BLUE);<br>
+                                SetCanvasPixel(screenTopRight,i+320,j,BLUE);<br>
+                };<br>
+//test pattern 2nd pass<br>
+for (i = 0; i &lt; 99; ++i)<br>
+ for (j = 201; j &lt; 239; ++j)<br>
+    {<br>
+                                SetCanvasPixel(screenTopLeft,i,j,PINK);<br>
+                                SetCanvasPixel(screenTopRight,i,j,PINK);<br>
+                                SetCanvasPixel(screenTopLeft,i+100,j,LIGHT_GREEN);<br>
+                                SetCanvasPixel(screenTopRight,i+100,j,LIGHT_GREEN);<br>
+                                SetCanvasPixel(screenTopLeft,i+200,j,WHITE);<br>
+                                SetCanvasPixel(screenTopRight,i+200,j,WHITE);<br>
+                                SetCanvasPixel(screenTopLeft,i+300,j,ORANGE);<br>
+                                SetCanvasPixel(screenTopRight,i+300,j,ORANGE);<br>
+                }  </p>
+
+<pre><code>            gfxFlushBuffers();
+            //gfxSwapBuffers();
+</code></pre>
+
+<h2>
+<a id="pixel-usagedemo-ii" class="anchor" href="#pixel-usagedemo-ii" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636836319918510/?type=1&amp;theater">Pixel usage/demo II</a>
+</h2>
+
+<p>switch(GetCanvasPixel(screenTopLeft,x,y))<br>
+  {<br>
+    case RED: text_print(screenBottom, "Sampled a RED",100,120); break;<br>
+    case GREEN: text_print(screenBottom, "Sampled a GREEN",100,120); break;<br>
+    case BLUE: text_print(screenBottom, "Sampled a BLUE",100,120); break;<br>
+    case CYAN: text_print(screenBottom, "Sampled a CYAN",100,120); break;<br>
+    case PINK: text_print(screenBottom, "Sampled a PINK",100,120); break;<br>
+    case YELLOW: text_print(screenBottom, "Sampled a YELLOW",100,120); break;<br>
+    case BLACK: text_print(screenBottom, "Sampled a BLACK",100,120); break;<br>
+    case WHITE: text_print(screenBottom, "Sampled a WHITE",100,120); break;<br>
+    case ORANGE: text_print(screenBottom, "Sampled a ORANGE",100,120); break;<br>
+    case LIGHT_GREEN: text_print(screenBottom, "Sampled a LIGHT GREEN",100,120); break;<br>
+    case PURPLE: text_print(screenBottom, "Sampled a PURPLE",100,120); break;<br>
+    default:<br>
+                ClearCanvas(screenBottom, BLACK);<br>
+        break;<br>
+  }  </p>
+
+<h2>
+<a id="primitive-shapes-usagedemo" class="anchor" href="#primitive-shapes-usagedemo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Primitive shapes usage/demo</h2>
+
+<p>//Cracker; and the world is full of them; want a polygon?  </p>
+
+<pre><code>            line(screenTopLeft, 0, 239, 399, 0, PINK);  
+            line(screenTopRight, 0, 0, 399, 239, PINK);  
+            Circle(screenTopLeft, 50, 50, 10, BLUE);     
+            Circle(screenTopRight, 349, 50, 10, RED);      
+            Ellipse(screenTopLeft, 50, 150, 20, 10, 45, RED); 
+            Ellipse(screenTopRight, 349, 150, 20, 10, 135, BLUE); 
+
+            gfxFlushBuffers();  
+</code></pre>
+
+<h2>
+<a id="primitive-shapes-usagedemo-ii" class="anchor" href="#primitive-shapes-usagedemo-ii" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1638563179745824/?type=3&amp;theater">Primitive shapes usage/demo II</a>
+</h2>
+
+<p>int * shape[6];   /* our polygon array */</p>
+
+<pre><code>shape[0] = 20;    /* first vertex */
+shape[1] = 20;
+shape[2] = 20;    /* second vertex */
+shape[3] = 60;
+shape[4] = 140;   /* third vertex */
+shape[5] = 80;
+</code></pre>
+
+<p>//   shape[4] = shape[0];      /* our's automatically close <em>/<br>
+//   shape[5] = shape[1];      /</em> the polygon, so we don't need bother*/  </p>
+
+<p>poly(screenTopLeft, shape, 5, LIGHT_GREEN);<br>
+   poly(screenTopRight, shape, 5, LIGHT_GREEN);  </p>
+
+<p>box(screenTopLeft, 70, 90, 260, 40, WHITE);<br>
+   box(screenTopRight, 70, 90, 260, 40, WHITE);   </p>
+
+<h2>
+<a id="rectangular-region-usagedemo" class="anchor" href="#rectangular-region-usagedemo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rectangular-Region usage/demo</h2>
+
+<p>//Proforms memory clean-up all cases. What if wii need in 1/2 time repeated usage of ...
+SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));</p>
+
+<h2>
+<a id="rectangular-region-extended-usagedemo-ii" class="anchor" href="#rectangular-region-extended-usagedemo-ii" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rectangular-Region extended usage/demo II</h2>
+
+<p>//still in debug</p>
+
+<p>//u8* Recbufl = (u8<em>)linearMemAlign(bitmapsize, 0x8);<br>
+Recbufl= (u8</em>)GetRecEx(screenTopLeft,10,10,80,80,linear); // patterns &amp; tiles ?<br>
+//&amp; about args 7th boolean cleanup, 8th RamType (1=vram or 0=linear)<br>
+SetRecEx(screenBottom,10,10,80,80, Recbufl, 0, linear);<br>
+//looks like wii Have to GetRecEx(buff) over &amp; ... anyways? vram !work &amp;&amp; freeze 3ds<br>
+//SetRecEx(screenBottom,10,100,80,80, Recbufl, 0, linear); repeated or subsiquent calls have no-eval<br>
+linearFree(Recbufl); //manual CleanUp</p>
+
+<h1>
+<a id="ps-mysterio-is-nothing-more-than-pawn" class="anchor" href="#ps-mysterio-is-nothing-more-than-pawn" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ps. Mysterio is nothing more than pawn,</h1>
+
+<h1>
+<a id="so-tell-your-ing-spider-woman" class="anchor" href="#so-tell-your-ing-spider-woman" aria-hidden="true"><span class="octicon octicon-link"></span></a>So tell your %^#<a href="https://github.com/ing" class="user-mention">@ing</a> Spider-Woman!!!</h1>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/flying-dutchmen" class="avatar"><img src="https://avatars0.githubusercontent.com/u/11143542?v=3&amp;s=60" width="48" height="48"></a> <a href="https://github.com/flying-dutchmen">flying-dutchmen</a> maintains <a href="https://github.com/flying-dutchmen/3DS-Sails">3ds-sails</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/flying-dutchmen/3DS-Sails/tarball/master" class="tar">tar</a><a href="https://github.com/flying-dutchmen/3DS-Sails/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
