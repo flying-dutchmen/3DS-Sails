@@ -21,7 +21,7 @@ Subject: Nintendo 3DS Sails ...
 Etymology--> https://en.wikipedia.org/wiki/Canvas#Etymology   
 The word "canvas" is derived from the 13th century Anglo-French canevaz and the Old French canevas. Both may be derivatives of the Vulgar Latin cannapaceus for "made of hemp," originating from the Greek κάνναβις (cannabis)
 
-##Pixel usage/demo
+##[Pixel usage/demo](https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636255289976613/?type=1&theater)
 
 	screenTopLeft = gfxGetFramebuffer(GFX_TOP, GFX_LEFT, NULL, NULL); 
 	screenTopRight = gfxGetFramebuffer(GFX_TOP, GFX_RIGHT, NULL, NULL); 
@@ -58,8 +58,6 @@ for (i = 0; i < 99; ++i)
 				gfxFlushBuffers();
 				//gfxSwapBuffers();
 
-As scene here --> https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636255289976613/?type=1&theater
-
 ##Pixel usage/demo II  
    switch(GetCanvasPixel(screenTopLeft,x,y))  
   {   
@@ -79,7 +77,7 @@ As scene here --> https://www.facebook.com/1596037147331761/photos/a.16291763673
 		break;  
   }  
   
-##Primitive shapes usage/demo  
+##[Primitive shapes usage/demo](https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636836319918510/?type=1&theater)  
 //Cracker; and the world is full of them; want a polygon?  
 
   				line(screenTopLeft, 0, 239, 399, 0, PINK);  
@@ -91,9 +89,7 @@ As scene here --> https://www.facebook.com/1596037147331761/photos/a.16291763673
 
 				gfxFlushBuffers();  
 
-As scene here -->https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636836319918510/?type=1&theater
-
-##Primitive shapes usage/demo II
+##[Primitive shapes usage/demo II](https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1638563179745824/?type=3&theater)
 
    int * shape[6];   /* our polygon array */
 
@@ -113,15 +109,21 @@ As scene here -->https://www.facebook.com/1596037147331761/photos/a.162917636735
    box(screenTopLeft, 70, 90, 260, 40, WHITE);   
    box(screenTopRight, 70, 90, 260, 40, WHITE);   
 
-As scene here -->https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1638563179745824/?type=3&theater
-
 ##Rectangular-Region usage/demo
 
 //Proforms memory clean-up all cases. What if wii need in 1/2 time repeated usage of ...
 SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));
+SetRecRe(screenBottom,10,150,80,80,GetRecRe(screenTopRight,10,310,80,80));   
+
+##[Rectangular-Region usage/demo II](https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xat1/v/t1.0-9/12063664_1638968876371921_7804270618532039999_n.png?oh=e27f09923ecd3f10a45402f4efd735aa&oe=56A3B327)
+
+transparent = RED;
+SetRecRe(screenBottom,100,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));
+transparent = BLUE;
+SetRecRe(screenBottom,100,150,80,80,GetRecRe(screenTopRight,10,310,80,80)); 
 
 ##Rectangular-Region extended usage/demo II 
-//still in debug
+//SetRecEx & GetRecEx are still in development debug...  
 
 //u8* Recbufl = (u8*)linearMemAlign(bitmapsize, 0x8);  
 Recbufl= (u8*)GetRecEx(screenTopLeft,10,10,80,80,linear); // patterns & tiles ?  
