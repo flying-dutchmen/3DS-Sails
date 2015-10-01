@@ -38,7 +38,7 @@ u32 GetCanvasPixel(u8* screen, int x, int y)
 	u32 v=(height-1-y+x*height)*3;
 	u32 colour =screen[v];
 	colour += (screen[v+1] << 8);
-	colour += (screen[v+2]<< 16);
+	colour += (screen[v+2] << 16);
         return colour;
 //        return ABGR8(screen[v],screen[v+2],screen[v+1], 0xFF);
 }
@@ -92,6 +92,7 @@ void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, 
 
 //re-tooled --> StapleButter :: blargSnes :: main.c :: "bool TakeScreenshot(char* path)"
 // & portions modify --> xerpi :: libsf2d :: sf2d_texture.c :: sf2d_create_texture
+//#define GetRecRe(screen, Top, Left, Height, Width) (GetRecEx(screen, Top, Left, Height, Width, linear))
 u8 * GetRecEx(u8* screen, int Top, int Left, int Height, int Width, RamType RamLocal)
 {  
 //	int CanvasWidth = MaxWidth(screen); ???
