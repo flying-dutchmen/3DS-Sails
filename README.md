@@ -115,8 +115,7 @@ for (i = 0; i < 99; ++i)
 SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));
 SetRecRe(screenBottom,10,150,80,80,GetRecRe(screenTopRight,10,310,80,80));   
 
-##[Rectangular-Region usage/demo II](
-https://www.facebook.com/1596037147331761/photos/a.1596038283998314.1073741825.1596037147331761/1639316213003854/?type=3&theater)
+##[Rectangular-Region usage/demo II](https://www.facebook.com/1596037147331761/photos/a.1596038283998314.1073741825.1596037147331761/1639316213003854/?type=3&theater)
 
 // U ain't Super-Man & I'm not gettin cought
 transparent = BLACK;
