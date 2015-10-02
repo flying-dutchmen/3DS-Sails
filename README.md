@@ -109,13 +109,13 @@ for (i = 0; i < 99; ++i)
    box(screenTopLeft, 70, 90, 260, 40, WHITE);   
    box(screenTopRight, 70, 90, 260, 40, WHITE);   
 
-##Extented Rectangular-Region usage/demo
+##Rectangular-Region usage/demo
 
 //Proforms memory clean-up all cases. What if wii need in 1/2 time repeated usage of ...
 SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));  
 SetRecRe(screenBottom,10,150,80,80,GetRecRe(screenTopRight,10,310,80,80));   
 
-##[Extented Rectangular-Region usage/demo II](https://www.facebook.com/1596037147331761/photos/a.1596038283998314.1073741825.1596037147331761/1639316213003854/?type=3&theater)
+##[Extented Rectangular-Region usage/demo I](https://www.facebook.com/1596037147331761/photos/a.1596038283998314.1073741825.1596037147331761/1639316213003854/?type=3&theater)
 
 // U ain't Super-Man & I'm not gettin cought   
 transparent = BLACK;  
@@ -123,14 +123,14 @@ SetRecEx(screenTopRight,10,10,120,90,doughbot_bin,0,generic);
 SetRecEx(screenTopLeft,10,290,120,90,doughbot_bin,0,generic);  
 // U be re-spawning in 3 seconds  
 
-##[Extented Rectangular-Region usage/demo III](https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xat1/v/t1.0-9/12063664_1638968876371921_7804270618532039999_n.png?oh=e27f09923ecd3f10a45402f4efd735aa&oe=56A3B327)
+##[Extented Rectangular-Region usage/demo II](https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xat1/v/t1.0-9/12063664_1638968876371921_7804270618532039999_n.png?oh=e27f09923ecd3f10a45402f4efd735aa&oe=56A3B327)
 
 transparent = RED;  
 SetRecRe(screenBottom,100,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));  
 transparent = BLUE;  
 SetRecRe(screenBottom,100,150,80,80,GetRecRe(screenTopRight,10,310,80,80));  
   
-##Rectangular-Region extended usage/demo II  
+##Rectangular-Region extended usage/demo III  
 //SetRecEx & GetRecEx are still in development & yes it's top on my debug list...  
 
 //  Recbufr= GetRecEx(screenTopRight,10,310,80,80,generic);
