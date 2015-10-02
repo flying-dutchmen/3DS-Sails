@@ -1,25 +1,34 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
-    <meta charset="UTF-8">
-    <title>3ds-sails by flying-dutchmen</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">3ds-sails</h1>
-      <h2 class="project-tagline">Nintendo 3ds Screen Canvas Get, Set for Pixel, Region</h2>
-      <a href="https://github.com/flying-dutchmen/3DS-Sails" class="btn">View on GitHub</a>
-      <a href="https://github.com/flying-dutchmen/3DS-Sails/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/flying-dutchmen/3DS-Sails/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-    <section class="main-content">
-      <h1>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>3ds-sails by flying-dutchmen</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>3ds-sails</h1>
+        <h2>Nintendo 3ds Screen Canvas Get, Set for Pixel, Region</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/flying-dutchmen/3DS-Sails/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/flying-dutchmen/3DS-Sails/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/flying-dutchmen/3DS-Sails" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
 <a id="3ds-sails" class="anchor" href="#3ds-sails" aria-hidden="true"><span class="octicon octicon-link"></span></a>3DS Sails</h1>
 
 <h4>
@@ -47,7 +56,7 @@ To steno-graph, laymen others a "glips &amp;or new appreciation for the work inv
 or Bcc <a href="mailto:undead.kennyd@gmail.com">undead.kennyd@gmail.com</a>, <a href="mailto:KennyD@mail.com">KennyD@mail.com</a><br>
 Subject: Nintendo 3DS Sails ...  </p>
 
-<p><a href="https://en.wikipedia.org/wiki/Canvas#Etymology">Etymology--&gt;</a><br>
+<p>Etymology--&gt; <a href="https://en.wikipedia.org/wiki/Canvas#Etymology">https://en.wikipedia.org/wiki/Canvas#Etymology</a><br>
 The word "canvas" is derived from the 13th century Anglo-French canevaz and the Old French canevas. Both may be derivatives of the Vulgar Latin cannapaceus for "made of hemp," originating from the Greek κάνναβις (cannabis)</p>
 
 <h2>
@@ -88,13 +97,9 @@ for (i = 0; i &lt; 99; ++i)
 
                 gfxFlushBuffers();
                 //gfxSwapBuffers();
-</code></pre>
 
-<h2>
-<a id="pixel-usagedemo-ii" class="anchor" href="#pixel-usagedemo-ii" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636836319918510/?type=1&amp;theater">Pixel usage/demo II</a>
-</h2>
-
-<pre><code>   switch(GetCanvasPixel(screenTopLeft,x,y))  
+##Pixel usage/demo II  
+   switch(GetCanvasPixel(screenTopLeft,x,y))  
   {   
     case RED: text_print(screenBottom, "Sampled a RED",100,120); break;  
     case GREEN: text_print(screenBottom, "Sampled a GREEN",100,120); break;  
@@ -114,11 +119,12 @@ for (i = 0; i &lt; 99; ++i)
 </code></pre>
 
 <h2>
-<a id="primitive-shapes-usagedemo" class="anchor" href="#primitive-shapes-usagedemo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Primitive shapes usage/demo</h2>
+<a id="primitive-shapes-usagedemo" class="anchor" href="#primitive-shapes-usagedemo" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636836319918510/?type=1&amp;theater">Primitive shapes usage/demo</a>
+</h2>
 
-<p>//Cracker; and the world is full of them; want a polygon?  </p>
+<pre><code>//Cracker; and the world is full of them; want a polygon?  
 
-<pre><code>                line(screenTopLeft, 0, 239, 399, 0, PINK);  
+                line(screenTopLeft, 0, 239, 399, 0, PINK);  
                 line(screenTopRight, 0, 0, 399, 239, PINK);  
                 Circle(screenTopLeft, 50, 50, 10, BLUE);     
                 Circle(screenTopRight, 349, 50, 10, RED);      
@@ -146,6 +152,7 @@ for (i = 0; i &lt; 99; ++i)
 
    poly(screenTopLeft, shape, 5, LIGHT_GREEN);    
    poly(screenTopRight, shape, 5, LIGHT_GREEN);  
+
    box(screenTopLeft, 70, 90, 260, 40, WHITE);   
    box(screenTopRight, 70, 90, 260, 40, WHITE);   
 </code></pre>
@@ -154,22 +161,52 @@ for (i = 0; i &lt; 99; ++i)
 <a id="rectangular-region-usagedemo" class="anchor" href="#rectangular-region-usagedemo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rectangular-Region usage/demo</h2>
 
 <pre><code>//Proforms memory clean-up all cases. What if wii need in 1/2 time repeated usage of ...
-  SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));
-  SetRecRe(screenBottom,10,150,80,80,GetRecRe(screenTopRight,10,310,80,80)); 
+SetRecRe(screenBottom,10,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));  
+SetRecRe(screenBottom,10,150,80,80,GetRecRe(screenTopRight,10,310,80,80));   
 </code></pre>
 
 <h2>
-<a id="rectangular-region-extended-usagedemo-ii" class="anchor" href="#rectangular-region-extended-usagedemo-ii" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rectangular-Region extended usage/demo II</h2>
+<a id="extented-rectangular-region-usagedemo-i" class="anchor" href="#extented-rectangular-region-usagedemo-i" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.facebook.com/1596037147331761/photos/a.1596038283998314.1073741825.1596037147331761/1639316213003854/?type=3&amp;theater">Extented Rectangular-Region usage/demo I</a>
+</h2>
 
-<p>//still in debug</p>
+<pre><code>// U ain't Super-Man &amp; I'm not gettin caught  
+//#include "doughbot_bin.h"   
+transparent = BLACK;  
+SetRecEx(screenTopRight,10,10,120,90,doughbot_bin,0,generic);  
+SetRecEx(screenTopLeft,10,290,120,90,doughbot_bin,0,generic);  
+// U be re-spawning in 3 seconds..  
+</code></pre>
 
-<pre><code>//u8* Recbufl = (u8*)linearMemAlign(bitmapsize, 0x8);  
-Recbufl= (u8*)GetRecEx(screenTopLeft,10,10,80,80,linear); // patterns &amp; tiles ?  
-//&amp; about args 7th boolean cleanup, 8th RamType (1=vram or 0=linear)    
-SetRecEx(screenBottom,10,10,80,80, Recbufl, 0, linear);    
-//looks like wii Have to GetRecEx(buff) over &amp; ... anyways? vram !work &amp;&amp; freeze 3ds  
-//SetRecEx(screenBottom,10,100,80,80, Recbufl, 0, linear); repeated or subsiquent calls have no-eval  
-linearFree(Recbufl); //manual CleanUp
+<h2>
+<a id="extented-rectangular-region-usagedemo-ii" class="anchor" href="#extented-rectangular-region-usagedemo-ii" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xat1/v/t1.0-9/12063664_1638968876371921_7804270618532039999_n.png?oh=e27f09923ecd3f10a45402f4efd735aa&amp;oe=56A3B327">Extented Rectangular-Region usage/demo II</a>
+</h2>
+
+<pre><code>transparent = RED;  
+SetRecRe(screenBottom,100,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));  
+transparent = BLUE;  
+SetRecRe(screenBottom,100,150,80,80,GetRecRe(screenTopRight,10,310,80,80));  
+</code></pre>
+
+<h2>
+<a id="rectangular-region-extended-usagedemo-iii" class="anchor" href="#rectangular-region-extended-usagedemo-iii" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rectangular-Region extended usage/demo III</h2>
+
+<pre><code>//SetRecEx &amp; GetRecEx are still in development &amp; yes it's top on my debug list...  
+
+//  Recbufr= GetRecEx(screenTopRight,10,310,80,80,generic);
+//  Recbufr= GetRecEx(screenTopRight,10,310,80,80,vram);
+//  Recbufr= GetRecEx(screenTopRight,10,310,80,80,linear);
+
+//  SetRecEx(screenBottom,100,150,80,80,Recbufr,0,generic);
+//  SetRecEx(screenBottom,100,150,80,80,Recbufr,0,vram);
+//  SetRecEx(screenBottom,100,150,80,80,Recbufr,0,linear);
+
+// vramFree(Recbufl);   //still craps-out &amp; freeze machine
+// linearFree(Recbufr);  
+// free(Recbufr);  
+
+//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,generic),0,generic); //sain  
+//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,vram),1||0,vram); //!sain  
+//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,linear),0,linear); //sain  
 </code></pre>
 
 <h1>
@@ -177,15 +214,9 @@ linearFree(Recbufl); //manual CleanUp
 
 <h1>
 <a id="so-tell-your-ing-spider-woman" class="anchor" href="#so-tell-your-ing-spider-woman" aria-hidden="true"><span class="octicon octicon-link"></span></a>So tell your %^#<a href="https://github.com/ing" class="user-mention">@ing</a> Spider-Woman!!!</h1>
+      </section>
+    </div>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/flying-dutchmen/3DS-Sails">3ds-sails</a> is maintained by <a href="https://github.com/flying-dutchmen">flying-dutchmen</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
+    
   </body>
 </html>
