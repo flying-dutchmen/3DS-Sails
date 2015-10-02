@@ -125,12 +125,12 @@ SetRecEx(screenTopLeft,10,290,120,90,doughbot_bin,0,generic);
 
 ##[Rectangular-Region usage/demo III](https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xat1/v/t1.0-9/12063664_1638968876371921_7804270618532039999_n.png?oh=e27f09923ecd3f10a45402f4efd735aa&oe=56A3B327)
 
-transparent = RED;
-SetRecRe(screenBottom,100,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));
-transparent = BLUE;
-SetRecRe(screenBottom,100,150,80,80,GetRecRe(screenTopRight,10,310,80,80)); 
-
-##Rectangular-Region extended usage/demo II 
+transparent = RED;  
+SetRecRe(screenBottom,100,10,80,80,GetRecRe(screenTopLeft,10,10,80,80));  
+transparent = BLUE;  
+SetRecRe(screenBottom,100,150,80,80,GetRecRe(screenTopRight,10,310,80,80));  
+  
+##Rectangular-Region extended usage/demo II  
 //SetRecEx & GetRecEx are still in development & yes it's top on my debug list...  
 
 //  Recbufr= GetRecEx(screenTopRight,10,310,80,80,generic);
@@ -145,9 +145,9 @@ SetRecRe(screenBottom,100,150,80,80,GetRecRe(screenTopRight,10,310,80,80));
 // linearFree(Recbufr);  
 // free(Recbufr);  
 
-//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,generic),0,generic); //sain
-//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,vram),1||0,vram); //!sain
-//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,linear),0,linear); //sain
-
+//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,generic),0,generic); //sain  
+//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,vram),1||0,vram); //!sain  
+//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,linear),0,linear); //sain  
+  
 #Ps. Mysterio is nothing more than pawn,    
 #So tell your %^#@ing Spider-Woman!!!
