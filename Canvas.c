@@ -83,8 +83,9 @@ void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, 
                 }
 
   if (CleanUp) switch(RamLocal){
+       case linear: linearFree(Region); break;  
        case vram: vramFree(Region); break;  
-       default:   linearFree(Region); 
+       default: free(Region); 
 }
 
 //in the begin there was --> SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j])
@@ -98,14 +99,19 @@ u8 * GetRecEx(u8* screen, int Top, int Left, int Height, int Width, RamType RamL
 //	int CanvasWidth = MaxWidth(screen); ???
 	u32 bitmapsize = Width*Height*3;
         u8* Region;
+        
 switch(RamLocal){
-case vram: Region = (u8*)vramMemAlign(bitmapsize, 0x8); 
-           GX_SetMemoryFill(NULL, Region, 0x00000000, (u32*)&(Region)[bitmapsize], GX_FILL_TRIGGER | GX_FILL_32BIT_DEPTH,NULL, 0x00000000, NULL, 0);
-	   gspWaitForPSC0();
-           break;
+case linear: Region = (u8*)linearMemAlign(bitmapsize, 0x8);
+             memset(Region, 0, bitmapsize);
+             break;
+
+case vram:   Region = (u8*)vramMemAlign(bitmapsize, 0x8); 
+             GX_SetMemoryFill(NULL, Region, 0x00000000, (u32*)&(Region)[bitmapsize], GX_FILL_TRIGGER | GX_FILL_32BIT_DEPTH,NULL, 0x00000000, NULL, 0);
+	     gspWaitForPSC0();
+             break;
 default: 
-	   Region = (u8*)linearMemAlign(bitmapsize, 0x8);
-           memset(Region, 0, bitmapsize);
+	     Region = (u8*)malloc(bitmapsize);
+             memset(Region, 0, bitmapsize);
 }	
 	int i, j;
 	for(i=Left;i<Width+Left;i++)
