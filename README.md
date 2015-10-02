@@ -137,5 +137,9 @@ SetRecRe(screenBottom,100,150,80,80,GetRecRe(screenTopRight,10,310,80,80));
 // linearFree(Recbufr);  
 // free(Recbufr);  
 
+//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,generic),0,generic); //sain
+//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,vram),1||0,vram); //!sain
+//  SetRecEx(screenBottom,100,150,80,80,GetRecEx(screenTopRight,10,310,80,80,linear),0,linear); //sain
+
 #Ps. Mysterio is nothing more than pawn,    
 #So tell your %^#@ing Spider-Woman!!!
