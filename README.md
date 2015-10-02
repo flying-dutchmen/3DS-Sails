@@ -117,7 +117,7 @@ SetRecRe(screenBottom,10,150,80,80,GetRecRe(screenTopRight,10,310,80,80));
 
 ##[Extented Rectangular-Region usage/demo I](https://www.facebook.com/1596037147331761/photos/a.1596038283998314.1073741825.1596037147331761/1639316213003854/?type=3&theater)
 
-#include "doughbot_bin.h"
+//#include "doughbot_bin.h"
 // U ain't Super-Man & I'm not gettin caught   
 transparent = BLACK;  
 SetRecEx(screenTopRight,10,10,120,90,doughbot_bin,0,generic);  
