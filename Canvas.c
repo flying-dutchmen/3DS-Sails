@@ -18,6 +18,10 @@
 //& Lua-Player-Plus --> https://github.com/Rinnegatamante
 //& smealum --> https://github.com/smealum/ctrulib
 
+//some planed revisions &or extensions may include bpp & graphic file format handling, thanks too 
+//mtheall --> https://github.com/mtheall/screenshot_png/blob/master/source/screenshot_png.c :: get_pixel
+//plus they have the second coolest avitar, the logo just about "says it all"!!
+
 void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 {
 	int height=240;
