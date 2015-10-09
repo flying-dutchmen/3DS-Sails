@@ -9,18 +9,19 @@
 //                Well it's comprized mostly of FreePascal & can't U c/c++ U'r time is drawing niegh 
 //                 to obtain your companies, very, very own corprate, dirigible listings? 
 //
-//PS: Oblivious too device! & Revamped from sources listed bellow 
+//PS: Oblivious too the device buffers & GPU is estranged! & Revamped from sources listed bellow 
 //
 // ShinyQuagsire23 --> https://github.com/shinyquagsire23/DCPU-3DS
+//& StapleButter --> https://github.com/StapleButter/blargSnes
 //& AlbertoSONIC --> https://github.com/AlbertoSONIC/3DS_Paint
-//& xerpi --> https://github.com/xerpi 
-//& steveice10 --> https://github.com/Steveice10/FBI
+//& Steveice10 --> https://github.com/Steveice10/FBI
 //& Lua-Player-Plus --> https://github.com/Rinnegatamante
 //& smealum --> https://github.com/smealum/ctrulib
 
-//some planed revisions &or extensions may include bpp & graphic file format handling, thanks too 
+//Too be later included graphic file formats, special thanks too 
+//+They have the second coolest avitar on the github? I beleve there logo "says it all"!!
 //mtheall --> https://github.com/mtheall/screenshot_png/blob/master/source/screenshot_png.c :: get_pixel
-//plus they have the second coolest avitar, the logo just about "says it all"!!
+//& xerpi --> https://github.com/xerpi 
 
 void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 {
@@ -95,7 +96,6 @@ void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, 
 //in the begin there was --> SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j])
 }
 
-//re-tooled --> StapleButter :: blargSnes :: main.c :: "bool TakeScreenshot(char* path)"
 // & portions modify --> xerpi :: libsf2d :: sf2d_texture.c :: sf2d_create_texture
 //#define GetRecRe(screen, Top, Left, Height, Width) (GetRecEx(screen, Top, Left, Height, Width, linear))
 u8 * GetRecEx(u8* screen, int Top, int Left, int Height, int Width, RamType RamLocal)
@@ -130,4 +130,4 @@ default:
 
 //the Pro-liter-riot's Sklaven "kennyd-lee" 
 //present's "long sex-live the Pro-liter-riot, &  3 nude lcd's 1/2 of in 3-D"
-//also (unmolested Citrus, GPU, GIMP, openGL &or Nanox or any & all other that "got bent Mozilla" that have endured some form of rape)?
+//also (unmolested Citrus, GPU, openGL, GIMP, VLC, &or Nanox, or any & all other that "got bent Mozilla" that have endured some form of rape)?
