@@ -36,7 +36,7 @@ void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
         screen[v+2]=(colour>>16) & 0xFF; //red
       } 
       else 
-      { //using alpha is slow
+      { //using alpha is slow, needs bitwise &= ~ re-written
 	float ratio = alpha / 255.0f;
 	screen[v] = ((colour & 0xFF) * ratio) + (screen[v] * (1.0 - ratio));               //blue
 	screen[v+1] = ((((colour) >> 8) & 0xFF) * ratio) + (screen[v+1] * (1.0 - ratio));  //green
