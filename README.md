@@ -1,8 +1,9 @@
 # 3DS Sails 
   
-####24bit "true-colour" Canvas for the Nintendo 3DS platform.
+####A "true-colour" Canvas for the Nintendo 3DS platform.
 ####versatile get & set for both pixel or rectangular regions. 
-####Use Text, Lines, Boxes, Polygons, Circles & tilted Ellipse.
+####Draw Text, Lines, Boxes, Polygons, Circles & tilted Ellipse 
+####Seamless Alpha compositing, it's done automatically no need to call a separate alpha-function
 ####"Elegant" use of left, right, bottom & ... gfxFramebuffer's as your blank canvas.
 
 All source Code with exception of "Dual_for" presented has undergone debuging & passed Eg. is functional/usable.  
