@@ -55,16 +55,17 @@ void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 //& found //gs.h --> crtulib nintendo 3ds
 //#define RGBA8(r,g,b,a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
 
-u32 GetCanvasPixel(u8* screen, int x, int y)
+//#define GetCanvasPixel(screen, x, y) (GetCanvasPixelEx(screen, GSP_BGR8_OES, x, y))
+u32 GetCanvasPixelEx(u8* screen, GSP_FramebufferFormats format, int x, int y)
 {
         int height=240;
 	u32 v=(height-1-y+x*height)*3;
 	u32 colour =screen[v];
 	colour += (screen[v+1] << 8);
 	colour += (screen[v+2] << 16);
-	colour += (0xFF << 24);
+	(bytes_per_pixel(format) = 3) ? colour += (0xFF << 24) : colour += (screen[v+3] << 24) //if 24bit or 32bit using an alpha
         return colour;
-//        return ABGR8(screen[v],screen[v+2],screen[v+3], 0xFF);
+//        return ABGR8(screen[v],screen[v+1],screen[v+2],screen[v+3]);
 }
 
 //todo
