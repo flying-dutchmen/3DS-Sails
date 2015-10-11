@@ -23,17 +23,29 @@
 //mtheall --> https://github.com/mtheall/screenshot_png/blob/master/source/screenshot_png.c :: get_pixel
 //& xerpi --> https://github.com/xerpi 
 
+//portions revised --> Lua-Player-Plus :: Graphics.cpp :: DrawAlphaPixel
 void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 {
-	int height=240;
-	u32 v=(height-1-y+x*height)*3;
-	screen[v]=colour & 0xFF;         //blue
-	screen[v+1]=(colour>>8) & 0xFF;  //green
-	screen[v+2]=(colour>>16) & 0xFF; //red
+       u8 alpha = (((colour) >> 24) & 0xFF); //alpha
+       int height=240;
+       u32 v=(height-1-y+x*height)*3;
+     if (alpha = 0xFF)
+      {	
+        screen[v]=colour & 0xFF;         //blue
+        screen[v+1]=(colour>>8) & 0xFF;  //green
+        screen[v+2]=(colour>>16) & 0xFF; //red
+      } 
+      else 
+      { //using alpha is slow
+	float ratio = alpha / 255.0f;
+	screen[v] = ((colour & 0xFF) * ratio) + (screen[v] * (1.0 - ratio));               //blue
+	screen[v+1] = ((((colour) >> 8) & 0xFF) * ratio) + (screen[v+1] * (1.0 - ratio));  //green
+	screen[v+2] = ((((colour) >> 16) & 0xFF) * ratio) + (screen[v+2] * (1.0 - ratio)); //red 
+      }
 }
 
 //found @ https://github.com/Lectem/3Damnesic 
-#define ABGR8(r, g, b, a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
+#define ABGR8(r,g,b,a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
 //& found //gs.h --> crtulib nintendo 3ds
 //#define RGBA8(r,g,b,a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
 
@@ -44,8 +56,9 @@ u32 GetCanvasPixel(u8* screen, int x, int y)
 	u32 colour =screen[v];
 	colour += (screen[v+1] << 8);
 	colour += (screen[v+2] << 16);
+	colour += (0xFF << 24);
         return colour;
-//        return ABGR8(screen[v],screen[v+2],screen[v+1], 0xFF);
+//        return ABGR8(screen[v],screen[v+2],screen[v+3], 0xFF);
 }
 
 //todo
@@ -101,7 +114,7 @@ void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, 
 u8 * GetRecEx(u8* screen, int Top, int Left, int Height, int Width, RamType RamLocal)
 {  
 //	int CanvasWidth = MaxWidth(screen); ???
-	u32 bitmapsize = Width*Height*3;
+	u32 bitmapsize = Width*Height*3; 
         u8* Region;
         
 switch(RamLocal){
