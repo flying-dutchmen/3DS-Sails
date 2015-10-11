@@ -32,18 +32,21 @@
 <a id="3ds-sails" class="anchor" href="#3ds-sails" aria-hidden="true"><span class="octicon octicon-link"></span></a>3DS Sails</h1>
 
 <h4>
-<a id="24bit-true-colour-canvas-for-the-nintendo-3ds-platform" class="anchor" href="#24bit-true-colour-canvas-for-the-nintendo-3ds-platform" aria-hidden="true"><span class="octicon octicon-link"></span></a>24bit "true-colour" Canvas for the Nintendo 3DS platform.</h4>
+<a id="a-true-colour-canvas-for-the-nintendo-3ds-platform" class="anchor" href="#a-true-colour-canvas-for-the-nintendo-3ds-platform" aria-hidden="true"><span class="octicon octicon-link"></span></a>A "true-colour" Canvas for the Nintendo 3DS platform.</h4>
 
 <h4>
 <a id="versatile-get--set-for-both-pixel-or-rectangular-regions" class="anchor" href="#versatile-get--set-for-both-pixel-or-rectangular-regions" aria-hidden="true"><span class="octicon octicon-link"></span></a>versatile get &amp; set for both pixel or rectangular regions.</h4>
 
 <h4>
-<a id="use-text-lines-boxes-polygons-circles--tilted-ellipse" class="anchor" href="#use-text-lines-boxes-polygons-circles--tilted-ellipse" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use Text, Lines, Boxes, Polygons, Circles &amp; tilted Ellipse.</h4>
+<a id="draw-text-lines-boxes-polygons-circles--tilted-ellipse" class="anchor" href="#draw-text-lines-boxes-polygons-circles--tilted-ellipse" aria-hidden="true"><span class="octicon octicon-link"></span></a>Draw Text, Lines, Boxes, Polygons, Circles &amp; tilted Ellipse</h4>
+
+<h4>
+<a id="seamless-alpha-compositing-no-calling-separate-functions-for-its-all-done-automatically" class="anchor" href="#seamless-alpha-compositing-no-calling-separate-functions-for-its-all-done-automatically" aria-hidden="true"><span class="octicon octicon-link"></span></a>Seamless Alpha compositing. No calling separate functions for... It's all done automatically</h4>
 
 <h4>
 <a id="elegant-use-of-left-right-bottom---gfxframebuffers-as-your-blank-canvas" class="anchor" href="#elegant-use-of-left-right-bottom---gfxframebuffers-as-your-blank-canvas" aria-hidden="true"><span class="octicon octicon-link"></span></a>"Elegant" use of left, right, bottom &amp; ... gfxFramebuffer's as your blank canvas.</h4>
 
-<p>All source Code with exception of "Dual_for" macro presented has undergone debuging &amp; passed Eg. is functional/usable.<br>
+<p>All source Code with exception of "Dual_for" macro presented has undergone debugging &amp; passed Eg. is functional/usable.<br>
 The *.c Sources &amp; snippets presented how ever broken, assume an intermediate++ knowledge "C" for there usage!<br>
 To steno-graph, laymen others a "glimpse &amp;or new appreciation for the work involved in building an implementation" and not scarcely fathom just the *.h header/interface's! &amp; if you don't like it; Well then; walk the plank! </p>
 
@@ -58,6 +61,24 @@ Subject: Nintendo 3DS Sails ...  </p>
 
 <p>Etymology--&gt; <a href="https://en.wikipedia.org/wiki/Canvas#Etymology">https://en.wikipedia.org/wiki/Canvas#Etymology</a><br>
 The word "canvas" is derived from the 13th century Anglo-French canevaz and the Old French canevas. Both may be derivatives of the Vulgar Latin cannapaceus for "made of hemp," originating from the Greek κάνναβις (cannabis)</p>
+
+<h2>
+<a id="our-colour-declarations" class="anchor" href="#our-colour-declarations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Our Colour declarations</h2>
+
+<pre><code>#define RED    0xFFFF0000
+#define GREEN  0xFF00FF00
+#define BLUE   0xFF0000FF
+#define CYAN   0xFF00FFFF
+#define PINK   0xFFFF00FF
+#define YELLOW 0xFFFFFF00
+#define BLACK  0xFF000000
+#define WHITE  0xFFFFFFFF
+#define ORANGE 0xFFFF9900
+#define LIGHT_GREEN 0xFF00CC00
+#define PURPLE 0xFF660033
+
+u32 transparent;
+</code></pre>
 
 <h2>
 <a id="pixel-usagedemo" class="anchor" href="#pixel-usagedemo" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://www.facebook.com/1596037147331761/photos/a.1629176367351172.1073741828.1596037147331761/1636255289976613/?type=1&amp;theater">Pixel usage/demo</a>
