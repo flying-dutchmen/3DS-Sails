@@ -99,6 +99,7 @@ void ClearCanvas(u8* screen, u32 colour)
            for(j=Top;j<Height+Top;j++){into;}; 
 
 //u32 transparent;
+//other sources for textures & sprites handling --> smealum :: portal3DS :: texture.c
 //#define SetRecRe(screen, Top, Left, Height, Width, Region) (SetRecEx(screen, Top, Left, Height, Width, Region, 1, linear))
 void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, bool CleanUp, RamType RamLocal)
 { 
@@ -116,9 +117,19 @@ void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, 
        case linear: linearFree(Region); break;  
        case vram: vramFree(Region); break;  
        default: free(Region); 
+}//in the begin there was --> SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j])
 }
 
-//in the begin there was --> SetCanvasPixel(screen[j+Top*CanvasWidth+i+Left],i+Left,j+Top, Region[i,j])
+//xerpi noted Grabbed --> http://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2
+unsigned int next_pow2(unsigned int v)
+{
+    v--;
+    v |= v >> 1;
+    v |= v >> 2;
+    v |= v >> 4;
+    v |= v >> 8;
+    v |= v >> 16;
+    return v+1;
 }
 
 // & portions modify --> xerpi :: libsf2d :: sf2d_texture.c :: sf2d_create_texture
@@ -130,11 +141,12 @@ u8 * GetRecEx(u8* screen, int Top, int Left, int Height, int Width, u16 bpp, Ram
         u8* Region;
         
 switch(RamLocal){
-case linear: Region = (u8*)linearMemAlign(bitmapsize, 0x8);
+case linear: Region = (u8*)linearMemAlign(bitmapsize, 0x80);
              memset(Region, 0, bitmapsize);
              break;
 
-case vram:   Region = (u8*)vramMemAlign(bitmapsize, 0x8); 
+case vram:   bitmapsize = next_pow2(Width) * next_pow2(Height) * (bpp);
+	     Region = (u8*)vramMemAlign(bitmapsize, 0x80); 
              GX_SetMemoryFill(NULL, Region, 0x00000000, (u32*)&(Region)[bitmapsize], GX_FILL_TRIGGER | GX_FILL_32BIT_DEPTH,NULL, 0x00000000, NULL, 0);
 	     gspWaitForPSC0();
              break;
