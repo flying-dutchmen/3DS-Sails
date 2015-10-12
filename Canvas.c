@@ -1,4 +1,5 @@
 #include "Canvas.h"
+#include "Canvas_Pallet.h"
 // the Pro-liter-riot's, Sklaven (a turned-out &or bent FSF/Open-Source) 
 // [act 1, scene 1] 
 // Eg. "Cash-in-Hand?", " U'r live?", "or still friends with Dr. Nelson Mandal";
@@ -63,9 +64,11 @@ u32 GetCanvasPixelEx(u8* screen, GSP_FramebufferFormats format, int x, int y)
 	u32 colour =screen[v];
 	colour += (screen[v+1] << 8);
 	colour += (screen[v+2] << 16);
-	(bytes_per_pixel(format) = 3) ? colour += (0xFF << 24) : colour += (screen[v+3] << 24) //if 24bit or 32bit using an alpha
+	if (bytes_per_pixel(format) == 3)  // 24bit 
+         colour += (0xFF << 24); 
+          else colour += (screen[v+3] << 24); // 32bit using an alpha
         return colour;
-//        return ABGR8(screen[v],screen[v+1],screen[v+2],screen[v+3]);
+//        return ABGR8(screen[v],screen[v+1],screen[v+2],screen[v+3])
 }
 
 //todo
