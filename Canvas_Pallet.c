@@ -1,6 +1,7 @@
 //forked --> https://github.com/mtheall/screenshot_png
 //bytes per pixel, for handling the Framebuffers pallet of colours
 
+#include <3ds.h>
 // --> screenshot_png.c :: bytes_per_pixel
 u32 bytes_per_pixel(GSP_FramebufferFormats format)
 {
