@@ -24,37 +24,37 @@
 //mtheall --> https://github.com/mtheall/screenshot_png/blob/master/source/screenshot_png.c :: get_pixel
 //& xerpi --> https://github.com/xerpi 
 
-//portions revised --> Lua-Player-Plus :: Graphics.cpp :: DrawAlphaPixel
-void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
+//24bit bytes_per_pixel(GSP_BGR8_OES) & 240 pixel's height used for SetCanvasPixel & GetCanvasPixel 
+//#define SetCanvasPixel(screen, x, y, colour) (SetCanvasPixelEx(screen, 3, 240, x, y,colour))
+void SetCanvasPixelEx(u8* screen, u16 bpp, int h, int x, int y, u32 colour)
 {
-       u8 alpha = (((colour) >> 24) & 0xFF); //alpha
-       int height=240;
-       u32 v=(height-1-y+x*height)*3;
-     if (alpha = 0xFF)
+//       int height=240;
+       u32 v=(h-1-y+x*h)*bpp;
+       u8 alpha = (((colour) >> 24) & 0xFF); //alpha 
+     if (alpha == 0xFF)
       {	
         screen[v]=colour & 0xFF;         //blue
         screen[v+1]=(colour>>8) & 0xFF;  //green
         screen[v+2]=(colour>>16) & 0xFF; //red
       } 
-      else 
-      { //this alpha is slow, needs bitwise &= ~ re-written
+      else //alpha is slow 
+      { 
+//revised --> Lua-Player-Plus :: Graphics.cpp :: DrawAlphaPixel
 //	float ratio = alpha / 255.0f;
 //	screen[v] = ((colour & 0xFF) * ratio) + (screen[v] * (1.0 - ratio));               //blue
 //	screen[v+1] = ((((colour) >> 8) & 0xFF) * ratio) + (screen[v+1] * (1.0 - ratio));  //green
 //	screen[v+2] = ((((colour) >> 16) & 0xFF) * ratio) + (screen[v+2] * (1.0 - ratio)); //red 
+	u8 b = screen[v];
+	u8 g = screen[v+1];
+	u8 r = screen[v+2];
 	
-	//the !float version should be faster
-	//revised --> smealum :: 3ds_hb_menu :: gfx.c :: gfxDrawSpriteAlpha
-	screen[v] = (((colour & 0xFF) * alpha) + (screen[v] * (255 - alpha))) >> 8;// div 256;
-	screen[v+1] = (((((colour) >> 8) & 0xFF)* alpha) + (screen[v+1] * (255 - alpha))) / 256;
-	screen[v+2] = (((((colour) >> 16) & 0xFF)* alpha) + (screen[v+2] * (255 - alpha))) / 256;
+//revised --> smealum :: 3ds_hb_menu :: gfx.c :: gfxDrawSpriteAlpha
+	screen[v] = (((colour & 0xFF) * alpha) + (b * (255 - alpha))) >> 8; //div 256;
+	screen[v+1] = (((((colour) >> 8) & 0xFF)* alpha) + (g * (255 - alpha))) >> 8; //div 256;
+	screen[v+2] = (((((colour) >> 16) & 0xFF)* alpha) + (r * (255 - alpha))) >> 8; //div 256;
+        if (bpp == 4) screen[v+3] = ((colour) >> 24) & 0xFF; //set buffers alpha
       }
 }
-
-//found @ https://github.com/Lectem/3Damnesic 
-#define ABGR8(r,g,b,a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
-//& found //gs.h --> crtulib nintendo 3ds
-//#define RGBA8(r,g,b,a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
 
 //24bit 240 pixel's high as default
 //#define GetCanvasPixel(screen, x, y) (GetCanvasPixelEx(screen, bytes_per_pixel(GSP_BGR8_OES), 240, x, y))
@@ -122,11 +122,11 @@ void SetRecEx(u8* screen, int Top, int Left, int Height, int Width, u8* Region, 
 }
 
 // & portions modify --> xerpi :: libsf2d :: sf2d_texture.c :: sf2d_create_texture
-//#define GetRecRe(screen, Top, Left, Height, Width) (GetRecEx(screen, Top, Left, Height, Width, linear))
-u8 * GetRecEx(u8* screen, int Top, int Left, int Height, int Width, RamType RamLocal)
+//#define GetRecRe(screen, Top, Left, Height, Width) (GetRecEx(screen, Top, Left, Height, Width, bytes_per_pixel(GSP_BGR8_OES), linear))
+u8 * GetRecEx(u8* screen, int Top, int Left, int Height, int Width, u16 bpp, RamType RamLocal)
 {  
 //	int CanvasWidth = MaxWidth(screen); ???
-	u32 bitmapsize = Width*Height*3; 
+	u32 bitmapsize = Width*Height*bpp; 
         u8* Region;
         
 switch(RamLocal){
