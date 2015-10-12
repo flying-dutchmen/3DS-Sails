@@ -45,7 +45,7 @@ void SetCanvasPixel(u8* screen, int x, int y, u32 colour)
 	
 	//the !float version should be faster
 	//revised --> smealum :: 3ds_hb_menu :: gfx.c :: gfxDrawSpriteAlpha
-	screen[v] = (((colour & 0xFF) * alpha) + (screen[v] * (255 - alpha))) / 256;
+	screen[v] = (((colour & 0xFF) * alpha) + (screen[v] * (255 - alpha))) >> 8;// div 256;
 	screen[v+1] = (((((colour) >> 8) & 0xFF)* alpha) + (screen[v+1] * (255 - alpha))) / 256;
 	screen[v+2] = (((((colour) >> 16) & 0xFF)* alpha) + (screen[v+2] * (255 - alpha))) / 256;
       }
@@ -68,6 +68,7 @@ u32 GetCanvasPixelEx(u8* screen, GSP_FramebufferFormats format, int x, int y)
          colour += (0xFF << 24); 
           else colour += (screen[v+3] << 24); // 32bit using an alpha
         return colour;
+//       (bytes_per_pixel(format) == 3) ? return ABGR8(screen[v],screen[v+1],screen[v+2],0xFF):
 //        return ABGR8(screen[v],screen[v+1],screen[v+2],screen[v+3])
 }
 
