@@ -17,14 +17,16 @@
 //& AlbertoSONIC --> https://github.com/AlbertoSONIC/3DS_Paint
 //& Steveice10 --> https://github.com/Steveice10/FBI
 //& Lua-Player-Plus --> https://github.com/Rinnegatamante
-//& smealum --> https://github.com/smealum/ctrulib
 
-//Too be later included graphic file formats, special thanks too 
-//+They have the second coolest avitar on the github? I beleve there logo "says it all"!!
-//mtheall --> https://github.com/mtheall/screenshot_png/blob/master/source/screenshot_png.c :: get_pixel
+//might be later included an "init/constructor", escape truecolour & 32bit alpha pallets for processing graphic files
+
+//special thanks goes out too 
+//smealum --> https://github.com/smealum/ctrulib
 //& xerpi --> https://github.com/xerpi 
+//+They have the second coolest avitar on the github? I beleve mtheall's logo "says it all"!!
+//mtheall --> https://github.com/mtheall/screenshot_png/blob/master/source/screenshot_png.c :: get_pixel
 
-//24bit bytes_per_pixel(GSP_BGR8_OES) & 240 pixel's height used for SetCanvasPixel & GetCanvasPixel 
+//bytes_per_pixel(GSP_BGR8_OES) & 240 pixel's height used for SetCanvasPixel, GetCanvasPixel & GetRecRe
 //#define SetCanvasPixel(screen, x, y, colour) (SetCanvasPixelEx(screen, 3, 240, x, y,colour))
 void SetCanvasPixelEx(u8* screen, u16 bpp, int h, int x, int y, u32 colour)
 {
