@@ -2,6 +2,12 @@
 //bytes per pixel, for handling the Framebuffers pallet of colours
 
 #include <3ds.h>
+
+//found @ https://github.com/Lectem/3Damnesic 
+#define ABGR8(r, g, b, a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
+//& found //gs.h --> crtulib nintendo 3ds
+//#define RGBA8(r,g,b,a) ((((r)&0xFF)<<24) | (((g)&0xFF)<<16) | (((b)&0xFF)<<8) | (((a)&0xFF)<<0))
+
 // --> screenshot_png.c :: bytes_per_pixel
 u32 bytes_per_pixel(GSP_FramebufferFormats format)
 {
