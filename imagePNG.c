@@ -3,6 +3,7 @@
 #define LODEPNG_COMPILE_PNG
 #include "lodepng.h"
 
+//revised --> Rinnegatamante :: Lua-Player-Plus :: Graphics.cpp :: Bitmap* decodePNGfile(const char* filename)
 imagebuff* loadPNG(const char* filename)
 {
 	Handle fileHandle;
