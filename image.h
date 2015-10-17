@@ -4,6 +4,6 @@ typedef struct
 {
 	u16 width, height;
 	u8* data;
-	unsigned bitdepth;
+	unsigned depth;
 	bool used;
 }imagebuff;
