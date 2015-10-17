@@ -1,10 +1,8 @@
-/*  fist draft too be tested */
-
 #include <3ds.h>
 #include "image.h"
 
 //revised --> AlbertoSONIC :: 3DS_Paint :: bool saveDrawing(char* path)
-bool saveBMP(u8* screen, const char* path, int h, int w)
+bool saveBMP(const char* path, imagebuff * image)
 {
 	int x, y;
 
@@ -21,7 +19,7 @@ bool saveBMP(u8* screen, const char* path, int h, int w)
 
 	u32 byteswritten;
 
-	u32 bitmapsize = w * h * 3;
+	u32 bitmapsize = image->width * image->height * 3;
 	u8* tempbuf = (u8*)malloc(0x36 + bitmapsize);
 	memset(tempbuf, 0, 0x36 + bitmapsize);
 
@@ -31,21 +29,21 @@ bool saveBMP(u8* screen, const char* path, int h, int w)
 	*(u32*)&tempbuf[0x2] = 0x36 + bitmapsize;
 	*(u32*)&tempbuf[0xA] = 0x36;
 	*(u32*)&tempbuf[0xE] = 0x28;
-	*(u32*)&tempbuf[0x12] = h; // width
-	*(u32*)&tempbuf[0x16] = w; // height
+	*(u32*)&tempbuf[0x12] = image->width; // width
+	*(u32*)&tempbuf[0x16] = image->height; // height
 	*(u32*)&tempbuf[0x1A] = 0x00180001;
 	*(u32*)&tempbuf[0x22] = bitmapsize;
 
-	for (y = 0; y < h; y++)
+	for (y = 0; y < image->height; y++)
 	{
-		for (x = 0; x < w; x++)
+		for (x = 0; x < image->width; x++)
 		{
-			int si = (((h-1) - y) + (x * h)) * 3;
-			int di = 0x36 + (x + (((h-1) - y) * w)) * 3;
+			int si = (((image->height-1) - y) + (x * image->height)) * image->depth;
+			int di = 0x36 + (x + ((image->height-1) - y) * image->width) * image->depth;
 
-			tempbuf[di++] = screen[si++];
-			tempbuf[di++] = screen[si++];
-			tempbuf[di++] = screen[si++];
+			tempbuf[di++] = image->data[si++];
+			tempbuf[di++] = image->data[si++];
+			tempbuf[di++] = image->data[si++];
 		}
 	}
 
@@ -81,7 +79,7 @@ imagebuff * loadBMP(const char* path)
 	FSFILE_Read(file, &bytesRead, 0x36, result->data, size-0x36);
 	FSFILE_Read(file, &bytesRead, 0x12, &(result->width), 4);
 	FSFILE_Read(file, &bytesRead, 0x16, &(result->height), 4);
-	FSFILE_Read(file, &bytesRead, 0x1C, &(result->bitdepth), 2);
+	FSFILE_Read(file, &bytesRead, 0x1C, &(result->depth), 2);
 
 	svcCloseHandle(file);
 	FSFILE_Close(file);
