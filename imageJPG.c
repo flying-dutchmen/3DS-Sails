@@ -5,7 +5,7 @@
 #include "image.h"
 
 
-
+//revised --> Rinnegatamante :: Lua-Player-Plus :: Graphics.cpp :: Bitmap* decodePNGfile(const char* filename);
 imagebuff* loadJPG(const char* filename)
 {
     imagebuff* result = (imagebuff*)malloc(sizeof(imagebuff));
@@ -61,7 +61,7 @@ imagebuff* loadJPG(const char* filename)
     return result;
 }
 
-
+//revised --> Rinnegatamante :: Lua-Player-Plus :: Graphics.cpp :: void saveJpg(char *filename, u32 *pixels, u32 width, u32 height);
 unsigned SaveJPG(const char* filename, imagebuff* image){
 	FILE *outfile = fopen(filename, "wb");
 	struct jpeg_error_mgr jerr;
