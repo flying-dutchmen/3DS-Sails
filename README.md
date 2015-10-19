@@ -15,5 +15,5 @@ on yahoo -->
 [over the air usb hdtv tuner](https://www.google.ca/search?q=usb+hdtv+tuners&hl=fr-CA&gbv=2&oq=&gs_l=)  
 
 & last: ++ what is use of a rental? would you like me to solicit every last shit-head at the court house with this info -->    
-https://www.mern.gouv.qc.ca/territoire/droit/droit-tarification.jsp
-http://www.ontario.ca/page/crown-land
+https://www.mern.gouv.qc.ca/territoire/droit/droit-tarification.jsp  
+http://www.ontario.ca/page/crown-land   
