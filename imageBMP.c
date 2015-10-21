@@ -124,7 +124,7 @@ u8* ConvertBMPToRGBBuffer (u8* Buffer, int width, int height )
 imagebuff * loadBMP(const char* path)
 {
 	int x, y;
-	s32 h, w;
+	s32 *h, *w;
 
 	Handle file;
 	u32 bytesRead;
@@ -144,7 +144,7 @@ imagebuff * loadBMP(const char* path)
 	FSFILE_Read(file, &bytesRead, 0x12, &(w), 4); //biWidth
 	FSFILE_Read(file, &bytesRead, 0x16, &(h), 4); //biHeight
 	FSFILE_Read(file, &bytesRead, 0x1C, &(result->depth), 2); //biBitCount
-	FSFILE_Read(file, &bytesRead, 0x22, &(biSizeImage), 4); 
+//	FSFILE_Read(file, &bytesRead, 0x22, &(biSizeImage), 4); 
 
 	result->width = w;
 	result->height = abs(h); //we should check non negitive & bufpos = (y - 1) * psw + x;
