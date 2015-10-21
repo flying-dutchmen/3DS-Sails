@@ -1,11 +1,16 @@
+//Revised for use nintendo 3ds, Kenny D. Lee 
+//large portions used --> Andreas Hartl :: http://tipsandtricks.runicsoft.com/Cpp/BitmapTutorial.html#chapter4
+
 #include <3ds.h>
+#include <stdio.h>
+
 #include "image.h"
 
 #define BI_RGB 0
 
 typedef struct tagBITMAPFILEHEADER 
 {
-   u16   bfType;        // must be 'BM' 
+   u16    bfType;        // must be 'BM' 
    u32   bfSize;        // size of the whole .bmp file
    u16   bfReserved1;   // must be 0
    u16   bfReserved2;   // must be 0
@@ -27,8 +32,99 @@ typedef struct tagBITMAPINFOHEADER
    u32   biClrImportant;    // important colors
 } BITMAPINFOHEADER;
 
+
+/*! Don't flush */
+//#define FS_WRITE_NOFLUSH (0x00000000)
+/*! Flush */
+//#define FS_WRITE_FLUSH   (0x00010001)      
+
+bool SaveBMP ( // BYTE* Buffer, int width, int height, long paddedsize, LPCTSTR bmpfile )
+const char* path, imagebuff * image)
+{
+	Handle file;
+	FS_path filePath;
+        FS_archive sdmcArchive;
+	filePath.type = PATH_CHAR;
+	filePath.size = strlen(path) + 1;
+	filePath.data = (u8*)path;
+
+	// declare bmp structures 
+	BITMAPFILEHEADER bmfh;
+	BITMAPINFOHEADER info;
+	
+	// andinitialize them to zero
+	memset ( &bmfh, 0, sizeof (BITMAPFILEHEADER ) );
+	memset ( &info, 0, sizeof (BITMAPINFOHEADER ) );
+	
+	// fill the infoheader
+
+	info.biSize = sizeof(BITMAPINFOHEADER);
+	info.biWidth = image->width;
+	info.biHeight = image->height;
+	info.biPlanes = 1;			// we only have one bitplane
+	info.biBitCount = 24;		// RGB mode is 24 bits
+	info.biCompression = BI_RGB;	
+	info.biSizeImage = 0;		// can be 0 for 24 bit images 
+
+// Calculating the size of a bitmap found --> https://msdn.microsoft.com/en-us/library/ms969901.aspx
+//	info.biSizeImage = ((((info.biWidth * info.biBitCount) + 31) & ~31) >> 3) * info.biHeight;
+	info.biXPelsPerMeter = 0x0ec4;     // paint and PSP use this values
+	info.biYPelsPerMeter = 0x0ec4;     
+	info.biClrUsed = 0;			// we are in RGB mode and have no palette
+	info.biClrImportant = 0;    // all colors are important
+
+	// fill the fileheader with data
+
+	bmfh.bfType = 0x4d42;       // 0x4d42 = 'BM'
+	bmfh.bfReserved1 = 0;
+	bmfh.bfReserved2 = 0;
+	bmfh.bfSize = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + info.biSizeImage; // paddedsize;
+	bmfh.bfOffBits = 0x36;		// number of bytes to start of bitmap bits
+	
+	// now we open the file to write to
+
+	Result res = FSUSER_OpenFile(NULL, &file, sdmcArchive, filePath, FS_OPEN_CREATE | FS_OPEN_WRITE, FS_ATTRIBUTE_NONE);
+	if (res)
+		return false;
+
+	
+	// write file header
+	unsigned long bwritten;
+	if (FSFILE_Write(file, &bwritten, 0, &bmfh, sizeof ( BITMAPFILEHEADER ), FS_WRITE_NOFLUSH) == false )
+         //WriteFile ( file, &bmfh, sizeof ( BITMAPFILEHEADER ), &bwritten, NULL ) == false )
+	{	
+		FSFILE_Close (file);
+  		svcCloseHandle(file);
+		return false;
+	}
+	// write infoheader
+	if (FSFILE_Write(file, &bwritten, 0, &info, sizeof ( BITMAPINFOHEADER ), FS_WRITE_NOFLUSH) == false )
+         // WriteFile ( file, &info, sizeof ( BITMAPINFOHEADER ), &bwritten, NULL ) == false )
+	{	
+		FSFILE_Close (file);
+  		svcCloseHandle(file);
+		return false;
+	}
+	// write image data
+	if (FSFILE_Write(file, &bwritten, 0, &image->data, info.biSizeImage, FS_WRITE_FLUSH) == false )
+        // WriteFile ( file, Buffer, paddedsize, &bwritten, NULL ) == false )
+	{	
+		FSFILE_Close (file);
+  		svcCloseHandle(file);
+		return false;
+	}
+	
+	// and close file
+	FSFILE_Close (file);
+	svcCloseHandle(file);
+
+	return true;
+}
+
+
+
 //revised --> AlbertoSONIC :: 3DS_Paint :: bool saveDrawing(char* path)
-bool saveBMP(const char* path, imagebuff * image)
+bool _saveBMP(const char* path, imagebuff * image)
 {
 	int x, y;
 
@@ -81,7 +177,7 @@ bool saveBMP(const char* path, imagebuff * image)
 }
 
 //found --> http://tipsandtricks.runicsoft.com/Cpp/BitmapTutorial.html#chapter4
-u8* ConvertBMPToRGBBuffer (u8* Buffer, int width, int height )
+u8* ConvertBMPToRGBBuffer(u8* Buffer, int width, int height )
 {
  int x, y;
 	// first make sure the parameters are valid
@@ -127,7 +223,7 @@ imagebuff * loadBMP(const char* path)
 	s32 *h, *w;
 
 	Handle file;
-	u32 bytesRead;
+	u32 bytesRead, offset;
 	u64 size;
 	FS_path filePath = FS_makePath(PATH_CHAR, path);
 	FS_archive archive = (FS_archive) { ARCH_SDMC, (FS_path) { PATH_EMPTY, 1, (u8*)"" }};
@@ -141,20 +237,22 @@ imagebuff * loadBMP(const char* path)
 		svcCloseHandle(file);
 		return 0;
 	}
+
+	FSFILE_Read(file, &bytesRead, 0x0A, &(offset), 4); //bfOffBits
 	FSFILE_Read(file, &bytesRead, 0x12, &(w), 4); //biWidth
 	FSFILE_Read(file, &bytesRead, 0x16, &(h), 4); //biHeight
 	FSFILE_Read(file, &bytesRead, 0x1C, &(result->depth), 2); //biBitCount
-//	FSFILE_Read(file, &bytesRead, 0x22, &(biSizeImage), 4); 
+
 
 	result->width = w;
-	result->height = abs(h); //we should check non negitive & bufpos = (y - 1) * psw + x;
+	result->height = abs(h);
 	
         // Calculating the size of a bitmap found --> https://msdn.microsoft.com/en-us/library/ms969901.aspx
 	//biSizeImage = ((((biWidth * biBitCount) + 31) & ~31) >> 3) * biHeight:
 
 	result->data = (u8*)malloc(result->height * result->width * 3);
-	u8* tempbuf = (u8*)malloc(size-0x36);
-	FSFILE_Read(file, &bytesRead, 0x36, tempbuf, size-0x36);
+	u8* tempbuf = (u8*)malloc(size-offset);
+	FSFILE_Read(file, &bytesRead, offset, tempbuf, size-offset);
 
 	FSFILE_Close(file);
 	svcCloseHandle(file);
@@ -179,7 +277,98 @@ imagebuff * loadBMP(const char* path)
 			result->data[newpos + 1] = tempbuf[bufpos+1]; 
 			result->data[newpos + 2] = tempbuf[bufpos];     
 		}
+
 //         result->data = (u8*)ConvertBMPToRGBBuffer(tempbuf, result->width, result->height);
 	free(tempbuf);
+	return result;
+}
+
+
+imagebuff * _loadBMP(const char* path)
+ // int* width, int* height, long* size, LPCTSTR bmpfile )
+{
+
+	// declare bitmap structures
+	BITMAPFILEHEADER bmpheader;
+	BITMAPINFOHEADER bmpinfo;
+	// value to be used in ReadFile funcs
+	u32 bytesread;
+	// open file to read from
+//	Handle file = CreateFile ( bmpfile , GENERIC_READ, FILE_SHARE_READ,
+//		 NULL, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL );
+        FILE* f = fopen(path, "rb+");
+	if ( NULL == f )
+		return NULL; // coudn't open file
+	
+	
+	// read file header
+	if ( fread(&bmpheader, &bytesread, sizeof (BITMAPFILEHEADER), f) == false )
+            //ReadFile ( file, &bmpheader, sizeof ( BITMAPFILEHEADER ), &bytesread, NULL ) == false )
+	{
+		fclose(f);
+		return NULL;
+	}
+
+	//read bitmap info
+
+	if ( fread(&bmpinfo, &bytesread, sizeof ( BITMAPINFOHEADER ), f) == false )
+             //ReadFile ( file, &bmpinfo, sizeof ( BITMAPINFOHEADER ), &bytesread, NULL ) == false )
+	{
+		fclose(f);
+		return NULL;
+	}
+	
+	// check if file is actually a bmp
+	if ( bmpheader.bfType != 'BM' )
+	{
+		fclose(f);
+		return NULL;
+	}
+
+        imagebuff* result = (imagebuff*)malloc(sizeof(imagebuff));
+
+	// get image measurements
+	result->width   = bmpinfo.biWidth;
+	result->height  = abs ( bmpinfo.biHeight );
+
+	// check if bmp is uncompressed
+	if ( bmpinfo.biCompression != BI_RGB )
+	{
+		fclose(f);
+		return NULL;
+	}
+
+	// check if we have 24 bit bmp
+	if ( bmpinfo.biBitCount != 24 )
+	{
+		fclose(f);
+		return NULL;
+	}
+	
+
+	// create buffer to hold the data
+	long *size = bmpheader.bfSize - bmpheader.bfOffBits;
+	u8* tempbuf = (u8*)malloc(size);
+	result->data = (u8*)malloc(size);
+
+	// move file pointer to start of bitmap data
+//	SetFilePointer ( file, bmpheader.bfOffBits, NULL, FILE_BEGIN );
+        fseek(f,bmpheader.bfOffBits,SEEK_SET);
+
+	// read bmp data
+	if ( fread(tempbuf, &bytesread, *size, f) == false )
+            //ReadFile ( file, Buffer, *size, &bytesread, NULL ) == false )
+	{
+		free(result->data);
+		fclose(f);
+		return NULL;
+	}
+
+        result->data = (u8*)ConvertBMPToRGBBuffer(tempbuf, result->width, result->height);
+        free(tempbuf);
+	// everything successful here: close file and return imagebuff
+	
+	fclose(f);
+
 	return result;
 }
