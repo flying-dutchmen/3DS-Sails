@@ -1,3 +1,4 @@
+#include <stdarg.h>
 #include "Canvas_font.h"
 
 //CanvasChar && CanvasString
@@ -45,7 +46,7 @@ int CanvasString(u8* screen, const char *string, int x, int y, u32 colour)
 	return x;
 }
 
-// punk out 
+// punks out 
 void Canvas_printf(u8* screen, int x, int y, const char* str,...)
 {
     char* formated[256];
