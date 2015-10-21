@@ -3,19 +3,20 @@
 
 #include <3ds.h>
 #include <stdio.h>
+#include "imageBMP.h"
 
-#include "image.h"
+#include "Canvas_font.h"
 
-#define BI_RGB 0
+#define BI_RGB 0 //no compression
 
 typedef struct tagBITMAPFILEHEADER 
 {
-   u16    bfType;        // must be 'BM' 
+   u16   bfType;        // must be 'BM' 
    u32   bfSize;        // size of the whole .bmp file
    u16   bfReserved1;   // must be 0
    u16   bfReserved2;   // must be 0
    u32   bfOffBits;     
-} BITMAPFILEHEADER; 
+} __attribute__((packed)) BITMAPFILEHEADER; 
 
 typedef struct tagBITMAPINFOHEADER
 {
@@ -30,13 +31,51 @@ typedef struct tagBITMAPINFOHEADER
    s32   biYPelsPerMeter;   // pixels per meter Y
    u32   biClrUsed;         // colors used
    u32   biClrImportant;    // important colors
-} BITMAPINFOHEADER;
+} __attribute__((packed)) BITMAPINFOHEADER;
+   
+//it's, top of crotch   
+//If u thought "https://github.com/kennyd-lee/filectrl2" was set GDB break points / debugging hell?
+void BITMAPINFOHEADERdebug(u8* screen, BITMAPINFOHEADER *image)
+{
+char* str[256];
+sprintf(str, "biSize: %u", image->biSize);
+CanvasString(screen, str, 0, 60, WHITE);
+sprintf(str, "biWidth %d \n", image->biWidth);
+CanvasString(screen, str, 0, 70, WHITE);
+sprintf(str, "biHeight %d \n", image->biHeight);
+CanvasString(screen, str, 0, 80, WHITE);
+sprintf(str, "biPlanes %u \n", image->biPlanes);
+CanvasString(screen, str, 0, 90, WHITE);
+sprintf(str, "biBitCount %u", image->biBitCount);
+CanvasString(screen, str, 0, 100, WHITE);
+sprintf(str, "biCompression %u", image->biCompression);
+CanvasString(screen, str, 0, 110, WHITE);
+sprintf(str, "biSizeImage %u", image->biSizeImage);
+CanvasString(screen, str, 0, 120, WHITE);
+sprintf(str, "biXPelsPerMeter %u", image->biXPelsPerMeter);
+CanvasString(screen, str, 0, 130, WHITE);
+sprintf(str, "biYPelsPerMeter %u", image->biYPelsPerMeter);
+CanvasString(screen, str, 0, 140, WHITE);
+sprintf(str, "biClrUsed %u", image->biClrUsed);
+CanvasString(screen, str, 0, 150, WHITE);
+sprintf(str, "biClrImportant %u", image->biClrImportant);
+CanvasString(screen, str, 0, 160, WHITE);
+}
 
-
-/*! Don't flush */
-//#define FS_WRITE_NOFLUSH (0x00000000)
-/*! Flush */
-//#define FS_WRITE_FLUSH   (0x00010001)      
+void BITMAPFILEHEADERdebug(u8* screen, BITMAPFILEHEADER *image)
+{
+char* str[256];
+sprintf(str, "bfType: %u", image->bfType);
+CanvasString(screen, str, 0, 10, WHITE);
+sprintf(str, "bfSize %u \n", image->bfSize);
+CanvasString(screen, str, 0, 20, WHITE);
+sprintf(str, "bfReserved1 %u \n", image->bfReserved1);
+CanvasString(screen, str, 0, 30, WHITE);
+sprintf(str, "bfReserved2 %u \n", image->bfReserved2);
+CanvasString(screen, str, 0, 40, WHITE);
+sprintf(str, "bfOffBits %u", image->bfOffBits);
+CanvasString(screen, str, 0, 50, WHITE);
+}
 
 bool SaveBMP ( // BYTE* Buffer, int width, int height, long paddedsize, LPCTSTR bmpfile )
 const char* path, imagebuff * image)
@@ -220,7 +259,10 @@ u8* ConvertBMPToRGBBuffer(u8* Buffer, int width, int height )
 imagebuff * loadBMP(const char* path)
 {
 	int x, y;
-	s32 *h, *w;
+//	s32 *h, *w;
+	// declare bitmap structures
+	BITMAPFILEHEADER bmpheader;
+	BITMAPINFOHEADER bmpinfo;
 
 	Handle file;
 	u32 bytesRead, offset;
@@ -238,28 +280,37 @@ imagebuff * loadBMP(const char* path)
 		return 0;
 	}
 
-	FSFILE_Read(file, &bytesRead, 0x0A, &(offset), 4); //bfOffBits
-	FSFILE_Read(file, &bytesRead, 0x12, &(w), 4); //biWidth
-	FSFILE_Read(file, &bytesRead, 0x16, &(h), 4); //biHeight
-	FSFILE_Read(file, &bytesRead, 0x1C, &(result->depth), 2); //biBitCount
+	// read file header
+	FSFILE_Read(file, &bytesRead, 0, &bmpheader,sizeof(BITMAPFILEHEADER));
+        BITMAPFILEHEADERdebug(screenBottom, &bmpheader);
+	//read bitmap info
+	FSFILE_Read(file, &bytesRead, 0x0e, &bmpinfo,sizeof(BITMAPINFOHEADER));
 
-
-	result->width = w;
-	result->height = abs(h);
-	
         // Calculating the size of a bitmap found --> https://msdn.microsoft.com/en-us/library/ms969901.aspx
-	//biSizeImage = ((((biWidth * biBitCount) + 31) & ~31) >> 3) * biHeight:
+        if (bmpinfo.biSizeImage == 0) bmpinfo.biSizeImage = ((((bmpinfo.biWidth * bmpinfo.biBitCount) + 31) & ~31) >> 3) * bmpinfo.biHeight;
+        BITMAPINFOHEADERdebug(screenBottom, &bmpinfo);
 
-	result->data = (u8*)malloc(result->height * result->width * 3);
-	u8* tempbuf = (u8*)malloc(size-offset);
-	FSFILE_Read(file, &bytesRead, offset, tempbuf, size-offset);
+//	FSFILE_Read(file, &bytesRead, 0x0A, &(offset), 4); //bfOffBits
+//	FSFILE_Read(file, &bytesRead, 0x12, &(w), 4); //biWidth
+//	FSFILE_Read(file, &bytesRead, 0x16, &(h), 4); //biHeight
+//	FSFILE_Read(file, &bytesRead, 0x1C, &(result->depth), 2); //biBitCount
+//	result->width = w;
+//	result->height = abs(h);
+
+
+	result->width = bmpinfo.biWidth;
+	result->height = abs(bmpinfo.biHeight);
+
+	result->data = (u8*)malloc(result->height * result->width * 3); //24bit canvas buffer
+	u8* tempbuf = (u8*)malloc(bmpinfo.biSizeImage); // size-offset
+	FSFILE_Read(file, &bytesRead, offset, tempbuf, bmpinfo.biSizeImage);
 
 	FSFILE_Close(file);
 	svcCloseHandle(file);
 
 	int padding = 0;
-	int scanlinebytes = result->width * 3;
-	while ( ( scanlinebytes + padding ) % 4 != 0 )     // DWORD = 4 bytes
+	int scanlinebytes = result->width * result->depth >> 3; //depth >> 3 is fine for 8, 16, 24, 32 & !monchrome 1
+	while ((scanlinebytes + padding) % 4 != 0)     // DWORD = 4 bytes
 		padding++;
 	// get the padded scanline width
 	int psw = scanlinebytes + padding;
@@ -277,9 +328,8 @@ imagebuff * loadBMP(const char* path)
 			result->data[newpos + 1] = tempbuf[bufpos+1]; 
 			result->data[newpos + 2] = tempbuf[bufpos];     
 		}
-
-//         result->data = (u8*)ConvertBMPToRGBBuffer(tempbuf, result->width, result->height);
 	free(tempbuf);
+        result->used == 1;
 	return result;
 }
 
@@ -372,3 +422,7 @@ imagebuff * _loadBMP(const char* path)
 
 	return result;
 }
+
+//& freinds too clear my good, good name
+//imagemagic stats my test bmp as (24bit & BI_RGB) 
+//It debugs on the local as 32bit with RLE8
