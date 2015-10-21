@@ -1,6 +1,32 @@
 #include <3ds.h>
 #include "image.h"
 
+#define BI_RGB 0
+
+typedef struct tagBITMAPFILEHEADER 
+{
+   u16   bfType;        // must be 'BM' 
+   u32   bfSize;        // size of the whole .bmp file
+   u16   bfReserved1;   // must be 0
+   u16   bfReserved2;   // must be 0
+   u32   bfOffBits;     
+} BITMAPFILEHEADER; 
+
+typedef struct tagBITMAPINFOHEADER
+{
+   u32   biSize;            // size of the structure
+   s32   biWidth;           // image width
+   s32   biHeight;          // image height //abs(biHeight) bottom .. top
+   u16   biPlanes;          // bitplanes
+   u16   biBitCount;        // resolution 
+   u32   biCompression;     // compression
+   u32   biSizeImage;       // size of the image
+   s32   biXPelsPerMeter;   // pixels per meter X
+   s32   biYPelsPerMeter;   // pixels per meter Y
+   u32   biClrUsed;         // colors used
+   u32   biClrImportant;    // important colors
+} BITMAPINFOHEADER;
+
 //revised --> AlbertoSONIC :: 3DS_Paint :: bool saveDrawing(char* path)
 bool saveBMP(const char* path, imagebuff * image)
 {
@@ -94,9 +120,11 @@ u8* ConvertBMPToRGBBuffer (u8* Buffer, int width, int height )
 }
 
 //revised --> Rinnegatamante :: Lua-Player-Plus :: Graphics.cpp :: Bitmap* decodeBMPfile(const char* fname)
+//& portions used --> http://tipsandtricks.runicsoft.com/Cpp/BitmapTutorial.html#chapter4 :: ConvertBMPToRGBBuffer
 imagebuff * loadBMP(const char* path)
 {
 	int x, y;
+	s32 h, w;
 
 	Handle file;
 	u32 bytesRead;
@@ -113,22 +141,45 @@ imagebuff * loadBMP(const char* path)
 		svcCloseHandle(file);
 		return 0;
 	}
-	FSFILE_Read(file, &bytesRead, 0x12, &(result->width), 4); //biWidth
-	FSFILE_Read(file, &bytesRead, 0x16, &(result->height), 4); //biHeight
+	FSFILE_Read(file, &bytesRead, 0x12, &(w), 4); //biWidth
+	FSFILE_Read(file, &bytesRead, 0x16, &(h), 4); //biHeight
 	FSFILE_Read(file, &bytesRead, 0x1C, &(result->depth), 2); //biBitCount
+	FSFILE_Read(file, &bytesRead, 0x22, &(biSizeImage), 4); 
 
-
-// Calculating the size of a bitmap found --> https://msdn.microsoft.com/en-us/library/ms969901.aspx
+	result->width = w;
+	result->height = abs(h); //we should check non negitive & bufpos = (y - 1) * psw + x;
+	
+        // Calculating the size of a bitmap found --> https://msdn.microsoft.com/en-us/library/ms969901.aspx
 	//biSizeImage = ((((biWidth * biBitCount) + 31) & ~31) >> 3) * biHeight:
 
-//	result->data = (u8*)malloc(size-0x36);
+	result->data = (u8*)malloc(result->height * result->width * 3);
 	u8* tempbuf = (u8*)malloc(size-0x36);
 	FSFILE_Read(file, &bytesRead, 0x36, tempbuf, size-0x36);
 
 	FSFILE_Close(file);
 	svcCloseHandle(file);
 
-        result->data = (u8*)ConvertBMPToRGBBuffer(tempbuf, result->width, result->height);
+	int padding = 0;
+	int scanlinebytes = result->width * 3;
+	while ( ( scanlinebytes + padding ) % 4 != 0 )     // DWORD = 4 bytes
+		padding++;
+	// get the padded scanline width
+	int psw = scanlinebytes + padding;
+
+	// swap the R and B bytes and the scanlines
+	long bufpos = 0;   
+	long newpos = 0;
+	for (y = 0; y < result->height; y++ )
+		for (x = 0; x < 3 * result->width; x+=3 )
+		{
+			newpos = y * 3 * result->width + x;     
+			bufpos = (result->height - y - 1) * psw + x;
+
+			result->data[newpos] = tempbuf[bufpos + 2];       
+			result->data[newpos + 1] = tempbuf[bufpos+1]; 
+			result->data[newpos + 2] = tempbuf[bufpos];     
+		}
+//         result->data = (u8*)ConvertBMPToRGBBuffer(tempbuf, result->width, result->height);
 	free(tempbuf);
 	return result;
 }
