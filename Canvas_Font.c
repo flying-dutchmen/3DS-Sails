@@ -44,3 +44,15 @@ int CanvasString(u8* screen, const char *string, int x, int y, u32 colour)
 	}
 	return x;
 }
+
+// punk out 
+void Canvas_printf(u8* screen, int x, int y, const char* str,...)
+{
+    char* formated[256];
+    va_list ap;
+    va_start(ap, str);
+    snprintf(formated, 256, str, ap);
+    //sprintf(formated, str, ap);
+    va_end(ap);
+    CanvasString(screen, formated, x, y, WHITE);
+}
