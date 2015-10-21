@@ -425,4 +425,4 @@ imagebuff * _loadBMP(const char* path)
 
 //& freinds too clear my good, good name
 //imagemagic stats my test bmp as (24bit & BI_RGB) 
-//It debugs on the local as 32bit with RLE8
+//It debugs on the local as 32bit with BI_BITFIELDS
