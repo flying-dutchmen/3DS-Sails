@@ -349,7 +349,7 @@ imagebuff * loadBMP(const char* path)
 	// swap the R and B bytes and the scanlines
 	u32 bufpos, newpos;
 	for (y = 0; y < result->height; y++ )
-		for (x = 0; x < result->width; x++)//for 24bit is kind of ok?
+		for (x = 0; x < result->width; x++)//for 24bit is kind of 1/2 crap ok, but wii need %100 of image?
 		{
 		   newpos = (result->height-1-y+x*result->height) * result->depth; //map pixels --> nintendo 3ds canvas 
 		if (bmpinfo.biHeight > 0) 
