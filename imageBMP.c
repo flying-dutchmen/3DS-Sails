@@ -321,9 +321,13 @@ imagebuff * loadBMP(const char* path)
 	result->width = bmpinfo.biWidth;
 	result->height = abs(bmpinfo.biHeight);
 	result->depth = bmpinfo.biBitCount >> 3;  //works for 8, 16, 24, 32 & !monchrome 1
-
+	
 	result->data = (u8*)malloc(result->height * result->width * result->depth); //24bit canvas buffer
 	u8* tempbuf = (u8*)malloc(bmpinfo.biSizeImage); 
+	
+	memset (result->data, 0, result->height * result->width * result->depth);
+	memset (tempbuf, 0, bmpinfo.biSizeImage);
+	
 	FSFILE_Read(file, &bytesRead, bmpheader.bfOffBits, tempbuf, bmpinfo.biSizeImage);
 
 	FSFILE_Close(file);
