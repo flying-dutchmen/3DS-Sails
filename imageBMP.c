@@ -317,17 +317,16 @@ imagebuff * loadBMP(const char* path)
       default: break;
 }
 */
-
 	result->width = bmpinfo.biWidth;
 	result->height = abs(bmpinfo.biHeight);
 	result->depth = bmpinfo.biBitCount >> 3;  //works for 8, 16, 24, 32 & !monchrome 1
-	
+
 	result->data = (u8*)malloc(result->height * result->width * result->depth); //24bit canvas buffer
-	u8* tempbuf = (u8*)malloc(bmpinfo.biSizeImage); 
-	
 	memset (result->data, 0, result->height * result->width * result->depth);
+
+	u8* tempbuf = (u8*)malloc(bmpinfo.biSizeImage); 
 	memset (tempbuf, 0, bmpinfo.biSizeImage);
-	
+
 	FSFILE_Read(file, &bytesRead, bmpheader.bfOffBits, tempbuf, bmpinfo.biSizeImage);
 
 	FSFILE_Close(file);
@@ -350,17 +349,18 @@ imagebuff * loadBMP(const char* path)
 	// swap the R and B bytes and the scanlines
 	u32 bufpos, newpos;
 	for (y = 0; y < result->height; y++ )
-		for (x = 0; x < result->depth * result->width; x+=result->depth)//for 24bit is kind of ok?
+		for (x = 0; x < result->width; x++)//for 24bit is kind of ok?
 		{
-			newpos = (result->height-1-y+x*result->height); //map pixels --> nintendo 3ds canvas 
+		   newpos = (result->height-1-y+x*result->height) * result->depth; //map pixels --> nintendo 3ds canvas 
 		if (bmpinfo.biHeight > 0) 
-			bufpos = (result->height - y - 1) * psw + x; // run through scanlines starting @ bottom work back to the top
+			bufpos = ((result->height - 1 - y) * psw) + (result->depth * x); // run through scanlines starting @ bottom work back to the top
 		   else
-			bufpos = y * psw + x; // padded scanlines starting @ top work to the bottom 
+			bufpos =  (y * psw) + (result->depth * x); // padded scanlines starting @ top work to the bottom 
 
 			result->data[newpos] = tempbuf[bufpos + 2];       
 			result->data[newpos + 1] = tempbuf[bufpos+1]; 
-			result->data[newpos + 2] = tempbuf[bufpos];     
+			result->data[newpos + 2] = tempbuf[bufpos];  
+			if (bmpinfo.biBitCount==32) result->data[newpos + 3] = tempbuf[bufpos + 3]; //if our rastermap, uses an alpha byte    
 		}
 	free(tempbuf);
         result->used == 1;
