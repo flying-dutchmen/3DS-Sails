@@ -17,7 +17,7 @@ typedef struct tagBITMAPFILEHEADER
    u32   bfSize;        // size of the whole .bmp file
    u16   bfReserved1;   // must be 0
    u16   bfReserved2;   // must be 0
-   u32   bfOffBits;     // begining of pixel data
+   u32   bfOffBits;     
 } __attribute__((packed)) BITMAPFILEHEADER; 
 
 typedef struct tagBITMAPINFOHEADER
@@ -257,7 +257,6 @@ u8* ConvertBMPToRGBBuffer(u8* Buffer, int width, int height )
 imagebuff * loadBMP(const char* path)
 {
 	int x, y;
-//	s32 *h, *w;
 
         u32 rgb[3];
 	// declare bitmap structures
@@ -265,7 +264,7 @@ imagebuff * loadBMP(const char* path)
 	BITMAPINFOHEADER bmpinfo;
 
 	Handle file;
-	u32 bytesRead, offset;
+	u32 bytesRead;
 	u64 size;
 	FS_path filePath = FS_makePath(PATH_CHAR, path);
 	FS_archive archive = (FS_archive) { ARCH_SDMC, (FS_path) { PATH_EMPTY, 1, (u8*)"" }};
@@ -293,10 +292,10 @@ imagebuff * loadBMP(const char* path)
 /*
   if(bmpinfo.biCompression == BI_BITFIELDS){
         u32 bitmasks = bytesRead;
-	FSFILE_Read(file, &bytesRead, bitmasks, &rgb[0],4); //alpha
 	FSFILE_Read(file, &bytesRead, bitmasks, &rgb[0],4); //red
 	FSFILE_Read(file, &bytesRead, bitmasks+4, &rgb[1],4); //green
 	FSFILE_Read(file, &bytesRead, bitmasks+8, &rgb[2],4); //blue
+	FSFILE_Read(file, &bytesRead, bitmasks+12, &rgb[2],4); //alpha
      }
 
     switch(bmpinfo.biBitCount){
@@ -319,49 +318,41 @@ imagebuff * loadBMP(const char* path)
 }
 */
 
-//	FSFILE_Read(file, &bytesRead, 0x0A, &(offset), 4); //bfOffBits
-//	FSFILE_Read(file, &bytesRead, 0x12, &(w), 4); //biWidth
-//	FSFILE_Read(file, &bytesRead, 0x16, &(h), 4); //biHeight
-//	FSFILE_Read(file, &bytesRead, 0x1C, &(result->depth), 2); //biBitCount
-//	result->width = w;
-//	result->height = abs(h);
-
-
 	result->width = bmpinfo.biWidth;
 	result->height = abs(bmpinfo.biHeight);
-	result->depth = bmpinfo.biBitCount >> 3; //depth >> 3 is fine for 8, 16, 24, 32 & !monchrome 1
+	result->depth = bmpinfo.biBitCount >> 3;  //works for 8, 16, 24, 32 & !monchrome 1
 
-	result->data = (u8*)malloc(result->height * result->width * result->depth); 
-	u8* tempbuf = (u8*)malloc(bmpinfo.biSizeImage); // size-offset
-	FSFILE_Read(file, &bytesRead, bmpheader->bfOffBits, tempbuf, bmpinfo.biSizeImage);
+	result->data = (u8*)malloc(result->height * result->width * result->depth); //24bit canvas buffer
+	u8* tempbuf = (u8*)malloc(bmpinfo.biSizeImage); 
+	FSFILE_Read(file, &bytesRead, bmpheader.bfOffBits, tempbuf, bmpinfo.biSizeImage);
 
 	FSFILE_Close(file);
 	svcCloseHandle(file);
 
 	int padding = 0;
-	int scanlinebytes = result->width * result->depth; 
+	int scanlinebytes = result->width * result->depth;
 	while ((scanlinebytes + padding) % 4 != 0)     // DWORD = 4 bytes
 		padding++;
 	// get the padded scanline width
 	int psw = scanlinebytes + padding;
 
-
 //char* str[256];
-//sprintf(str, "scanlinebytes: %u", scanlinebytes);
+//sprintf(str, "scanlinebytes: %d", scanlinebytes);
 //CanvasString(screenBottom, str, 0, 170, WHITE);
 
-//sprintf(str, "psw: %u", psw);
+//sprintf(str, "psw: %d", psw);
 //CanvasString(screenBottom, str, 0, 180, WHITE);
 
-
 	// swap the R and B bytes and the scanlines
-	long bufpos = 0;   
-	long newpos = 0;
+	u32 bufpos, newpos;
 	for (y = 0; y < result->height; y++ )
 		for (x = 0; x < result->depth * result->width; x+=result->depth)//for 24bit is kind of ok?
 		{
 			newpos = (result->height-1-y+x*result->height); //map pixels --> nintendo 3ds canvas 
+		if (bmpinfo.biHeight > 0) 
 			bufpos = (result->height - y - 1) * psw + x; // run through scanlines starting @ bottom work back to the top
+		   else
+			bufpos = y * psw + x; // padded scanlines starting @ top work to the bottom 
 
 			result->data[newpos] = tempbuf[bufpos + 2];       
 			result->data[newpos + 1] = tempbuf[bufpos+1]; 
