@@ -17,7 +17,7 @@ typedef struct tagBITMAPFILEHEADER
    u32   bfSize;        // size of the whole .bmp file
    u16   bfReserved1;   // must be 0
    u16   bfReserved2;   // must be 0
-   u32   bfOffBits;     
+   u32   bfOffBits;     // begining of pixel data
 } __attribute__((packed)) BITMAPFILEHEADER; 
 
 typedef struct tagBITMAPINFOHEADER
@@ -329,17 +329,17 @@ imagebuff * loadBMP(const char* path)
 
 	result->width = bmpinfo.biWidth;
 	result->height = abs(bmpinfo.biHeight);
-	result->depth = bmpinfo.biBitCount >> 3;
+	result->depth = bmpinfo.biBitCount >> 3; //depth >> 3 is fine for 8, 16, 24, 32 & !monchrome 1
 
-	result->data = (u8*)malloc(result->height * result->width * result->depth); //24bit canvas buffer
+	result->data = (u8*)malloc(result->height * result->width * result->depth); 
 	u8* tempbuf = (u8*)malloc(bmpinfo.biSizeImage); // size-offset
-	FSFILE_Read(file, &bytesRead, offset, tempbuf, bmpinfo.biSizeImage);
+	FSFILE_Read(file, &bytesRead, bmpheader->bfOffBits, tempbuf, bmpinfo.biSizeImage);
 
 	FSFILE_Close(file);
 	svcCloseHandle(file);
 
 	int padding = 0;
-	int scanlinebytes = result->width * result->depth; //depth >> 3 is fine for 8, 16, 24, 32 & !monchrome 1
+	int scanlinebytes = result->width * result->depth; 
 	while ((scanlinebytes + padding) % 4 != 0)     // DWORD = 4 bytes
 		padding++;
 	// get the padded scanline width
