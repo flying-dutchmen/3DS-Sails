@@ -1,5 +1,6 @@
 //Revised for use nintendo 3ds, Kenny D. Lee 
 //large portions used --> Andreas Hartl :: http://tipsandtricks.runicsoft.com/Cpp/BitmapTutorial.html#chapter4
+//& portions used --> Mans Rullgard :: FFmpeg :: libavcodec :: bmp.c
 
 #include <3ds.h>
 #include <stdio.h>
@@ -7,7 +8,8 @@
 
 #include "Canvas_font.h"
 
-#define BI_RGB 0 //no compression
+#define BI_RGB 0
+#define BI_BITFIELDS 3
 
 typedef struct tagBITMAPFILEHEADER 
 {
@@ -33,8 +35,6 @@ typedef struct tagBITMAPINFOHEADER
    u32   biClrImportant;    // important colors
 } __attribute__((packed)) BITMAPINFOHEADER;
    
-//it's, top of crotch   
-//If u thought "https://github.com/kennyd-lee/filectrl2" was set GDB break points / debugging hell?
 void BITMAPINFOHEADERdebug(u8* screen, BITMAPINFOHEADER *image)
 {
 char* str[256];
@@ -160,8 +160,6 @@ const char* path, imagebuff * image)
 	return true;
 }
 
-
-
 //revised --> AlbertoSONIC :: 3DS_Paint :: bool saveDrawing(char* path)
 bool _saveBMP(const char* path, imagebuff * image)
 {
@@ -260,6 +258,8 @@ imagebuff * loadBMP(const char* path)
 {
 	int x, y;
 //	s32 *h, *w;
+
+        u32 rgb[3];
 	// declare bitmap structures
 	BITMAPFILEHEADER bmpheader;
 	BITMAPINFOHEADER bmpinfo;
@@ -287,8 +287,37 @@ imagebuff * loadBMP(const char* path)
 	FSFILE_Read(file, &bytesRead, 0x0e, &bmpinfo,sizeof(BITMAPINFOHEADER));
 
         // Calculating the size of a bitmap found --> https://msdn.microsoft.com/en-us/library/ms969901.aspx
-        if (bmpinfo.biSizeImage == 0) bmpinfo.biSizeImage = ((((bmpinfo.biWidth * bmpinfo.biBitCount) + 31) & ~31) >> 3) * bmpinfo.biHeight;
+//        if (bmpinfo.biSizeImage == 0) bmpinfo.biSizeImage = ((((bmpinfo.biWidth * bmpinfo.biBitCount) + 31) & ~31) >> 3) * bmpinfo.biHeight;
         BITMAPINFOHEADERdebug(screenBottom, &bmpinfo);
+
+/*
+  if(bmpinfo.biCompression == BI_BITFIELDS){
+        u32 bitmasks = bytesRead;
+	FSFILE_Read(file, &bytesRead, bitmasks, &rgb[0],4); //alpha
+	FSFILE_Read(file, &bytesRead, bitmasks, &rgb[0],4); //red
+	FSFILE_Read(file, &bytesRead, bitmasks+4, &rgb[1],4); //green
+	FSFILE_Read(file, &bytesRead, bitmasks+8, &rgb[2],4); //blue
+     }
+
+    switch(bmpinfo.biBitCount){
+     case 32:
+         if(bmpinfo.biCompression == BI_BITFIELDS){
+             rgb[0] = (rgb[0] >> 15) & 3;
+             rgb[1] = (rgb[1] >> 15) & 3;
+             rgb[2] = (rgb[2] >> 15) & 3;
+ 
+             if(rgb[0] + rgb[1] + rgb[2] != 3 ||
+                rgb[0] == rgb[1] || rgb[0] == rgb[2] || rgb[1] == rgb[2]){
+                 break;
+             }
+         } else {
+             rgb[0] = 2;
+             rgb[1] = 1;
+             rgb[2] = 0;
+         }
+      default: break;
+}
+*/
 
 //	FSFILE_Read(file, &bytesRead, 0x0A, &(offset), 4); //bfOffBits
 //	FSFILE_Read(file, &bytesRead, 0x12, &(w), 4); //biWidth
@@ -300,8 +329,9 @@ imagebuff * loadBMP(const char* path)
 
 	result->width = bmpinfo.biWidth;
 	result->height = abs(bmpinfo.biHeight);
+	result->depth = bmpinfo.biBitCount >> 3;
 
-	result->data = (u8*)malloc(result->height * result->width * 3); //24bit canvas buffer
+	result->data = (u8*)malloc(result->height * result->width * result->depth); //24bit canvas buffer
 	u8* tempbuf = (u8*)malloc(bmpinfo.biSizeImage); // size-offset
 	FSFILE_Read(file, &bytesRead, offset, tempbuf, bmpinfo.biSizeImage);
 
@@ -309,20 +339,29 @@ imagebuff * loadBMP(const char* path)
 	svcCloseHandle(file);
 
 	int padding = 0;
-	int scanlinebytes = result->width * result->depth >> 3; //depth >> 3 is fine for 8, 16, 24, 32 & !monchrome 1
+	int scanlinebytes = result->width * result->depth; //depth >> 3 is fine for 8, 16, 24, 32 & !monchrome 1
 	while ((scanlinebytes + padding) % 4 != 0)     // DWORD = 4 bytes
 		padding++;
 	// get the padded scanline width
 	int psw = scanlinebytes + padding;
 
+
+//char* str[256];
+//sprintf(str, "scanlinebytes: %u", scanlinebytes);
+//CanvasString(screenBottom, str, 0, 170, WHITE);
+
+//sprintf(str, "psw: %u", psw);
+//CanvasString(screenBottom, str, 0, 180, WHITE);
+
+
 	// swap the R and B bytes and the scanlines
 	long bufpos = 0;   
 	long newpos = 0;
 	for (y = 0; y < result->height; y++ )
-		for (x = 0; x < 3 * result->width; x+=3 )
+		for (x = 0; x < result->depth * result->width; x+=result->depth)//for 24bit is kind of ok?
 		{
-			newpos = y * 3 * result->width + x;     
-			bufpos = (result->height - y - 1) * psw + x;
+			newpos = (result->height-1-y+x*result->height); //map pixels --> nintendo 3ds canvas 
+			bufpos = (result->height - y - 1) * psw + x; // run through scanlines starting @ bottom work back to the top
 
 			result->data[newpos] = tempbuf[bufpos + 2];       
 			result->data[newpos + 1] = tempbuf[bufpos+1]; 
@@ -332,98 +371,3 @@ imagebuff * loadBMP(const char* path)
         result->used == 1;
 	return result;
 }
-
-
-imagebuff * _loadBMP(const char* path)
- // int* width, int* height, long* size, LPCTSTR bmpfile )
-{
-
-	// declare bitmap structures
-	BITMAPFILEHEADER bmpheader;
-	BITMAPINFOHEADER bmpinfo;
-	// value to be used in ReadFile funcs
-	u32 bytesread;
-	// open file to read from
-//	Handle file = CreateFile ( bmpfile , GENERIC_READ, FILE_SHARE_READ,
-//		 NULL, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL );
-        FILE* f = fopen(path, "rb+");
-	if ( NULL == f )
-		return NULL; // coudn't open file
-	
-	
-	// read file header
-	if ( fread(&bmpheader, &bytesread, sizeof (BITMAPFILEHEADER), f) == false )
-            //ReadFile ( file, &bmpheader, sizeof ( BITMAPFILEHEADER ), &bytesread, NULL ) == false )
-	{
-		fclose(f);
-		return NULL;
-	}
-
-	//read bitmap info
-
-	if ( fread(&bmpinfo, &bytesread, sizeof ( BITMAPINFOHEADER ), f) == false )
-             //ReadFile ( file, &bmpinfo, sizeof ( BITMAPINFOHEADER ), &bytesread, NULL ) == false )
-	{
-		fclose(f);
-		return NULL;
-	}
-	
-	// check if file is actually a bmp
-	if ( bmpheader.bfType != 'BM' )
-	{
-		fclose(f);
-		return NULL;
-	}
-
-        imagebuff* result = (imagebuff*)malloc(sizeof(imagebuff));
-
-	// get image measurements
-	result->width   = bmpinfo.biWidth;
-	result->height  = abs ( bmpinfo.biHeight );
-
-	// check if bmp is uncompressed
-	if ( bmpinfo.biCompression != BI_RGB )
-	{
-		fclose(f);
-		return NULL;
-	}
-
-	// check if we have 24 bit bmp
-	if ( bmpinfo.biBitCount != 24 )
-	{
-		fclose(f);
-		return NULL;
-	}
-	
-
-	// create buffer to hold the data
-	long *size = bmpheader.bfSize - bmpheader.bfOffBits;
-	u8* tempbuf = (u8*)malloc(size);
-	result->data = (u8*)malloc(size);
-
-	// move file pointer to start of bitmap data
-//	SetFilePointer ( file, bmpheader.bfOffBits, NULL, FILE_BEGIN );
-        fseek(f,bmpheader.bfOffBits,SEEK_SET);
-
-	// read bmp data
-	if ( fread(tempbuf, &bytesread, *size, f) == false )
-            //ReadFile ( file, Buffer, *size, &bytesread, NULL ) == false )
-	{
-		free(result->data);
-		fclose(f);
-		return NULL;
-	}
-
-        result->data = (u8*)ConvertBMPToRGBBuffer(tempbuf, result->width, result->height);
-        free(tempbuf);
-	// everything successful here: close file and return imagebuff
-	
-	fclose(f);
-
-	return result;
-}
-
-//& freinds too clear my good, good name
-//imagemagic stats my test bmp as (24bit & BI_RGB) 
-//It debugs on the local as 32bit with BI_BITFIELDS
-//info --> https://msdn.microsoft.com/en-us/library/windows/desktop/dd183376%28v=vs.85%29.aspx
