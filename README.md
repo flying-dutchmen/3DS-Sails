@@ -1,6 +1,6 @@
 # [3DS Sails](http://flying-dutchmen.github.io/3DS-Sails) 
 
-Any software works derive &or that make use of MUST include "web search quries" listed!
+Any software works derive &or that make use of MUST include "web search quries" listed!  
 I'll retract these web search quries after some of these persons charged with assalt & etc...
 
 on yahoo -->  
