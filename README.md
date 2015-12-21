@@ -4,7 +4,7 @@ a side from my sell this world a "moonbased",
 405,696 km or 363,104 kilometers away from retirement/power plant/recycling and canvas the rest of the system. 
 
 #all i'm thinking is "gui & arrays of any arbitrary pixels" is the future "in several more chapters" of this rag
-##beaten black adam R&D in those bootblack canadien's, really? 
+##beaten black adam R&D in those bootblack canadien's, really need to free Europe & Japan? 
 
 Any software works derive &or that make use of MUST include "web search quries" listed!  
 I'll retract these web search quries after some of these persons charged with assalt & etc...
