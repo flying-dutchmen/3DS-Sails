@@ -1,6 +1,6 @@
 # [3DS Sails](http://flying-dutchmen.github.io/3DS-Sails) 
 
-a side from my sell this world a "moonbased",   
+a side from my sell this world a "moonbase or our stellar ego",   
 405,696 km or 363,104 kilometers away from retirement/power plant/recycling and canvas the rest of the system. 
 
 #all i'm thinking is "gui & arrays of any arbitrary pixels" is the future "in several more chapters" of this rag
