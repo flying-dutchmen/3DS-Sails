@@ -169,4 +169,4 @@ default:
 
 //the Pro-liter-riot's Sklaven "kennyd-lee" 
 //present's "long sex-live the Pro-liter-riot, &  3 nude lcd's 1/2 of in 3-D"
-//also (unmolested Citrus, GPU, openGL, GIMP, VLC, &or Nanox, or any & all other that "got bent Mozilla" that have endured some form of rape)?
+//also (unmolested Citrus or Citro3d, openGL, GIMP, VLC, &or Nanox, or any & all other that "got bent Mozilla" that have endured some form of rape)?
