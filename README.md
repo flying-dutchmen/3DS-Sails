@@ -7,6 +7,8 @@ a side from my sell this world a "moonbase or our stellar ego",
 ##Beat'n black adam R&D in 
 those bootblack southern Canadien's, really need to [free Europe & Japan](https://en.wikipedia.org/wiki/Revolution_for_DS)? 
 
+U have an invention call 1-800-603-0502
+
 Any software works derive &or that make use of MUST include "web search quries" listed!  
 I'll retract these web search quries after some persons are charged with assalt & etc...
 
