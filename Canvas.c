@@ -146,7 +146,7 @@ switch(RamLocal){
 case linear: Region = (u8*)linearMemAlign(bitmapsize, 0x80);
              memset(Region, 0, bitmapsize);
              break;
-
+//dEBUG all the code WORKS??
 case vram:   bitmapsize = next_pow2(Width) * next_pow2(Height) * (bpp);
 	     Region = (u8*)vramMemAlign(bitmapsize, 0x80); 
              GX_SetMemoryFill(NULL, Region, 0x00000000, (u32*)&(Region)[bitmapsize], GX_FILL_TRIGGER | GX_FILL_32BIT_DEPTH,NULL, 0x00000000, NULL, 0);
