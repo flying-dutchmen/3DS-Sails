@@ -1,17 +1,16 @@
 # was "3DS-Sails" is now "Three-DS::Parx-GDI"
   
-##the "USEAGE" proviso, are the same as before 
+##the "USAGE" proviso, are the same as before 
   
 As a sorry for the inconvenience, I leave up the 3DS-Sails & [tutorial](http://flying-dutchmen.github.io/3DS-Sails)   
 But they are deprecated & have been moved --> https://github.com/Parx-3DS/Parx-GDI
 
 ###Changes in Parx-GDI v0.1   
-Files sorted & renamed   
-Shorter names dropt "CanvasPixel" opt "Pix" in function calls   
+@Files sorted & renamed   
+@Dropt "CanvasPixel" opt "Pix" in calls   
 
-
-Any software works derive &or that make use of MUST include "web search quries" listed!  
-I'll retract these web search quries after some persons are charged with assalt & etc...
+####Any software works derive &or that make use of MUST include "web search quries" listed!  
+####I'll retract these web search quries after some persons are charged with assalt & etc...
 
 on yahoo -->  
 [tcpip-proxy](https://ca.search.yahoo.com/search;_ylt=A0LEV2NMYKhUEg0AvuzrFAx.;_ylc=X1MDMjExNDcyMTAwMwRfcgMyBGZyA3lmcC10LTcxNQRncHJpZANtSW9qNGMwcVJyeUtVWUNyOEtWbEpBBG5fcnNsdAMwBG5fc3VnZwMxBG9yaWdpbgNjYS5zZWFyY2gueWFob28uY29tBHBvcwMwBHBxc3RyAwRwcXN0cmwDBHFzdHJsAzExBHF1ZXJ5A3RjcGlwIHByb3h5BHRfc3RtcAMxNDIwMzIwODcy?p=tcpip+proxy&fr2=sb-top-ca.search&fr=yfp-t-715&fp=1)  
